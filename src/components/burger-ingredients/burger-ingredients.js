@@ -9,13 +9,13 @@ function BurgerIngredients() {
   return (
     <section className={BurgerIngredientsStyles.ingredients}>
       <div className={BurgerIngredientsStyles.menu}>
-        <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+        <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
           Булки
         </Tab>
-        <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+        <Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
           Соусы
         </Tab>
-        <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+        <Tab value="main" active={current === 'main'} onClick={setCurrent}>
           Начинки
         </Tab>
       </div>
