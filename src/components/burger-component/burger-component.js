@@ -1,6 +1,6 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerComponentStyles from './burger-component.module.css';
-import bunSmallImg from '../../images/bun-small-02.png';
+import PropTypes from 'prop-types';
 
 function BurgerComponent({isDragIconVisible=true, type, isLocked, text, price, thumbnail}) {
   return (
@@ -17,6 +17,15 @@ function BurgerComponent({isDragIconVisible=true, type, isLocked, text, price, t
       />
     </li>
   )
+}
+
+BurgerComponent.propTypes = {
+  isDragIconVisible: PropTypes.bool,
+  type: PropTypes.string,
+  isLocked: PropTypes.bool,
+  text: PropTypes.string,
+  price: PropTypes.number,
+  thumbnail: PropTypes.string,
 }
 
 export default BurgerComponent;

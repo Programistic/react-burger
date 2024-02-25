@@ -1,5 +1,6 @@
 import TabContentStyles from './tab-content.module.css';
 import Card from '../card/card';
+import PropTypes from 'prop-types';
 
 function TabContent({cards}) {
 
@@ -59,6 +60,10 @@ function TabContent({cards}) {
       </ul>
     </div>
   )
+}
+
+TabContent.propTypes = {
+  cards: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default TabContent;
