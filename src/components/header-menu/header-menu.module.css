@@ -3,6 +3,7 @@
   flex-wrap: nowrap;
   column-gap: .5rem;
   margin: 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -14,6 +15,7 @@
   padding: 16px 20px;
   border: 1px solid transparent;
   border-radius: 40px;
+  text-decoration: none;
 }
 
 .menuItem__link:hover {

@@ -13,3 +13,11 @@
   src:
     url(./JetBrainsMono-Bold.ttf) format('ttf');
 }
+
+@font-face {
+  font-display: swap;
+  font-family: 'Iceland-Regular';
+  font-weight: 400;
+  src:
+    url(./JetBrainsMono-Regular.ttf) format('ttf');
+}

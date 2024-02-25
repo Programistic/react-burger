@@ -1,0 +1,41 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-inline-size: 272px;
+  
+  aspect-ratio: 1.31;
+  inline-size: 100%;
+  border: 1px solid transparent;
+  transition: border-color .3s ease;
+}
+
+.card:hover {
+  border-color: #4c4cff;
+  cursor: pointer;
+}
+
+.innerContainer {
+  display: flex;
+  column-gap: 8px;
+  margin: 4px 0;
+}
+
+.image {
+  max-inline-size: 240px;
+  aspect-ratio: 2;
+}
+
+.productPrice {
+  align-self: center;
+  font: 400 1.5rem/1 'Iceland-Regular', 'Inter', sans-serif;
+  color: #f2f2f3;
+}
+
+.title {
+  margin: 0;
+  font: 400 1rem/1.2 'JetBrainsMono-Regular', 'Inter', sans-serif;
+  color: #f2f2f3;
+  text-align: center;
+}

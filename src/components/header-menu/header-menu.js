@@ -6,15 +6,15 @@ function HeaderMenu() {
   return (
     <ul className={HeaderMenuStyles.menu}>
       <li className={HeaderMenuStyles.menuItem}>
-        <a href='#0' className={ HeaderMenuStyles.menuItem__link }>
-          <BurgerIcon type={ 'primary' } />
-          <span className={ `${HeaderMenuStyles.menuItem__text} ${HeaderMenuStyles.isActiv}` }>Конструктор</span>
+        <a href='#0' className={HeaderMenuStyles.menuItem__link}>
+          <BurgerIcon type={'primary'} />
+          <span className={`${HeaderMenuStyles.menuItem__text} ${HeaderMenuStyles.isActiv}`}>Конструктор</span>
         </a>
       </li>
       <li className={HeaderMenuStyles.menuItem}>
-        <a href='#0' className={ HeaderMenuStyles.menuItem__link }>
-          <ListIcon type={ 'secondary' } />
-          <span className={ HeaderMenuStyles.menuItem__text }>Лента&nbsp;заказов</span>
+        <a href='#0' className={HeaderMenuStyles.menuItem__link}>
+          <ListIcon type={'secondary'} />
+          <span className={HeaderMenuStyles.menuItem__text}>Лента&nbsp;заказов</span>
         </a>
       </li>
     </ul>
