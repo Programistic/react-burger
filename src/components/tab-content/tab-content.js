@@ -3,7 +3,6 @@ import Card from '../card/card';
 import PropTypes from 'prop-types';
 
 function TabContent({cards}) {
-
   const cardsBun = cards.filter(card => card.type === 'bun');
   const cardsSauce = cards.filter(card => card.type === 'sauce');
   const cardsMain = cards.filter(card => card.type === 'main');
@@ -15,7 +14,6 @@ function TabContent({cards}) {
         title={card.name}
         image={card.image}
         price={card.price}
-        count={1}
       />
     );
   });
@@ -27,7 +25,6 @@ function TabContent({cards}) {
         title={card.name}
         image={card.image}
         price={card.price}
-        count={3}
       />
     );
   });
@@ -39,7 +36,6 @@ function TabContent({cards}) {
         title={card.name}
         image={card.image}
         price={card.price}
-        count={5}
       />
     );
   });
@@ -63,7 +59,19 @@ function TabContent({cards}) {
 }
 
 TabContent.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.object)
+  cards: PropTypes.arrayOf(
+    PropTypes.objectOf(
+      PropTypes.shape(
+        {
+          _id: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+          type: PropTypes.string.isRequired,
+          image: PropTypes.string.isRequired,
+          price: PropTypes.number.isRequired
+        }
+      )
+    )
+  )
 }
 
 export default TabContent;
