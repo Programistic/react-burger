@@ -2,9 +2,8 @@ import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsStyles from './burger-ingredients.module.css';
 import TabContent from "../tab-content/tab-content";
-import cardsArray from '../../utils/data';
 
-function BurgerIngredients() {
+function BurgerIngredients({ data }) {
   const [current, setCurrent] = React.useState('one')
   return (
     <section className={BurgerIngredientsStyles.ingredients}>
@@ -19,7 +18,7 @@ function BurgerIngredients() {
           Начинки
         </Tab>
       </div>
-      <TabContent cards={cardsArray} />
+      <TabContent cards={data} />
     </section>
   )
 }

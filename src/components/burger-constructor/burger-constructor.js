@@ -1,25 +1,33 @@
 import BurgerConstructorStyles from './burger-constructor.module.css';
 import BurgerComponent from "../burger-component/burger-component";
-import meetSmallImg from '../../images/meat-small-02.png';
-import mineralRingsSmallImg from '../../images/mineral-rings-small.png';
-import sauseSmallImg from '../../images/sauce-small-03.png';
-import bunSmallImg from '../../images/bun-small-02.png';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function BurgerConstructor() {
+function BurgerConstructor({ data }) {
+
+  const componentList = data.map((component) => {
+    return (
+      <BurgerComponent
+        key={component._id}
+        text={component.name}
+        image={component.image}
+        price={component.price}
+        thumbnail={component.image}
+        isDragIconVisible={true}
+        isLocked={false}
+      />
+    );
+  });
+
+  componentList.shift();
+  componentList.pop();
+
   return (
     <section className={BurgerConstructorStyles.constructor}>
-      <BurgerComponent type={'top'} isDragIconVisible={false} thumbnail={bunSmallImg} text={"Краторная булка N-200i (верх)"} price={220} isLocked={true}/>
+      <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={data[0].image} text={data[0].name} price={data[0].price} isLocked={true} />
       <ul className={BurgerConstructorStyles.componentsList}>
-        <BurgerComponent isDragIconVisible={true} thumbnail={sauseSmallImg} text={"Соус традиционный галактический"} price={120} isLocked={false}/>
-        <BurgerComponent isDragIconVisible={true} thumbnail={meetSmallImg} text={"Мясо бессмертных моллюсков"} price={400} isLocked={false}/>
-        <BurgerComponent isDragIconVisible={true} thumbnail={meetSmallImg} text={"Мясо бессмертных моллюсков"} price={400} isLocked={false}/>
-        <BurgerComponent isDragIconVisible={true} thumbnail={sauseSmallImg} text={"Соус традиционный галактический"} price={120} isLocked={false}/>
-        <BurgerComponent isDragIconVisible={true} thumbnail={sauseSmallImg} text={"Соус традиционный галактический"} price={120} isLocked={false}/>
-        <BurgerComponent isDragIconVisible={true} thumbnail={mineralRingsSmallImg} text={"Хрустящие минеральные кольца"} price={50} isLocked={false}/>
-        <BurgerComponent isDragIconVisible={true} thumbnail={mineralRingsSmallImg} text={"Хрустящие минеральные кольца"} price={50} isLocked={false}/>
+        {componentList}
       </ul>
-      <BurgerComponent type={'bottom'} isDragIconVisible={false} thumbnail={bunSmallImg} text={"Краторная булка N-200i (верх)"} price={220} isLocked={true}/>
+      <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={data[data.length-1].image} text={data[data.length-1].name} price={data[data.length-1].price} isLocked={true} />
       <div className={BurgerConstructorStyles.innerContainer}>
         <span className={BurgerConstructorStyles.productPrice}>610</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>

@@ -3,6 +3,7 @@ import Card from '../card/card';
 import PropTypes from 'prop-types';
 
 function TabContent({cards}) {
+
   const cardsBun = cards.filter(card => card.type === 'bun');
   const cardsSauce = cards.filter(card => card.type === 'sauce');
   const cardsMain = cards.filter(card => card.type === 'main');
