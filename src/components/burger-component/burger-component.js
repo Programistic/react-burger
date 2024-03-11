@@ -2,10 +2,10 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import BurgerComponentStyles from './burger-component.module.css';
 import PropTypes from 'prop-types';
 
-function BurgerComponent({isDragIconVisible, isLocked, text, price, thumbnail}) {
+function BurgerComponent({isLocked, text, price, thumbnail}) {
   return (
     <li className={BurgerComponentStyles.componentsListItem}>
-      <button className={`${BurgerComponentStyles.buttonDragIcon} ${isDragIconVisible ? '' : BurgerComponentStyles.isVisible}`} type='button'>
+      <button className={BurgerComponentStyles.buttonDragIcon} type='button'>
         <DragIcon />
       </button>
       <ConstructorElement
@@ -19,7 +19,6 @@ function BurgerComponent({isDragIconVisible, isLocked, text, price, thumbnail}) 
 }
 
 BurgerComponent.propTypes = {
-  isDragIconVisible: PropTypes.bool.isRequired,
   isLocked: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

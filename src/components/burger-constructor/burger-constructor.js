@@ -12,7 +12,6 @@ function BurgerConstructor({ data }) {
         image={component.image}
         price={component.price}
         thumbnail={component.image}
-        isDragIconVisible={true}
         isLocked={false}
       />
     );
@@ -21,13 +20,16 @@ function BurgerConstructor({ data }) {
   componentList.shift();
   componentList.pop();
 
+  const firstComponent = data[0];
+  const lastComponent = data[data.length-1];
+
   return (
     <section className={BurgerConstructorStyles.constructor}>
-      <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={data[0].image} text={data[0].name} price={data[0].price} isLocked={true} />
+      <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={firstComponent.image} text={firstComponent.name} price={firstComponent.price} isLocked={true} />
       <ul className={BurgerConstructorStyles.componentsList}>
         {componentList}
       </ul>
-      <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={data[data.length-1].image} text={data[data.length-1].name} price={data[data.length-1].price} isLocked={true} />
+      <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={lastComponent.image} text={lastComponent.name} price={lastComponent.price} isLocked={true} />
       <div className={BurgerConstructorStyles.innerContainer}>
         <span className={BurgerConstructorStyles.productPrice}>610</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>

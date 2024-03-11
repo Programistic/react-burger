@@ -4,7 +4,7 @@ import BurgerIngredientsStyles from './burger-ingredients.module.css';
 import TabContent from "../tab-content/tab-content";
 
 function BurgerIngredients({ data }) {
-  const [current, setCurrent] = React.useState('one')
+  const [current, setCurrent] = React.useState('bun')
   return (
     <section className={BurgerIngredientsStyles.ingredients}>
       <div className={BurgerIngredientsStyles.menu}>
