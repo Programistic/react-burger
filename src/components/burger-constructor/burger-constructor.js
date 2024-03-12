@@ -1,8 +1,9 @@
 import BurgerConstructorStyles from './burger-constructor.module.css';
 import BurgerComponent from "../burger-component/burger-component";
 import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { propTypesForData } from '../../utils/constants';
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor({data}) {
 
   const componentList = data.map((component) => {
     return (
@@ -33,12 +34,14 @@ function BurgerConstructor({ data }) {
       <div className={BurgerConstructorStyles.innerContainer}>
         <span className={BurgerConstructorStyles.productPrice}>610</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType={'button'} type={'primary'} size={'large'}>
           Оформить заказ
         </Button>
       </div>
     </section>
-  )
+  );
 }
 
 export default BurgerConstructor;
+
+BurgerConstructor.propTypes = propTypesForData;

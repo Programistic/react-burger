@@ -6,20 +6,20 @@ function Card({image, price, title}) {
   return (
     <li className={CardStyles.card}>
       <img src={image} className={CardStyles.image} alt={title} />
-      <Counter count={''} size="default" extraClass="m-1" />
+      <Counter count={''} size={'default'} extraClass={'m-1'} />
       <div className={CardStyles.innerContainer}>
         <span className={CardStyles.productPrice}>{price}</span>
-        <CurrencyIcon type="primary" />
+        <CurrencyIcon type={'primary'} />
       </div>
       <h3 className={CardStyles.title}>{title}</h3>
     </li>
-  )
+  );
 }
+
+export default Card;
 
 Card.propTypes = {
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-}
-
-export default Card;
+};

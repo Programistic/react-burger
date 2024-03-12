@@ -1,12 +1,12 @@
 import TabContentStyles from './tab-content.module.css';
 import Card from '../card/card';
-import PropTypes from 'prop-types';
+import { propTypesForData } from '../../utils/constants';
 
-function TabContent({cards}) {
+function TabContent({data}) {
 
-  const cardsBun = cards.filter(card => card.type === 'bun');
-  const cardsSauce = cards.filter(card => card.type === 'sauce');
-  const cardsMain = cards.filter(card => card.type === 'main');
+  const cardsBun = data.filter(card => card.type === 'bun');
+  const cardsSauce = data.filter(card => card.type === 'sauce');
+  const cardsMain = data.filter(card => card.type === 'main');
 
   const cardListBun = cardsBun.map((card) => {
     return (
@@ -56,23 +56,9 @@ function TabContent({cards}) {
         {cardListMain}
       </ul>
     </div>
-  )
-}
-
-TabContent.propTypes = {
-  cards: PropTypes.arrayOf(
-    PropTypes.objectOf(
-      PropTypes.shape(
-        {
-          _id: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
-          type: PropTypes.string.isRequired,
-          image: PropTypes.string.isRequired,
-          price: PropTypes.number.isRequired
-        }
-      )
-    )
-  )
+  );
 }
 
 export default TabContent;
+
+TabContent.propTypes = propTypesForData;

@@ -15,14 +15,14 @@ function BurgerComponent({isLocked, text, price, thumbnail}) {
         thumbnail={thumbnail}
       />
     </li>
-  )
+  );
 }
+
+export default BurgerComponent;
 
 BurgerComponent.propTypes = {
   isLocked: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   thumbnail: PropTypes.string.isRequired,
-}
-
-export default BurgerComponent;
+};
