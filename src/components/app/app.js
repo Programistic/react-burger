@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { dataURL } from '../../utils/constants';
 import Modal from '../modal/modal';
 import ModalOverlay from '../modal-overlay/modal-overlay';
+import OrderDetails from '../order-details/order-details';
 
 function App() {
 
@@ -78,7 +79,7 @@ function App() {
       <ModalOverlay isVisible={modalState.isVisible} />
       { modalState.isVisible &&
         <Modal onClose={handleModalClose}>
-          
+          <OrderDetails onOrderDetailsOkButtonClick={handleModalClose} />
         </Modal>
       }
     </div>

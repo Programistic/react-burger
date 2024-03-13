@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orderNumber {
+  display: block;
+  font-family: 'Iceland', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 9rem;
+  line-height: .8;
+  color: #f2f2f3;
+}
+
+.text {
+  margin: 2rem 0 0;
+  padding: 0;
+  font-family: 'JetBrainsMono-Bold', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  color: #f2f2f3;
+}
+
+.button {
+  margin: 3.75rem 0;
+  padding: 0;
+  inline-size: 120px;
+  block-size: 120px;
+  border-color: transparent;
+  border-radius: 50%;
+  background-image: url(../../images/done.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+.button:hover {
+  opacity: .7;
+}
+
+.message {
+  margin: 0;
+  font-family: 'JetBrainsMono-Regular';
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  color: #f2f2f3
+}
+
+.message:last-of-type {
+  margin: .5rem 0 3.75rem;
+  color: #8585ad;
+}

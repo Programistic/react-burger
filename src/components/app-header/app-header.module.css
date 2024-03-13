@@ -38,6 +38,9 @@
 
 .profileLink__text {
   align-self: center;
-  font: 400 1rem/1 'JetBrainsMono-Regular', 'Inter', sans-serif;
+  font-family: 'JetBrainsMono-Regular';
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
   color: #8585ad;
 }
