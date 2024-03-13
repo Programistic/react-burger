@@ -1,0 +1,23 @@
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  inline-size: 720px;
+  padding: 40px;
+  border-radius: 40px;
+  background-color: #1c1c21;
+}
+
+.button {
+  inline-size: 24px;
+  block-size: 24px;
+  align-self: flex-end;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  transition: opacity .3s ease;
+}
+
+.button:hover {
+  cursor: pointer;
+  opacity: .7;
+}

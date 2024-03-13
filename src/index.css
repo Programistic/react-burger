@@ -1,1 +1,25 @@
 @import './fonts/fonts.css';
+
+.page {
+  display: grid;
+  overflow: hidden;
+}
+
+.main {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+}
+
+.modal {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  align-self: center;
+  justify-self: center;
+  inline-size: min-content;
+  block-size: min-content;
+  z-index: 2;
+}
+
+.overlay {
+  position: absolute;
+}

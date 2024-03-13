@@ -3,7 +3,7 @@ import BurgerComponent from "../burger-component/burger-component";
 import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { propTypesForData } from '../../utils/constants';
 
-function BurgerConstructor({data}) {
+function BurgerConstructor({data, onButtonMakeOrderClick}) {
 
   const componentList = data.map((component) => {
     return (
@@ -24,6 +24,10 @@ function BurgerConstructor({data}) {
   const firstComponent = data[0];
   const lastComponent = data[data.length-1];
 
+  const handleClick = () => {
+    onButtonMakeOrderClick();
+  }
+
   return (
     <section className={BurgerConstructorStyles.constructor}>
       <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={firstComponent.image} text={firstComponent.name} price={firstComponent.price} isLocked={true} />
@@ -34,7 +38,7 @@ function BurgerConstructor({data}) {
       <div className={BurgerConstructorStyles.innerContainer}>
         <span className={BurgerConstructorStyles.productPrice}>610</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>
-        <Button htmlType={'button'} type={'primary'} size={'large'}>
+        <Button htmlType={'button'} type={'primary'} size={'large'} aria-label='Оформить заказ' onClick={handleClick}>
           Оформить заказ
         </Button>
       </div>

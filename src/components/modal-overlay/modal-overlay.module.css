@@ -1,0 +1,10 @@
+.modalOverlay {
+  inline-size: 100vw;
+  block-size: 100vh;
+  background-color: #000;
+  opacity: .6;
+}
+
+.modalClosed {
+  display: none;
+}

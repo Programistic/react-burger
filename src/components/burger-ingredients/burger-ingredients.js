@@ -4,7 +4,7 @@ import BurgerIngredientsStyles from './burger-ingredients.module.css';
 import TabContent from "../tab-content/tab-content";
 import { propTypesForData } from "../../utils/constants";
 
-function BurgerIngredients({data}) {
+function BurgerIngredients({data, onCardClick}) {
 
   const [current, setCurrent] = React.useState('bun')
 
@@ -21,7 +21,7 @@ function BurgerIngredients({data}) {
           Начинки
         </Tab>
       </div>
-      <TabContent data={data} />
+      <TabContent data={data} onCardClick={onCardClick} />
     </section>
   );
 }

@@ -2,7 +2,7 @@ import TabContentStyles from './tab-content.module.css';
 import Card from '../card/card';
 import { propTypesForData } from '../../utils/constants';
 
-function TabContent({data}) {
+function TabContent({data, onCardClick}) {
 
   const cardsBun = data.filter(card => card.type === 'bun');
   const cardsSauce = data.filter(card => card.type === 'sauce');
@@ -15,6 +15,8 @@ function TabContent({data}) {
         title={card.name}
         image={card.image}
         price={card.price}
+        card={card}
+        onCardClick={onCardClick}
       />
     );
   });
@@ -26,6 +28,8 @@ function TabContent({data}) {
         title={card.name}
         image={card.image}
         price={card.price}
+        card={card}
+        onCardClick={onCardClick}
       />
     );
   });
@@ -37,6 +41,8 @@ function TabContent({data}) {
         title={card.name}
         image={card.image}
         price={card.price}
+        card={card}
+        onCardClick={onCardClick}
       />
     );
   });

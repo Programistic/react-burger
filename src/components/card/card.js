@@ -2,9 +2,14 @@ import CardStyles from './card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 
-function Card({image, price, title}) {
+function Card({image, price, title, card, onCardClick}) {
+
+  const handleClick = () => {
+    onCardClick(card);
+  };
+
   return (
-    <li className={CardStyles.card}>
+    <li className={CardStyles.card} onClick={handleClick}>
       <img src={image} className={CardStyles.image} alt={title} />
       <Counter count={''} size={'default'} extraClass={'m-1'} />
       <div className={CardStyles.innerContainer}>
