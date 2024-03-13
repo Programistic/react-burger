@@ -1,6 +1,6 @@
 .modalContainer {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
   inline-size: 720px;
   padding: 60px 40px;
   border-radius: 40px;
@@ -8,6 +8,8 @@
 }
 
 .button {
+  position: absolute;
+  inset-inline-end: 40px;
   inline-size: 24px;
   block-size: 24px;
   align-self: flex-end;

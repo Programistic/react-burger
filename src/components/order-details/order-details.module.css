@@ -6,6 +6,7 @@
 
 .orderNumber {
   display: block;
+  margin-block-start: 3.75rem;
   font-family: 'Iceland', 'Inter', sans-serif;
   font-weight: 400;
   font-size: 9rem;
@@ -46,7 +47,7 @@
   margin: 0;
   font-family: 'JetBrainsMono-Regular';
   font-size: 1rem;
-  line-height: 1.5rem;
+  line-height: 1.5;
   font-weight: 400;
   color: #f2f2f3
 }
