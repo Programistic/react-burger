@@ -7,6 +7,7 @@ import { dataURL } from '../../utils/constants';
 import Modal from '../modal/modal';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import OrderDetails from '../order-details/order-details';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 
 function App() {
 
@@ -34,19 +35,35 @@ function App() {
   };
 
   const [modalState, setModalState] = useState({
-    isVisible: false,
+    isModalVisible: false,
+    isOrderDetailsVisible: false,
+    isIngredientDetailsVisible: false,
   });
 
   const handleModalClose = () => {
-    setModalState({ isVisible: false });
+    setModalState({
+      isModalVisible: false,
+      isIngredientDetailsVisible: false,
+      isOrderDetailsVisible: false,
+    });
   };
 
-  const handleCardClick = () => {
-    setModalState({ isVisible: true });
+  const handleCardClick = (card) => {
+    setModalState({
+      isModalVisible: true,
+      isIngredientDetailsVisible: true,
+    });
+
+    setCardState({
+      card: card,
+    });
   }
 
   const handleButtonMakeOrderClick = () => {
-    setModalState({ isVisible: true });
+    setModalState({
+      isModalVisible: true,
+      isOrderDetailsVisible: true,
+    });
   }
 
   useEffect(() => {
@@ -62,24 +79,29 @@ function App() {
 
   const handleEscClick = (event) => {
     if(event.key === 'Escape') {
-      setModalState({ isVisible: false });
+      setModalState({ isModalVisible: false });
     };
   };
 
   const handleOutsideClick = (event) => {
-    if (event.target.classList.contains('modal-overlay_modalOverlay__Bc71J')) { // подумать над классом!
-      setModalState({ isVisible: false });
+    if (event.target.classList.contains('modal-overlay_modalOverlay__Bc71J')) { // подумать над реализацией!
+      setModalState({ isModalVisible: false });
     };
   };
 
+  const [cardState, setCardState] = useState({
+    card: {},
+  })
+ 
   return(
     <div className={AppStyles.page}>
       <AppHeader />
       { state.success ? <AppMain data={state.data} onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> }
-      <ModalOverlay isVisible={modalState.isVisible} />
-      { modalState.isVisible &&
+      <ModalOverlay isVisible={modalState.isModalVisible} />
+      { modalState.isModalVisible &&
         <Modal onClose={handleModalClose}>
-          <OrderDetails onOrderDetailsOkButtonClick={handleModalClose} />
+          { modalState.isIngredientDetailsVisible && <IngredientDetails card={cardState.card} /> }
+          { modalState.isOrderDetailsVisible && <OrderDetails onOrderDetailsOkButtonClick={handleModalClose} /> }
         </Modal>
       }
     </div>
