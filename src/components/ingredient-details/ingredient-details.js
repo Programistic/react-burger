@@ -3,8 +3,6 @@ import InggredientDetailsStyles from './ingredient-details.module.css';
 
 function IngredientDetails({card}) {
 
-  console.log(card)
-
   return(
     <div className={InggredientDetailsStyles.container}>
       <h2 className={InggredientDetailsStyles.cardTitle}>Детали ингредиента</h2>

@@ -34,19 +34,9 @@ function App() {
     }
   };
 
-  const [modalState, setModalState] = useState({
-    isModalVisible: false,
-    isOrderDetailsVisible: false,
-    isIngredientDetailsVisible: false,
-  });
-
-  const handleModalClose = () => {
-    setModalState({
-      isModalVisible: false,
-      isIngredientDetailsVisible: false,
-      isOrderDetailsVisible: false,
-    });
-  };
+  const [cardState, setCardState] = useState({
+    card: {},
+  })
 
   const handleCardClick = (card) => {
     setModalState({
@@ -66,32 +56,27 @@ function App() {
     });
   }
 
-  useEffect(() => {
-    document.addEventListener('keydown', handleEscClick);
-    return () => {
-      document.removeEventListener('keydown', handleEscClick);
-    }
-  },[]);
+  const [modalState, setModalState] = useState({
+    isModalVisible: false,
+    isOrderDetailsVisible: false,
+    isIngredientDetailsVisible: false,
+  });
 
-  const handleEscClick = (event) => {
-    if(event.key === 'Escape') {
-      setModalState({ isModalVisible: false });
-    };
-  };
-
-  const [cardState, setCardState] = useState({
-    card: {},
-  })
+  const handleCloseModal = () => {
+    setModalState({
+      isModalVisible: false,
+    })
+  }
  
   return(
     <div className={AppStyles.page}>
       <AppHeader />
       { state.success ? <AppMain data={state.data} onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> }
-      <ModalOverlay isVisible={modalState.isModalVisible} modalClose={handleModalClose} />
+      { modalState.isModalVisible && <ModalOverlay closeModal={handleCloseModal} /> }
       { modalState.isModalVisible &&
-        <Modal closeModal={handleModalClose}>
+        <Modal closeModal={handleCloseModal}>
           { modalState.isIngredientDetailsVisible && <IngredientDetails card={cardState.card} /> }
-          { modalState.isOrderDetailsVisible && <OrderDetails onOrderDetailsOkButtonClick={handleModalClose} /> }
+          { modalState.isOrderDetailsVisible && <OrderDetails onOrderDetailsOkButtonClick={handleCloseModal} /> }
         </Modal>
       }
     </div>
