@@ -68,23 +68,13 @@ function App() {
 
   useEffect(() => {
     document.addEventListener('keydown', handleEscClick);
-    document.addEventListener('click', handleOutsideClick);
-  
     return () => {
       document.removeEventListener('keydown', handleEscClick);
-      document.removeEventListener('click', handleOutsideClick);
     }
-  
   },[]);
 
   const handleEscClick = (event) => {
     if(event.key === 'Escape') {
-      setModalState({ isModalVisible: false });
-    };
-  };
-
-  const handleOutsideClick = (event) => {
-    if (event.target.classList.contains('modal-overlay_modalOverlay__Bc71J')) { // подумать над реализацией!
       setModalState({ isModalVisible: false });
     };
   };
@@ -97,9 +87,9 @@ function App() {
     <div className={AppStyles.page}>
       <AppHeader />
       { state.success ? <AppMain data={state.data} onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> }
-      <ModalOverlay isVisible={modalState.isModalVisible} />
+      <ModalOverlay isVisible={modalState.isModalVisible} modalClose={handleModalClose} />
       { modalState.isModalVisible &&
-        <Modal onClose={handleModalClose}>
+        <Modal closeModal={handleModalClose}>
           { modalState.isIngredientDetailsVisible && <IngredientDetails card={cardState.card} /> }
           { modalState.isOrderDetailsVisible && <OrderDetails onOrderDetailsOkButtonClick={handleModalClose} /> }
         </Modal>
