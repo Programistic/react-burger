@@ -8,6 +8,7 @@ import Modal from '../modal/modal';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import { orderNumber } from '../../utils/test-data';
 
 function App() {
 
@@ -76,7 +77,7 @@ function App() {
       { modalState.isModalVisible &&
         <Modal closeModal={handleCloseModal}>
           { modalState.isIngredientDetailsVisible && <IngredientDetails card={cardState.card} /> }
-          { modalState.isOrderDetailsVisible && <OrderDetails onOrderDetailsOkButtonClick={handleCloseModal} /> }
+          { modalState.isOrderDetailsVisible && <OrderDetails orderNumber={orderNumber} onOrderDetailsOkButtonClick={handleCloseModal} /> }
         </Modal>
       }
     </div>

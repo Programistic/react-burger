@@ -1,5 +1,6 @@
 import React from "react";
 import InggredientDetailsStyles from './ingredient-details.module.css';
+import { propTypesForData } from "../../utils/constants";
 
 function IngredientDetails({card}) {
 
@@ -33,3 +34,5 @@ function IngredientDetails({card}) {
 };
 
 export default IngredientDetails;
+
+IngredientDetails.propTypes = propTypesForData;

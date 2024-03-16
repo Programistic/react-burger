@@ -1,7 +1,8 @@
 import React from "react";
 import OrderDetailsStyles from './order-details.module.css';
+import PropTypes from 'prop-types';
 
-function OrderDetails({orderNumber = '034536', onOrderDetailsOkButtonClick}) {
+function OrderDetails({orderNumber, onOrderDetailsOkButtonClick}) {
 
   const handleClick = () => {
     onOrderDetailsOkButtonClick();
@@ -23,3 +24,7 @@ function OrderDetails({orderNumber = '034536', onOrderDetailsOkButtonClick}) {
 };
 
 export default OrderDetails;
+
+OrderDetails.propTypes = {
+  orderNumber: PropTypes.string.isRequired,
+};
