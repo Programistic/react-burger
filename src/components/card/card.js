@@ -31,5 +31,6 @@ Card.propTypes = {
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  card: propTypesForData,
 };
+
+Card.propTypes = propTypesForData;
