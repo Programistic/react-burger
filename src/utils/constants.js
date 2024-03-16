@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 export const dataURL = `${window.location.protocol}//norma.nomoreparties.space/api/ingredients`;
+
 export const propTypesForData = {
   data: PropTypes.arrayOf(
     PropTypes.shape(
@@ -20,4 +21,8 @@ export const propTypesForData = {
       }
     )
   )
+};
+
+export const checkResponse = (res) => {
+  return res.ok ? res.json() : Promise.reject(`Error ${res.status}`);
 };

@@ -3,7 +3,7 @@ import AppMain from '../app-main/app-main';
 import AppStyles from './app.module.css';
 import Preloader from '../preloader/preloader';
 import { useEffect, useState } from 'react';
-import { dataURL } from '../../utils/constants';
+import { dataURL, checkResponse } from '../../utils/constants';
 import Modal from '../modal/modal';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import OrderDetails from '../order-details/order-details';
@@ -26,8 +26,7 @@ function App() {
   const getData = async() => {
     try {
       setState({ ...state, hasError: false, isLoading: true });
-      const res = await fetch(dataURL);
-      const resJson = await res.json();  
+      const resJson = await fetch(dataURL).then(checkResponse); 
       setState({ ...state, success: resJson.success, data: resJson.data, isLoading: false });
     } catch (error) {
       setState({ ...state, hasError: true, isLoading: false });
