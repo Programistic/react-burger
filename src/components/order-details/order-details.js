@@ -12,7 +12,7 @@ function OrderDetails({orderNumber, onOrderDetailsOkButtonClick}) {
     <div className={OrderDetailsStyles.container}>
       <span className={OrderDetailsStyles.orderNumber}>{orderNumber}</span>
       <p className={OrderDetailsStyles.text}>идентификатор заказа</p>
-      <button type="button" className={OrderDetailsStyles.button} aria-label="Ok" onClick={handleClick}/>
+      <button type="button" className={OrderDetailsStyles.button} aria-label="Ok" onClick={handleClick} />
       <p className={OrderDetailsStyles.message}>
         Ваш заказ начали готовить
       </p>

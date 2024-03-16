@@ -1,15 +1,9 @@
-import ReactDOM from 'react-dom';
 import ModalOverlayStyles from './modal-overlay.module.css';
 
 function ModalOverlay({closeModal}) {
 
-  const modalOverlayRoot = document.getElementById('overlay');
-
-  return ReactDOM.createPortal(
-    (
-      <div className={ModalOverlayStyles.modalOverlay} onClick={closeModal}></div>
-    ),
-    modalOverlayRoot
+  return(
+    <div className={ModalOverlayStyles.modalOverlay} onClick={closeModal} />
   );
 }
 
