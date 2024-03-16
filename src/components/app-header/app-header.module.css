@@ -36,11 +36,8 @@
   border-color: #4c4cff;
 }
 
-.profileLink__text {
+.profileLinkText {
   align-self: center;
-  font-family: 'JetBrainsMono-Regular';
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1;
+  font: 400 1rem/1 'JetBrainsMono', "Inter", sans-serif;
   color: #8585ad;
 }

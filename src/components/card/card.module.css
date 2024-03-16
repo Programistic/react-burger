@@ -34,7 +34,8 @@
 
 .title {
   margin: 0;
-  font: 400 1rem/1.2 'JetBrainsMono-Regular', 'Inter', sans-serif;
+  font: 400 1rem/1.2 'JetBrainsMono', 'Inter', sans-serif;
+  line-height: 1.2;
   color: #f2f2f3;
   text-align: center;
 }

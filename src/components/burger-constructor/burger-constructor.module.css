@@ -39,10 +39,7 @@
 .productPrice {
   display: block;
   margin-inline-end: .5rem;
-  font-family: 'Iceland';
-  font-weight: 400;
-  font-size: 3rem;
-  line-height: 1;
+  font: 400 3rem/1 'Iceland', 'Inter', sans-serif;
   color: #f2f2f3;
 }
 

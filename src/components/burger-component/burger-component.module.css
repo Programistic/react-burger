@@ -16,7 +16,3 @@
 .buttonDragIcon:hover {
   opacity: .7;
 }
-
-.isVisible {
-  visibility: hidden;
-}

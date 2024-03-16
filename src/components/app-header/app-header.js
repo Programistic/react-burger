@@ -13,7 +13,7 @@ function AppHeader() {
         </a>
         <a href='#0' className={AppHeaderStyles.profileLink} >
           <ProfileIcon type={'secondary'} />
-          <span className={AppHeaderStyles.profileLink__text}>Личный&nbsp;кабинет</span>
+          <span className={AppHeaderStyles.profileLinkText}>Личный&nbsp;кабинет</span>
         </a>
       </nav> 
     </header>

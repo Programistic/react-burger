@@ -7,20 +7,14 @@
 .orderNumber {
   display: block;
   margin-block-start: 3.75rem;
-  font-family: 'Iceland', 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 9rem;
-  line-height: .8;
+  font: 400 9rem/.8 'Iceland', 'Inter', sans-serif;
   color: #f2f2f3;
 }
 
 .text {
   margin: 2rem 0 0;
   padding: 0;
-  font-family: 'JetBrainsMono-Bold', 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1.25;
+  font: 700 1.5rem/1.25 'JetBrainsMono', 'Inter', sans-serif;
   color: #f2f2f3;
 }
 
@@ -45,10 +39,7 @@
 
 .message {
   margin: 0;
-  font-family: 'JetBrainsMono-Regular';
-  font-size: 1rem;
-  line-height: 1.5;
-  font-weight: 400;
+  font: 400 1rem/1.5 'JetBrainsMono', 'Inter', sans-serif;
   color: #f2f2f3
 }
 
