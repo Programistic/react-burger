@@ -1,0 +1,23 @@
+@font-face {
+  font-display: swap;
+  font-family: 'JetBrainsMono-Regular';
+  font-weight: 400;
+  src:
+    url(./JetBrainsMono-Regular.ttf) format('ttf');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'JetBrainsMono-Bold';
+  font-weight: 700;
+  src:
+    url(./JetBrainsMono-Bold.ttf) format('ttf');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Iceland-Regular';
+  font-weight: 400;
+  src:
+    url(./JetBrainsMono-Regular.ttf) format('ttf');
+}
