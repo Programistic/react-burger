@@ -2,7 +2,8 @@ import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsStyles from './burger-ingredients.module.css';
 import TabContent from "../tab-content/tab-content";
-import { propTypesForData } from "../../utils/constants";
+import PropTypes from 'prop-types';
+import { cardType } from "../../utils/constants";
 
 function BurgerIngredients({data, onCardClick}) {
 
@@ -28,4 +29,7 @@ function BurgerIngredients({data, onCardClick}) {
 
 export default BurgerIngredients;
 
-BurgerIngredients.propTypes = propTypesForData;
+BurgerIngredients.propTypes = {
+  data: PropTypes.arrayOf(cardType).isRequired,
+  onCardClick: PropTypes.func.isRequired,
+};

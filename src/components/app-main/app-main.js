@@ -1,6 +1,7 @@
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import { propTypesForData } from "../../utils/constants";
+import PropTypes from 'prop-types';
+import { cardType } from "../../utils/constants";
 import AppMainStyles from './app-main.module.css';
 
 function AppMain({data, onCardClick, onButtonMakeOrderClick}) {
@@ -17,4 +18,8 @@ function AppMain({data, onCardClick, onButtonMakeOrderClick}) {
 
 export default AppMain;
 
-AppMain.propTypes = propTypesForData;
+AppMain.propTypes = {
+  data: PropTypes.arrayOf(cardType).isRequired,
+  onCardClick: PropTypes.func.isRequired,
+  onButtonMakeOrderClick: PropTypes.func.isRequired,
+};

@@ -1,6 +1,7 @@
 import TabContentStyles from './tab-content.module.css';
 import Card from '../card/card';
-import { propTypesForData } from '../../utils/constants';
+import PropTypes from 'prop-types';
+import { cardType } from '../../utils/constants';
 
 function TabContent({data, onCardClick}) {
 
@@ -12,9 +13,6 @@ function TabContent({data, onCardClick}) {
     return (
       <Card
         key={card._id}
-        title={card.name}
-        image={card.image}
-        price={card.price}
         card={card}
         onCardClick={onCardClick}
       />
@@ -25,9 +23,6 @@ function TabContent({data, onCardClick}) {
     return (
       <Card
         key={card._id}
-        title={card.name}
-        image={card.image}
-        price={card.price}
         card={card}
         onCardClick={onCardClick}
       />
@@ -38,9 +33,6 @@ function TabContent({data, onCardClick}) {
     return (
       <Card
         key={card._id}
-        title={card.name}
-        image={card.image}
-        price={card.price}
         card={card}
         onCardClick={onCardClick}
       />
@@ -67,4 +59,7 @@ function TabContent({data, onCardClick}) {
 
 export default TabContent;
 
-TabContent.propTypes = propTypesForData;
+TabContent.propTypes = {
+  data: PropTypes.arrayOf(cardType).isRequired,
+  onCardClick: PropTypes.func.isRequired,
+};

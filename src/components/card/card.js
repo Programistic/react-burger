@@ -1,12 +1,10 @@
 import CardStyles from './card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { propTypesForData } from '../../utils/constants';
+import { cardType } from '../../utils/constants';
 import { count } from './../../utils/test-data';
 
-
-
-function Card({image, price, title, card, onCardClick}) {
+function Card({card, onCardClick}) {
 
   const handleClick = () => {
     onCardClick(card);
@@ -14,13 +12,13 @@ function Card({image, price, title, card, onCardClick}) {
 
   return (
     <li className={CardStyles.card} onClick={handleClick}>
-      <img src={image} className={CardStyles.image} alt={title} />
+      <img src={card.image} className={CardStyles.image} alt={card.name} />
       <Counter count={count} size={'default'} extraClass={'m-1'} />
       <div className={CardStyles.innerContainer}>
-        <span className={CardStyles.productPrice}>{price}</span>
+        <span className={CardStyles.productPrice}>{card.price}</span>
         <CurrencyIcon type={'primary'} />
       </div>
-      <h3 className={CardStyles.title}>{title}</h3>
+      <h3 className={CardStyles.title}>{card.name}</h3>
     </li>
   );
 }
@@ -28,9 +26,6 @@ function Card({image, price, title, card, onCardClick}) {
 export default Card;
 
 Card.propTypes = {
-  image: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
+  card: cardType.isRequired,
+  onCardClick: PropTypes.func.isRequired,
 };
-
-Card.propTypes = propTypesForData;

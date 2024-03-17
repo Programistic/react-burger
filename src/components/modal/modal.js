@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
 import ModalStyles from './modal.module.css';
 
 function Modal({children, closeModal}) {
@@ -35,3 +36,8 @@ function Modal({children, closeModal}) {
 }
 
 export default Modal;
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  closeModal: PropTypes.func.isRequired,
+};
