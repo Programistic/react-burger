@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 
 export const dataURL = `${window.location.protocol}//norma.nomoreparties.space/api/ingredients`;
 
@@ -22,3 +23,5 @@ export const cardType = PropTypes.shape(
     __v: PropTypes.number.isRequired,
   }
 );
+
+export const DataContext = React.createContext();

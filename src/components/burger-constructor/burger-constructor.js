@@ -2,9 +2,12 @@ import BurgerConstructorStyles from './burger-constructor.module.css';
 import BurgerComponent from "../burger-component/burger-component";
 import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { cardType } from '../../utils/constants';
+import { DataContext } from '../../utils/constants';
+import { useContext } from 'react';
 
-function BurgerConstructor({data, onButtonMakeOrderClick}) {
+function BurgerConstructor({onButtonMakeOrderClick}) {
+
+  const data = useContext(DataContext);
 
   const componentList = data.map((component) => {
     return (
@@ -50,6 +53,5 @@ function BurgerConstructor({data, onButtonMakeOrderClick}) {
 export default BurgerConstructor;
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(cardType).isRequired,
   onButtonMakeOrderClick: PropTypes.func.isRequired,
 };
