@@ -1,7 +1,6 @@
 .modalOverlay {
-  position: absolute;
-  inline-size: 100vw;
-  block-size: 100vh;
+  position: fixed;
+  inset: 0;
   background-color: #000;
   opacity: .6;
 }
