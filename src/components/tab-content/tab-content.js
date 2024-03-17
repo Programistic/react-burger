@@ -1,20 +1,20 @@
 import TabContentStyles from './tab-content.module.css';
 import Card from '../card/card';
 import PropTypes from 'prop-types';
+import { cardType } from '../../utils/constants';
 
-function TabContent({cards}) {
+function TabContent({data, onCardClick}) {
 
-  const cardsBun = cards.filter(card => card.type === 'bun');
-  const cardsSauce = cards.filter(card => card.type === 'sauce');
-  const cardsMain = cards.filter(card => card.type === 'main');
+  const cardsBun = data.filter(card => card.type === 'bun');
+  const cardsSauce = data.filter(card => card.type === 'sauce');
+  const cardsMain = data.filter(card => card.type === 'main');
 
   const cardListBun = cardsBun.map((card) => {
     return (
       <Card
         key={card._id}
-        title={card.name}
-        image={card.image}
-        price={card.price}
+        card={card}
+        onCardClick={onCardClick}
       />
     );
   });
@@ -23,9 +23,8 @@ function TabContent({cards}) {
     return (
       <Card
         key={card._id}
-        title={card.name}
-        image={card.image}
-        price={card.price}
+        card={card}
+        onCardClick={onCardClick}
       />
     );
   });
@@ -34,9 +33,8 @@ function TabContent({cards}) {
     return (
       <Card
         key={card._id}
-        title={card.name}
-        image={card.image}
-        price={card.price}
+        card={card}
+        onCardClick={onCardClick}
       />
     );
   });
@@ -56,23 +54,12 @@ function TabContent({cards}) {
         {cardListMain}
       </ul>
     </div>
-  )
-}
-
-TabContent.propTypes = {
-  cards: PropTypes.arrayOf(
-    PropTypes.objectOf(
-      PropTypes.shape(
-        {
-          _id: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
-          type: PropTypes.string.isRequired,
-          image: PropTypes.string.isRequired,
-          price: PropTypes.number.isRequired
-        }
-      )
-    )
-  )
+  );
 }
 
 export default TabContent;
+
+TabContent.propTypes = {
+  data: PropTypes.arrayOf(cardType).isRequired,
+  onCardClick: PropTypes.func.isRequired,
+};

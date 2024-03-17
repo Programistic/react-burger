@@ -1,8 +1,10 @@
 import BurgerConstructorStyles from './burger-constructor.module.css';
 import BurgerComponent from "../burger-component/burger-component";
 import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
+import { cardType } from '../../utils/constants';
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor({data, onButtonMakeOrderClick}) {
 
   const componentList = data.map((component) => {
     return (
@@ -12,7 +14,6 @@ function BurgerConstructor({ data }) {
         image={component.image}
         price={component.price}
         thumbnail={component.image}
-        isDragIconVisible={true}
         isLocked={false}
       />
     );
@@ -21,22 +22,34 @@ function BurgerConstructor({ data }) {
   componentList.shift();
   componentList.pop();
 
+  const firstComponent = data[0];
+  const lastComponent = data[data.length-1];
+
+  const handleClick = () => {
+    onButtonMakeOrderClick();
+  }
+
   return (
     <section className={BurgerConstructorStyles.constructor}>
-      <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={data[0].image} text={data[0].name} price={data[0].price} isLocked={true} />
+      <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={firstComponent.image} text={firstComponent.name} price={firstComponent.price} isLocked={true} />
       <ul className={BurgerConstructorStyles.componentsList}>
         {componentList}
       </ul>
-      <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={data[data.length-1].image} text={data[data.length-1].name} price={data[data.length-1].price} isLocked={true} />
+      <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={lastComponent.image} text={lastComponent.name} price={lastComponent.price} isLocked={true} />
       <div className={BurgerConstructorStyles.innerContainer}>
         <span className={BurgerConstructorStyles.productPrice}>610</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType={'button'} type={'primary'} size={'large'} aria-label='Оформить заказ' onClick={handleClick}>
           Оформить заказ
         </Button>
       </div>
     </section>
-  )
+  );
 }
 
 export default BurgerConstructor;
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(cardType).isRequired,
+  onButtonMakeOrderClick: PropTypes.func.isRequired,
+};

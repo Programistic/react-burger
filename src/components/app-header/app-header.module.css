@@ -36,8 +36,8 @@
   border-color: #4c4cff;
 }
 
-.profileLink__text {
+.profileLinkText {
   align-self: center;
-  font: 400 1rem/1 'JetBrainsMono-Regular', 'Inter', sans-serif;
+  font: 400 1rem/1 'JetBrainsMono', "Inter", sans-serif;
   color: #8585ad;
 }

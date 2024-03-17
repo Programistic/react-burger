@@ -5,15 +5,15 @@ import AppHeaderStyles from './app-header.module.css';
 
 function AppHeader() {
   return (
-    <header className={ AppHeaderStyles.header }>
-      <nav className={ AppHeaderStyles.navBar }>
+    <header className={AppHeaderStyles.header}>
+      <nav className={AppHeaderStyles.navBar}>
         <HeaderMenu />
-        <a href='#0' className={ AppHeaderStyles.logo }>
+        <a href='#0' className={AppHeaderStyles.logo}>
           <Logo />
         </a>
-        <a href='#0' className={ AppHeaderStyles.profileLink } >
+        <a href='#0' className={AppHeaderStyles.profileLink} >
           <ProfileIcon type={'secondary'} />
-          <span className={AppHeaderStyles.profileLink__text}>Личный&nbsp;кабинет</span>
+          <span className={AppHeaderStyles.profileLinkText}>Личный&nbsp;кабинет</span>
         </a>
       </nav> 
     </header>
