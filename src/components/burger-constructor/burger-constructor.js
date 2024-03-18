@@ -13,7 +13,14 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
     return item.type === 'bun';
   });
 
+  const isBun = bun !== undefined;
+
+  let price = isBun ? (bun.price * 2) : 0;
+
   const componentList = data.filter(item => item.type !== 'bun').map((component) => {
+    
+    price += component.price;
+   
     return (
       <BurgerComponent
         key={component._id}
@@ -32,13 +39,13 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
 
   return (
     <section className={BurgerConstructorStyles.constructor}>
-      <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} />
+      { isBun && <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} /> }
       <ul className={BurgerConstructorStyles.componentsList}>
         {componentList}
       </ul>
-      <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} />
+      { isBun && <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} /> }
       <div className={BurgerConstructorStyles.innerContainer}>
-        <span className={BurgerConstructorStyles.productPrice}>610</span>
+        <span className={BurgerConstructorStyles.productPrice}>{price}</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>
         <Button htmlType={'button'} type={'primary'} size={'large'} aria-label='Оформить заказ' onClick={handleClick}>
           Оформить заказ
