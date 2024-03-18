@@ -9,7 +9,11 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
 
   const data = useContext(DataContext);
 
-  const componentList = data.map((component) => {
+  const bun = data.find((item) => {
+    return item.type === 'bun';
+  });
+
+  const componentList = data.filter(item => item.type !== 'bun').map((component) => {
     return (
       <BurgerComponent
         key={component._id}
@@ -22,23 +26,17 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
     );
   });
 
-  componentList.shift();
-  componentList.pop();
-
-  const firstComponent = data[0];
-  const lastComponent = data[data.length-1];
-
   const handleClick = () => {
     onButtonMakeOrderClick();
   }
 
   return (
     <section className={BurgerConstructorStyles.constructor}>
-      <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={firstComponent.image} text={firstComponent.name} price={firstComponent.price} isLocked={true} />
+      <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} />
       <ul className={BurgerConstructorStyles.componentsList}>
         {componentList}
       </ul>
-      <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={lastComponent.image} text={lastComponent.name} price={lastComponent.price} isLocked={true} />
+      <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} />
       <div className={BurgerConstructorStyles.innerContainer}>
         <span className={BurgerConstructorStyles.productPrice}>610</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>
