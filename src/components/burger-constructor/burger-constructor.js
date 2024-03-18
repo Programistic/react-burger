@@ -15,11 +15,11 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
 
   const isBun = bun !== undefined;
 
-  let price = isBun ? (bun.price * 2) : 0;
+  let totalCost = isBun ? (bun.price * 2) : 0;
 
   const componentList = data.filter(item => item.type !== 'bun').map((component) => {
     
-    price += component.price;
+    totalCost += component.price;
    
     return (
       <BurgerComponent
@@ -45,7 +45,7 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
       </ul>
       { isBun && <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} /> }
       <div className={BurgerConstructorStyles.innerContainer}>
-        <span className={BurgerConstructorStyles.productPrice}>{price}</span>
+        <span className={BurgerConstructorStyles.productPrice}>{totalCost}</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>
         <Button htmlType={'button'} type={'primary'} size={'large'} aria-label='Оформить заказ' onClick={handleClick}>
           Оформить заказ
