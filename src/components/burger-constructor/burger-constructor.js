@@ -1,9 +1,9 @@
 import BurgerConstructorStyles from './burger-constructor.module.css';
 import BurgerComponent from "../burger-component/burger-component";
 import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import { DataContext } from '../../utils/constants';
 import { useContext } from 'react';
+import PropTypes from 'prop-types';
 
 function BurgerConstructor({onButtonMakeOrderClick}) {
 
@@ -16,11 +16,13 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
   const isBun = bun !== undefined;
 
   let totalCost = isBun ? (bun.price * 2) : 0;
+  let idArray = [];
 
   const componentList = data.filter(item => item.type !== 'bun').map((component) => {
     
     totalCost += component.price;
-   
+    idArray.push(component._id);
+    
     return (
       <BurgerComponent
         key={component._id}
@@ -34,7 +36,9 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
   });
 
   const handleClick = () => {
-    onButtonMakeOrderClick();
+    idArray.unshift(bun._id);
+    idArray.push(bun._id);
+    onButtonMakeOrderClick(idArray);
   }
 
   return (

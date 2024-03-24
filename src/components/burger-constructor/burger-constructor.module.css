@@ -22,6 +22,8 @@
 
 .componentsList::-webkit-scrollbar-thumb {
   background-color: #8585ad;
+  border: 3px solid #2F2F37;
+  border-radius: 6px;
 }
 
 .componentsList::-webkit-scrollbar-track {

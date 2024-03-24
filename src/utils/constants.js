@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const dataURL = `${window.location.protocol}//norma.nomoreparties.space/api/ingredients`;
-
-export const checkResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Error ${res.status}`);
-};
+export const apiURL = `${window.location.protocol}//norma.nomoreparties.space/api`;
+export const dataURL = `${apiURL}/ingredients`;
+export const orderURL = `${apiURL}/orders`;
 
 export const cardType = PropTypes.shape(
   {

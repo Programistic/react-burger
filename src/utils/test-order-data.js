@@ -1,7 +1,7 @@
 const orderData = 
 [
   {
-     "_id":"60666c42cc7b410027a1a9b5",
+     "_id":"643d69a5c3f7b9001cfa0940",
      "name":"Говяжий метеорит (отбивная)",
      "type":"main",
      "proteins":800,
@@ -15,7 +15,7 @@ const orderData =
      "__v":0
   },
   {
-     "_id":"60666c42cc7b410027a1a9ba",
+     "_id":"643d69a5c3f7b9001cfa0945",
      "name":"Соус с шипами Антарианского плоскоходца",
      "type":"sauce",
      "proteins":101,
@@ -29,7 +29,21 @@ const orderData =
      "__v":0
   },
   {
-     "_id":"60666c42cc7b410027a1a9b4",
+   "_id":"643d69a5c3f7b9001cfa093d",
+   "name":"Флюоресцентная булка R2-D3",
+   "type":"bun",
+   "proteins":44,
+   "fat":26,
+   "carbohydrates":85,
+   "calories":643,
+   "price":100,
+   "image":"https://code.s3.yandex.net/react/code/bun-01.png",
+   "image_mobile":"https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+   "image_large":"https://code.s3.yandex.net/react/code/bun-01-large.png",
+   "__v":0
+  },
+  {
+     "_id":"643d69a5c3f7b9001cfa093f",
      "name":"Мясо бессмертных моллюсков Protostomia",
      "type":"main",
      "proteins":433,
@@ -43,7 +57,7 @@ const orderData =
      "__v":0
   },
   {
-     "_id":"60666c42cc7b410027a1a9bb",
+     "_id":"643d69a5c3f7b9001cfa0946",
      "name":"Хрустящие минеральные кольца",
      "type":"main",
      "proteins":808,
@@ -57,7 +71,7 @@ const orderData =
      "__v":0
   },
   {
-     "_id":"60666c42cc7b410027a1a9be",
+     "_id":"643d69a5c3f7b9001cfa0949",
      "name":"Мини-салат Экзо-Плантаго",
      "type":"main",
      "proteins":1,
@@ -71,21 +85,7 @@ const orderData =
      "__v":0
   },
   {
-     "_id":"60666c42cc7b410027a1a9b3",
-     "name":"Филе Люминесцентного тетраодонтимформа",
-     "type":"main",
-     "proteins":44,
-     "fat":26,
-     "carbohydrates":85,
-     "calories":643,
-     "price":988,
-     "image":"https://code.s3.yandex.net/react/code/meat-03.png",
-     "image_mobile":"https://code.s3.yandex.net/react/code/meat-03-mobile.png",
-     "image_large":"https://code.s3.yandex.net/react/code/meat-03-large.png",
-     "__v":0
-  },
-  {
-     "_id":"60666c42cc7b410027a1a9bf",
+     "_id":"643d69a5c3f7b9001cfa094a",
      "name":"Сыр с астероидной плесенью",
      "type":"main",
      "proteins":84,
@@ -96,20 +96,6 @@ const orderData =
      "image":"https://code.s3.yandex.net/react/code/cheese.png",
      "image_mobile":"https://code.s3.yandex.net/react/code/cheese-mobile.png",
      "image_large":"https://code.s3.yandex.net/react/code/cheese-large.png",
-     "__v":0
-  },
-  {
-     "_id":"60666c42cc7b410027a1a9b2",
-     "name":"Флюоресцентная булка R2-D3",
-     "type":"bun",
-     "proteins":44,
-     "fat":26,
-     "carbohydrates":85,
-     "calories":643,
-     "price":1000,
-     "image":"https://code.s3.yandex.net/react/code/bun-01.png",
-     "image_mobile":"https://code.s3.yandex.net/react/code/bun-01-mobile.png",
-     "image_large":"https://code.s3.yandex.net/react/code/bun-01-large.png",
      "__v":0
   }
 ]
