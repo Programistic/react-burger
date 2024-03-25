@@ -1,9 +1,12 @@
 import TabContentStyles from './tab-content.module.css';
 import Card from '../card/card';
+import { useContext } from 'react';
+import { DataContext } from '../../utils/constants';
 import PropTypes from 'prop-types';
-import { cardType } from '../../utils/constants';
 
-function TabContent({data, onCardClick}) {
+function TabContent({onCardClick}) {
+
+  const data = useContext(DataContext);
 
   const cardsBun = data.filter(card => card.type === 'bun');
   const cardsSauce = data.filter(card => card.type === 'sauce');
@@ -60,6 +63,5 @@ function TabContent({data, onCardClick}) {
 export default TabContent;
 
 TabContent.propTypes = {
-  data: PropTypes.arrayOf(cardType).isRequired,
   onCardClick: PropTypes.func.isRequired,
 };
