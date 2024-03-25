@@ -12,8 +12,6 @@ import { getData, setOrder } from '../../utils/api';
 function App() {
 
   const [state, setState] = useState({
-    isLoading: false,
-    hasError: false,
     success: false,
     data: [],
     orderNumber: '',
@@ -23,8 +21,9 @@ function App() {
     isIngredientDetailsVisible: false,
   });
 
-  useEffect(() => {
-    getData({state, setState});
+  useEffect(() => {    
+      getData({state, setState})
+        .catch(error => console.log(error));
   }, []);
 
   const handleCardClick = (card) => {
@@ -37,12 +36,8 @@ function App() {
   };
 
   const handleButtonMakeOrderClick = (idArray) => {
-    setOrder({idArray, state, setState});
-    setState({
-      ...state,
-      isOrderDetailsVisible: true,
-      isModalVisible: true,
-    });
+    setOrder({idArray, state, setState})
+      .catch(error => console.log(error));
   };
 
   const handleCloseModal = () => {
