@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const apiURL = `${window.location.protocol}//norma.nomoreparties.space/api`;
+export const apiURL = 'https://norma.nomoreparties.space/api'
 export const dataURL = `${apiURL}/ingredients`;
 export const orderURL = `${apiURL}/orders`;
 
