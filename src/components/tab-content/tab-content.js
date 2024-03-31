@@ -1,16 +1,15 @@
 import TabContentStyles from './tab-content.module.css';
 import Card from '../card/card';
-import { useContext } from 'react';
-import { DataContext } from '../../utils/constants';
+import { useSelector, shallowEqual } from 'react-redux';
 import PropTypes from 'prop-types';
 
 function TabContent({onCardClick}) {
 
-  const data = useContext(DataContext);
+  const { data } = useSelector(store => ({data: store.data}), shallowEqual);
 
-  const cardsBun = data.filter(card => card.type === 'bun');
-  const cardsSauce = data.filter(card => card.type === 'sauce');
-  const cardsMain = data.filter(card => card.type === 'main');
+  const cardsBun = data.data.filter(card => card.type === 'bun');
+  const cardsSauce = data.data.filter(card => card.type === 'sauce');
+  const cardsMain = data.data.filter(card => card.type === 'main');
 
   const cardListBun = cardsBun.map((card) => {
     return (

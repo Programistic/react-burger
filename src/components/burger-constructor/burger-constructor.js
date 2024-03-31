@@ -1,15 +1,16 @@
 import BurgerConstructorStyles from './burger-constructor.module.css';
 import BurgerComponent from "../burger-component/burger-component";
 import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { DataContext } from '../../utils/constants';
-import { useContext } from 'react';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { CONSTRUCTOR_INGREDIENTS } from '../../services/actions/constructor-ingredients';
 
 function BurgerConstructor({onButtonMakeOrderClick}) {
 
-  const data = useContext(DataContext);
+  const { data } = useSelector(store => ({data: store.data}), shallowEqual);
+  const dispatch = useDispatch();
 
-  const bun = data.find((item) => {
+  const bun = data.data.find((item) => {
     return item.type === 'bun';
   });
 
@@ -18,7 +19,7 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
   let totalCost = isBun ? (bun.price * 2) : 0;
   let idArray = [];
 
-  const componentList = data.filter(item => item.type !== 'bun').map((component) => {
+  const componentList = data.data.filter(item => item.type !== 'bun').map((component) => {
     
     totalCost += component.price;
     idArray.push(component._id);
@@ -38,6 +39,7 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
   const handleClick = () => {
     idArray.unshift(bun._id);
     idArray.push(bun._id);
+    dispatch({type: CONSTRUCTOR_INGREDIENTS, idArray})
     onButtonMakeOrderClick(idArray);
   }
 

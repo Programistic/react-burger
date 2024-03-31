@@ -2,63 +2,59 @@ import AppHeader from '../app-header/app-header';
 import AppMain from '../app-main/app-main';
 import AppStyles from './app.module.css';
 import Preloader from '../preloader/preloader';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Modal from '../modal/modal';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { getData, setOrder } from '../../utils/api';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
 
 function App() {
 
-  const [state, setState] = useState({
-    success: false,
-    data: [],
-    orderNumber: '',
-    card: {},
-    isModalVisible: false,
-    isOrderDetailsVisible: false,
-    isIngredientDetailsVisible: false,
-  });
-
-  useEffect(() => {    
-      getData({state, setState})
-        .catch(error => console.log(error));
+  useEffect(()=> {
+    dispatch(getData);
   }, []);
+  
+  const dispatch = useDispatch();
+
+  const {
+    isSuccess,
+    isModalVisible,
+    isIngredientDetailsVisible,
+    isOrderDetailsVisible,
+    card,
+  } = useSelector(store => ({
+    isSuccess: store.data.success,
+    isModalVisible: store.modal.isModalVisible,
+    isIngredientDetailsVisible: store.modal.isIngredientDetailsVisible,
+    isOrderDetailsVisible: store.modal.isOrderDetailsVisible,
+    card: store.card.card,
+  }), shallowEqual);
 
   const handleCardClick = (card) => {
-    setState({
-      ...state,
-      card: card,
-      isModalVisible: true,
-      isIngredientDetailsVisible: true,
-    });
+    dispatch({type: OPEN_INGREDIENT_MODAL});
   };
 
   const handleButtonMakeOrderClick = (idArray) => {
-    setOrder({idArray, state, setState})
-      .catch(error => console.log(error));
+    dispatch(setOrder(idArray));
+    dispatch({type: OPEN_ORDER_MODAL});
   };
 
   const handleCloseModal = () => {
-    setState({
-      ...state,
-      orderNumber: '',
-      isModalVisible: false,
-      isOrderDetailsVisible: false,
-      isIngredientDetailsVisible: false,
-    });
+    dispatch({type: CLOSE_MODAL});
   };
  
   return(
     <div className={AppStyles.page}>
       <AppHeader />
-      { state.success ? <AppMain data={state.data} onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> }
-      { state.isModalVisible && <ModalOverlay closeModal={handleCloseModal} /> }
-      { state.isModalVisible &&
+      { isSuccess ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> }
+      { isModalVisible && <ModalOverlay closeModal={handleCloseModal} /> }
+      { isModalVisible &&
         <Modal closeModal={handleCloseModal}>
-          { state.isIngredientDetailsVisible && <IngredientDetails card={state.card} /> }
-          { state.isOrderDetailsVisible && <OrderDetails orderNumber={state.orderNumber} onOrderDetailsOkButtonClick={handleCloseModal} /> }
+          { isIngredientDetailsVisible && <IngredientDetails card={card} /> }
+          { isOrderDetailsVisible && <OrderDetails onOrderDetailsOkButtonClick={handleCloseModal} /> }
         </Modal>
       }
     </div>
