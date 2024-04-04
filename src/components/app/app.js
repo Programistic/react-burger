@@ -10,6 +10,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import { getData, setOrder } from '../../utils/api';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
+import { CURRENT_INGREDIENT_SET } from '../../services/actions/current-ingredient';
 
 function App() {
 
@@ -33,7 +34,7 @@ function App() {
     card: store.card.card,
   }), shallowEqual);
 
-  const handleCardClick = (card) => {
+  const handleCardClick = () => {
     dispatch({type: OPEN_INGREDIENT_MODAL});
   };
 
@@ -44,6 +45,7 @@ function App() {
 
   const handleCloseModal = () => {
     dispatch({type: CLOSE_MODAL});
+    dispatch({type: CURRENT_INGREDIENT_SET, card: null})
   };
  
   return(

@@ -2,23 +2,34 @@ import CardStyles from './card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { cardType } from '../../utils/constants';
-import { count } from './../../utils/test-data';
 import { useDispatch } from 'react-redux';
-import { CURRENT_INGREDIENT } from '../../services/actions/current-ingredient';
+import { CURRENT_INGREDIENT_SET } from '../../services/actions/current-ingredient';
+import { useDrag } from 'react-dnd';
 
-function Card({card, onCardClick}) {
+function Card({card, counter, onCardClick}) {
 
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch({type: CURRENT_INGREDIENT, card})
-    onCardClick(card);
+    dispatch({type: CURRENT_INGREDIENT_SET, card})
+    onCardClick();
   };
 
+  const {_id} = card;
+  const [{isDrag}, dragRef] = useDrag({
+    type: 'card',
+    item: {_id},
+    collect: monitor => ({
+      isDrag: monitor.isDragging()
+    }),
+  });
+
+
   return (
-    <li className={CardStyles.card} onClick={handleClick}>
+    !isDrag &&
+    <li className={CardStyles.card} onClick={handleClick} ref={dragRef} >
       <img src={card.image} className={CardStyles.image} alt={card.name} />
-      <Counter count={count} size={'default'} extraClass={'m-1'} />
+      <Counter count={counter} size={'default'} extraClass={'m-1'} />
       <div className={CardStyles.innerContainer}>
         <span className={CardStyles.productPrice}>{card.price}</span>
         <CurrencyIcon type={'primary'} />

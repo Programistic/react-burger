@@ -5,6 +5,8 @@ const initialState = {
   isLoading: false,
   isError: false,
   data: [],
+  bun: [],
+  ingredients: [],
 }
 
 export const dataReducer = (state = initialState, action) => {
@@ -20,6 +22,8 @@ export const dataReducer = (state = initialState, action) => {
       return {
         ...state,
         data: action.data,
+        bun: action.data.filter(item => (item.type === 'bun')),
+        ingredients: action.data.filter(item => (item.type !== 'bun')),
         success: true,
         isLoading: false,
       };

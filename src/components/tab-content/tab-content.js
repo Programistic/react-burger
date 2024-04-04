@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 function TabContent({onCardClick}) {
 
+  const { counter } = useSelector(store => ({counter: store.card.counter}), shallowEqual);
+
   const { data } = useSelector(store => ({data: store.data}), shallowEqual);
 
   const cardsBun = data.data.filter(card => card.type === 'bun');
@@ -16,6 +18,7 @@ function TabContent({onCardClick}) {
       <Card
         key={card._id}
         card={card}
+        counter={counter}
         onCardClick={onCardClick}
       />
     );
@@ -26,6 +29,7 @@ function TabContent({onCardClick}) {
       <Card
         key={card._id}
         card={card}
+        counter={counter}
         onCardClick={onCardClick}
       />
     );
@@ -36,6 +40,7 @@ function TabContent({onCardClick}) {
       <Card
         key={card._id}
         card={card}
+        counter={counter}
         onCardClick={onCardClick}
       />
     );

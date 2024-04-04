@@ -1,17 +1,32 @@
 .constructor {
   display: flex;
   flex-direction: column;
+  padding: 0 1rem 3.25rem 0;
+}
+
+.container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
   align-items: flex-end;
-  padding: 0 1rem 3.25rem;
+  padding: 10px;
+  min-inline-size: 580px;
+  inline-size: max-content;
+  max-block-size: calc(100vh - 370px);
+  box-sizing: border-box;
+  border: 2px solid #8585ad;
+  border-radius: 60px;
+  transition: border .3s ease;
+  overflow-y: hidden;
 }
 
 .componentsList {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-  max-block-size: calc(100vh - 562px);
   margin: 10px 0;
-  padding: 0;
+  padding: 0 10px 0 0;
+  max-block-size: calc(100vh - 562px);
   box-sizing: border-box;
   overflow-y: auto;
 }
