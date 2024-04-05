@@ -69,7 +69,7 @@ function TabContent({onCardClick, onSetTab}) {
   useEffect(
     () => {
       if (state.isBunView) {onSetTab('bun'); return;};
-      if (!state.isBunView && !state.isMainView) {onSetTab('sauce'); return;};
+      if (!state.isBunView && state.isSauceView && !state.isMainView) {onSetTab('sauce'); return;};
       if (!state.isBunView && !state.isSauceView && state.isMainView) {onSetTab('main'); return;}
     },
     [state]
@@ -93,7 +93,7 @@ function TabContent({onCardClick, onSetTab}) {
           </ul>
         </div>
       </InView>
-      <InView onChange={setInViewMain} threshold={0.6}>
+      <InView onChange={setInViewMain} threshold={0.65}>
         <div>
           <h2 className={TabContentStyles.title}>Начинки</h2>
           <ul className={TabContentStyles.cardList}>
