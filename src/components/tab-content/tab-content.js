@@ -3,9 +3,9 @@ import Card from '../card/card';
 import { useSelector, shallowEqual } from 'react-redux';
 import { InView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
-function TabContent({onCardClick}) {
+function TabContent({onCardClick, onCurrent}) {
 
   const { counter } = useSelector(store => ({counter: store.card.counter}), shallowEqual);
 
@@ -48,7 +48,6 @@ function TabContent({onCardClick}) {
     );
   });
 
-
   const [state, setState] = useState({
     isBunView: true,
     isSauceView: false,
@@ -56,22 +55,17 @@ function TabContent({onCardClick}) {
   });
 
   const setInViewBun = (inView) => {
-    console.log('bun ' + inView)
-    setState({...state, isBunView: inView})
-    console.log(state)
+    setState({...state, isBunView: inView});
   };
 
   const setInViewSauce = (inView) => {
-    console.log('sauce ' + inView)
     setState({...state, isSauceView: inView})
-    console.log(state)
   };
 
   const setInViewMain = (inView) => {
-    console.log('main ' + inView)
     setState({...state, isMainView: inView})
-    console.log(state)
   };
+
 
   return (
     <div className={TabContentStyles.content}>
