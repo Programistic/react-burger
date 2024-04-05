@@ -1,7 +1,9 @@
 import TabContentStyles from './tab-content.module.css';
 import Card from '../card/card';
 import { useSelector, shallowEqual } from 'react-redux';
+import { InView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 function TabContent({onCardClick}) {
 
@@ -46,20 +48,57 @@ function TabContent({onCardClick}) {
     );
   });
 
+
+  const [state, setState] = useState({
+    isBunView: true,
+    isSauceView: false,
+    isMainView: false,
+  });
+
+  const setInViewBun = (inView) => {
+    console.log('bun ' + inView)
+    setState({...state, isBunView: inView})
+    console.log(state)
+  };
+
+  const setInViewSauce = (inView) => {
+    console.log('sauce ' + inView)
+    setState({...state, isSauceView: inView})
+    console.log(state)
+  };
+
+  const setInViewMain = (inView) => {
+    console.log('main ' + inView)
+    setState({...state, isMainView: inView})
+    console.log(state)
+  };
+
   return (
     <div className={TabContentStyles.content}>
-      <h2 className={TabContentStyles.title}>Булки</h2>
-      <ul className={TabContentStyles.cardList}>
-        {cardListBun}
-      </ul>
-      <h2 className={TabContentStyles.title}>Соусы</h2>
-      <ul className={TabContentStyles.cardList}>
-        {cardListSauce}
-      </ul>
-      <h2 className={TabContentStyles.title}>Начинки</h2>
-      <ul className={TabContentStyles.cardList}>
-        {cardListMain}
-      </ul>
+      <InView onChange={setInViewBun} threshold={0.2}>
+        <div>
+          <h2 className={TabContentStyles.title}>Булки</h2>
+          <ul className={TabContentStyles.cardList}>
+            {cardListBun}
+          </ul>
+        </div>
+      </InView>
+      <InView onChange={setInViewSauce} threshold={0.2}>
+        <div>
+          <h2 className={TabContentStyles.title}>Соусы</h2>
+          <ul className={TabContentStyles.cardList}>
+            {cardListSauce}
+          </ul>
+        </div>
+      </InView>
+      <InView onChange={setInViewMain} threshold={0.2}>
+        <div>
+          <h2 className={TabContentStyles.title}>Начинки</h2>
+          <ul className={TabContentStyles.cardList}>
+            {cardListMain}
+          </ul>
+        </div>
+      </InView>
     </div>
   );
 }

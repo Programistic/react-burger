@@ -4,6 +4,7 @@ import { orderReducer } from "./order";
 import { modalReducer } from "./modal";
 import { constructorReducer } from "./constructor-ingredients";
 import { cardReducer } from "./current-ingredient";
+import { tabReducer } from "./tab";
 
 export const rootReducer = combineReducers({
   data: dataReducer,
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
   modal: modalReducer,
   ingredients: constructorReducer,
   card: cardReducer,
+  tab: tabReducer,
 });
