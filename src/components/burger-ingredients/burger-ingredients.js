@@ -2,30 +2,15 @@ import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsStyles from './burger-ingredients.module.css';
 import TabContent from "../tab-content/tab-content";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import PropTypes from 'prop-types';
 
 function BurgerIngredients({onCardClick}) {
 
   const [tab, setTab] = useState('bun');
 
-  const current = (isBunView, isSauceView, isMainView) => {
-    if (isBunView) {
-      setTab('bun')
-      return;
-    }
-    if (!isBunView && isSauceView) {
-      setTab('sauce')
-      return;
-    }
-    else if (!isBunView && !isSauceView && isMainView) {
-      setTab('main')
-      return;
-    }
-  };
-
   const handleClick = (value) => {
-    setTab({ currentTab: value} )
+    setTab(value)
   }
 
   return (
@@ -41,7 +26,7 @@ function BurgerIngredients({onCardClick}) {
           Начинки
         </Tab>
       </div>
-      <TabContent onCardClick={onCardClick} onSetTab={setTab} onCurrent={current} tab={tab} />
+      <TabContent onCardClick={onCardClick} onSetTab={setTab} />
     </section>
   );
 }

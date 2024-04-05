@@ -3,9 +3,9 @@ import Card from '../card/card';
 import { useSelector, shallowEqual } from 'react-redux';
 import { InView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
-function TabContent({onCardClick, onCurrent}) {
+function TabContent({onCardClick, onSetTab}) {
 
   const { counter } = useSelector(store => ({counter: store.card.counter}), shallowEqual);
 
@@ -49,10 +49,10 @@ function TabContent({onCardClick, onCurrent}) {
   });
 
   const [state, setState] = useState({
-    isBunView: true,
+    isBunView: false,
     isSauceView: false,
     isMainView: false,
-  });
+  })
 
   const setInViewBun = (inView) => {
     setState({...state, isBunView: inView});
@@ -66,6 +66,14 @@ function TabContent({onCardClick, onCurrent}) {
     setState({...state, isMainView: inView})
   };
 
+  useEffect(
+    () => {
+      if (state.isBunView) {onSetTab('bun'); return;};
+      if (!state.isBunView && !state.isMainView) {onSetTab('sauce'); return;};
+      if (!state.isBunView && !state.isSauceView && state.isMainView) {onSetTab('main'); return;}
+    },
+    [state]
+  )
 
   return (
     <div className={TabContentStyles.content}>
@@ -77,7 +85,7 @@ function TabContent({onCardClick, onCurrent}) {
           </ul>
         </div>
       </InView>
-      <InView onChange={setInViewSauce} threshold={0.2}>
+      <InView onChange={setInViewSauce} threshold={1}>
         <div>
           <h2 className={TabContentStyles.title}>Соусы</h2>
           <ul className={TabContentStyles.cardList}>
@@ -85,7 +93,7 @@ function TabContent({onCardClick, onCurrent}) {
           </ul>
         </div>
       </InView>
-      <InView onChange={setInViewMain} threshold={0.2}>
+      <InView onChange={setInViewMain} threshold={0.6}>
         <div>
           <h2 className={TabContentStyles.title}>Начинки</h2>
           <ul className={TabContentStyles.cardList}>
