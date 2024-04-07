@@ -59,11 +59,15 @@ function BurgerConstructor({onButtonMakeOrderClick, onDropHandler}) {
 
   const handleClick = () => {
     const orderIdArray = ingredients.map(item => item.oldId);
-    isBun && orderIdArray.unshift(bun._id);
-    isBun && orderIdArray.push(bun._id);
-    isBun && dispatch({type: CONSTRUCTOR_SAVE_ORDER, orderIdArray})
-    isBun && onButtonMakeOrderClick(orderIdArray);
-  }
+    if (isBun) {
+      orderIdArray.unshift(bun._id);
+      orderIdArray.push(bun._id);
+      dispatch({type: CONSTRUCTOR_SAVE_ORDER, orderIdArray})
+      onButtonMakeOrderClick(orderIdArray);
+    } else {
+      console.log('В бургере должны быть булки!'); // сделать модалку
+    };
+  };
 
   return (
     <section className={BurgerConstructorStyles.constructor}>

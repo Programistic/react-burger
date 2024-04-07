@@ -14,11 +14,11 @@ import { CURRENT_INGREDIENT_SET } from '../../services/actions/current-ingredien
 
 function App() {
 
+  const dispatch = useDispatch();
+
   useEffect(()=> {
     dispatch(getData);
   }, []);
-  
-  const dispatch = useDispatch();
 
   const {
     isSuccess,
