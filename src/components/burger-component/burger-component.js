@@ -1,12 +1,13 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import BurgerComponentStyles from './burger-component.module.css';
 import { CONSTRUCTOR_DELETE_INGREDIENT } from "../../services/actions/constructor-ingredients";
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from 'react-dnd';
-import PropTypes from 'prop-types';
 import { useRef } from "react";
+import { DEC_COUNTER } from "../../services/actions/all-ingredients";
+import PropTypes from 'prop-types';
+import BurgerComponentStyles from './burger-component.module.css';
 
-function BurgerComponent({isLocked, text, price, thumbnail, id, index, onMove}) {
+function BurgerComponent({isLocked, text, price, thumbnail, id, oldId, index, ingredients, onMove}) {
 
   const componentRef = useRef(null);
 
@@ -56,6 +57,8 @@ function BurgerComponent({isLocked, text, price, thumbnail, id, index, onMove}) 
   const dispatch = useDispatch();
 
   const handleDelete = () => {
+    const ingredient = ingredients.find(item => item._id === oldId);
+    dispatch({type: DEC_COUNTER, ingredient});
     dispatch({type: CONSTRUCTOR_DELETE_INGREDIENT, id});
   };
 
@@ -82,4 +85,9 @@ BurgerComponent.propTypes = {
   text: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   thumbnail: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  oldId: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  ingredients: PropTypes.array.isRequired,
+  onMove: PropTypes.func.isRequired,
 };

@@ -8,7 +8,7 @@
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   padding: 10px;
   min-inline-size: 580px;
   inline-size: max-content;
@@ -24,8 +24,8 @@
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-  margin: 10px 0;
-  padding: 0 10px 0 0;
+  margin: 10px 20px 10px 0;
+  padding: 0 16px 0 0;
   max-block-size: calc(100vh - 562px);
   box-sizing: border-box;
   overflow-y: auto;

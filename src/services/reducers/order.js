@@ -2,6 +2,7 @@ import { SET_ORDER_REQUEST, SET_ORDER_SUCCESS, SET_ORDER_ERROR } from "../action
 
 const initData = {
   orderNumber: '',
+  error: '',
 }
 
 export const orderReducer = (state = initData, action) => {
@@ -27,6 +28,7 @@ export const orderReducer = (state = initData, action) => {
         isError: true,
         success: false,
         isLoading: false,
+        error: action.err,
       };
     }
     default:

@@ -1,21 +1,22 @@
-import BurgerConstructorStyles from './burger-constructor.module.css';
 import BurgerComponent from "../burger-component/burger-component";
 import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { CONSTRUCTOR_SET_BUN, CONSTRUCTOR_SET_INGREDIENT, CONSTRUCTOR_UPDATE } from '../../services/actions/constructor-ingredients';
+import { CONSTRUCTOR_UPDATE, CONSTRUCTOR_SAVE_ORDER } from '../../services/actions/constructor-ingredients';
 import { useDrop } from "react-dnd";
 import PropTypes from 'prop-types';
+import BurgerConstructorStyles from './burger-constructor.module.css';
 
 function BurgerConstructor({onButtonMakeOrderClick, onDropHandler}) {
 
   const { bun, ingredients } = useSelector(store => ({bun: store.ingredients.bun, ingredients: store.ingredients.ingredients}), shallowEqual);
+  const { ingredientsArr } = useSelector(store => ({ingredientsArr: store.data.data}), shallowEqual);
 
   const dispatch = useDispatch();
 
   const [{isHover}, dropTarget] = useDrop({
     accept: 'card',
-    drop(itemId) {
-      onDropHandler(itemId);
+    drop(item) {
+      onDropHandler(item);
     },
     collect: monitor => ({
       isHover: monitor.isOver(),
@@ -24,24 +25,20 @@ function BurgerConstructor({onButtonMakeOrderClick, onDropHandler}) {
 
   const borderColor = isHover ? '#4c4cff' : 'transparent';
 
-  const isBun = bun !== null;
-
-  let totalCost = isBun ? (bun.price * 2) : 0;
-  let idArray = [];
-
   const moveComponent = (dragIndex, hoverIndex) => {
     const dragComponent = ingredients[dragIndex];
     const newIngredients = [...ingredients];
     newIngredients.splice(dragIndex, 1);
     newIngredients.splice(hoverIndex, 0, dragComponent);
-  
     dispatch({type: CONSTRUCTOR_UPDATE, newIngredients});
   };
 
+  const isBun = bun !== null;
+
+  let totalCost = isBun ? (bun.price * 2) : 0;
+
   const componentList = ingredients.map((ingredient, index) => {
-    
     totalCost += ingredient.price;
-    idArray.push(ingredient._id);
     
     return (
       <BurgerComponent
@@ -52,27 +49,34 @@ function BurgerConstructor({onButtonMakeOrderClick, onDropHandler}) {
         thumbnail={ingredient.image}
         isLocked={false}
         id={ingredient._id}
+        oldId={ingredient.oldId}
         index={index}
         onMove={moveComponent}
+        ingredients={ingredientsArr}
       />
     );
   });
 
   const handleClick = () => {
-    isBun && idArray.unshift(bun._id);
-    isBun && idArray.push(bun._id);
-    isBun && dispatch({type: CONSTRUCTOR_SET_BUN, idArray})
-    isBun && onButtonMakeOrderClick(idArray);
+    const orderIdArray = ingredients.map(item => item.oldId);
+    isBun && orderIdArray.unshift(bun._id);
+    isBun && orderIdArray.push(bun._id);
+    isBun && dispatch({type: CONSTRUCTOR_SAVE_ORDER, orderIdArray})
+    isBun && onButtonMakeOrderClick(orderIdArray);
   }
 
   return (
     <section className={BurgerConstructorStyles.constructor}>
       <div className={BurgerConstructorStyles.container} style={{borderColor}} ref={dropTarget}>
-        { isBun && <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} /> }
+        <div>
+          { isBun && <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} /> }
+        </div>
         <ul className={BurgerConstructorStyles.componentsList} >
           {componentList}
         </ul>
-        { isBun && <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} /> }
+        <div>
+          { isBun && <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} /> }
+        </div>
       </div>
       <div className={BurgerConstructorStyles.innerContainer}>
         <span className={BurgerConstructorStyles.productPrice}>{totalCost}</span>
@@ -89,4 +93,5 @@ export default BurgerConstructor;
 
 BurgerConstructor.propTypes = {
   onButtonMakeOrderClick: PropTypes.func.isRequired,
+  onDropHandler: PropTypes.func.isRequired,
 };

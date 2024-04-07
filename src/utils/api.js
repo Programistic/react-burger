@@ -8,7 +8,7 @@ export const getData = (dispatch) => {
   fetch(dataURL)
     .then(checkResponse)
     .then(res => dispatch({type: GET_DATA_SUCCESS, data: res.data}))
-    .catch({type: GET_DATA_ERROR});
+    .catch(err => dispatch({type: GET_DATA_ERROR, err}));
 };
 
 export const setOrder = (idArray) => (dispatch) => {
@@ -24,5 +24,5 @@ export const setOrder = (idArray) => (dispatch) => {
   })
     .then(checkResponse)
     .then(res => dispatch({type: SET_ORDER_SUCCESS, order: res.order.number}))
-    .catch({type: SET_ORDER_ERROR});
+    .catch(err => dispatch({type: SET_ORDER_ERROR, err}));
 };

@@ -6,18 +6,18 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import AppMainStyles from './app-main.module.css';
 import PropTypes from 'prop-types';
 import { CONSTRUCTOR_SET_BUN, CONSTRUCTOR_SET_INGREDIENT } from "../../services/actions/constructor-ingredients";
-import uuid from "react-uuid";
+import { INC_COUNTER } from "../../services/actions/all-ingredients";
 
 function AppMain({onCardClick, onButtonMakeOrderClick}) {
 
   const dispatch = useDispatch();
 
   const { ingredients } = useSelector(store => ({ingredients: store.data.data}), shallowEqual);
-
-  const handleDrop = (itemId) => {
-    const ingredient = ingredients.find(item => item._id === itemId._id);
-    ingredient._id = uuid();
+  
+  const handleDrop = (dropItem) => {
+    const ingredient = ingredients.find(item => item._id === dropItem._id);
     ingredient.type === 'bun' ? dispatch({type: CONSTRUCTOR_SET_BUN, bun: {...ingredient}}) : dispatch({type: CONSTRUCTOR_SET_INGREDIENT, ingredient: {...ingredient}});
+    dispatch({type: INC_COUNTER, ingredient});
   };
 
   return (

@@ -1,26 +1,28 @@
-import TabContentStyles from './tab-content.module.css';
 import Card from '../card/card';
 import { useSelector, shallowEqual } from 'react-redux';
 import { InView } from 'react-intersection-observer';
+import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import TabContentStyles from './tab-content.module.css';
 
 function TabContent({onCardClick, onSetTab}) {
 
-  const { counter } = useSelector(store => ({counter: store.card.counter}), shallowEqual);
-
   const { data } = useSelector(store => ({data: store.data}), shallowEqual);
 
-  const cardsBun = data.data.filter(card => card.type === 'bun');
-  const cardsSauce = data.data.filter(card => card.type === 'sauce');
-  const cardsMain = data.data.filter(card => card.type === 'main');
+  const { cardsBun, cardsSauce, cardsMain } = useMemo (
+    () => ({
+      cardsBun: data.data.filter(card => card.type === 'bun'),
+      cardsSauce: data.data.filter(card => card.type === 'sauce'),
+      cardsMain: data.data.filter(card => card.type === 'main'), 
+    }),
+    [data]
+  );
 
   const cardListBun = cardsBun.map((card) => {
     return (
       <Card
         key={card._id}
         card={card}
-        counter={counter}
         onCardClick={onCardClick}
       />
     );
@@ -31,7 +33,6 @@ function TabContent({onCardClick, onSetTab}) {
       <Card
         key={card._id}
         card={card}
-        counter={counter}
         onCardClick={onCardClick}
       />
     );
@@ -42,14 +43,13 @@ function TabContent({onCardClick, onSetTab}) {
       <Card
         key={card._id}
         card={card}
-        counter={counter}
         onCardClick={onCardClick}
       />
     );
   });
 
   const [state, setState] = useState({
-    isBunView: false,
+    isBunView: true,
     isSauceView: false,
     isMainView: false,
   })
@@ -109,4 +109,5 @@ export default TabContent;
 
 TabContent.propTypes = {
   onCardClick: PropTypes.func.isRequired,
+  onSetTab: PropTypes.func.isRequired,
 };
