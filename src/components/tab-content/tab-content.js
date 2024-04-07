@@ -52,32 +52,19 @@ function TabContent({onCardClick, onSetTab}) {
     isBunView: true,
     isSauceView: false,
     isMainView: false,
-  })
-
-  const setInViewBun = (inView) => {
-    setState({...state, isBunView: inView});
-  };
-
-  const setInViewSauce = (inView) => {
-    setState({...state, isSauceView: inView})
-  };
-
-  const setInViewMain = (inView) => {
-    setState({...state, isMainView: inView})
-  };
+  });
 
   useEffect(
     () => {
       if (state.isBunView) {onSetTab('bun'); return;};
       if (!state.isBunView && state.isSauceView && !state.isMainView) {onSetTab('sauce'); return;};
       if (!state.isBunView && !state.isSauceView && state.isMainView) {onSetTab('main'); return;}
-    },
-    [state]
-  )
+    }, [state]
+  );
 
   return (
     <div className={TabContentStyles.content}>
-      <InView onChange={setInViewBun} threshold={0.2}>
+      <InView onChange={bunView => {setState({...state, isBunView: bunView})}} threshold={0.2}>
         <div>
           <h2 className={TabContentStyles.title}>Булки</h2>
           <ul className={TabContentStyles.cardList}>
@@ -85,7 +72,7 @@ function TabContent({onCardClick, onSetTab}) {
           </ul>
         </div>
       </InView>
-      <InView onChange={setInViewSauce} threshold={1}>
+      <InView onChange={sauceView => {setState({...state, isSauceView: sauceView})}} threshold={1}>
         <div>
           <h2 className={TabContentStyles.title}>Соусы</h2>
           <ul className={TabContentStyles.cardList}>
@@ -93,7 +80,7 @@ function TabContent({onCardClick, onSetTab}) {
           </ul>
         </div>
       </InView>
-      <InView onChange={setInViewMain} threshold={0.65}>
+      <InView onChange={mainView => {setState({...state, isMainView: mainView})}} threshold={0.65}>
         <div>
           <h2 className={TabContentStyles.title}>Начинки</h2>
           <ul className={TabContentStyles.cardList}>
