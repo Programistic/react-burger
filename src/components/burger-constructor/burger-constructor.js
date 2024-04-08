@@ -1,12 +1,13 @@
 import BurgerComponent from "../burger-component/burger-component";
 import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { CONSTRUCTOR_UPDATE, CONSTRUCTOR_SAVE_ORDER } from '../../services/actions/constructor-ingredients';
+import { CONSTRUCTOR_UPDATE, CONSTRUCTOR_SAVE_ORDER, CONSTRUCTOR_SET_BUN, CONSTRUCTOR_SET_INGREDIENT } from '../../services/actions/constructor-ingredients';
+import { INC_COUNTER } from "../../services/actions/all-ingredients";
 import { useDrop } from "react-dnd";
 import PropTypes from 'prop-types';
 import BurgerConstructorStyles from './burger-constructor.module.css';
 
-function BurgerConstructor({onButtonMakeOrderClick, onDropHandler}) {
+function BurgerConstructor({onButtonMakeOrderClick}) {
 
   const { bun, ingredients } = useSelector(store => ({bun: store.ingredients.bun, ingredients: store.ingredients.ingredients}), shallowEqual);
   const { ingredientsArr } = useSelector(store => ({ingredientsArr: store.data.data}), shallowEqual);
@@ -16,7 +17,7 @@ function BurgerConstructor({onButtonMakeOrderClick, onDropHandler}) {
   const [{isHover}, dropTarget] = useDrop({
     accept: 'card',
     drop(item) {
-      onDropHandler(item);
+      dropHandler(item);
     },
     collect: monitor => ({
       isHover: monitor.isOver(),
@@ -24,6 +25,12 @@ function BurgerConstructor({onButtonMakeOrderClick, onDropHandler}) {
   });
 
   const borderColor = isHover ? '#4c4cff' : 'transparent';
+  
+  const dropHandler = (dropItem) => {
+    const ingredient = ingredientsArr.find(item => item._id === dropItem._id);
+    ingredient.type === 'bun' ? dispatch({type: CONSTRUCTOR_SET_BUN, bun: {...ingredient}}) : dispatch({type: CONSTRUCTOR_SET_INGREDIENT, ingredient: {...ingredient}});
+    dispatch({type: INC_COUNTER, ingredient});
+  };
 
   const moveComponent = (dragIndex, hoverIndex) => {
     const dragComponent = ingredients[dragIndex];
