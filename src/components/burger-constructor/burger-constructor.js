@@ -73,13 +73,13 @@ function BurgerConstructor({onButtonMakeOrderClick, onDropHandler}) {
     <section className={BurgerConstructorStyles.constructor}>
       <div className={BurgerConstructorStyles.container} style={{borderColor}} ref={dropTarget}>
         <div>
-          { isBun && <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} /> }
+          { isBun && <ConstructorElement type={'top'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name + ' (верх)'} price={bun.price} isLocked={true} /> }
         </div>
         <ul className={BurgerConstructorStyles.componentsList} >
           {componentList}
         </ul>
         <div>
-          { isBun && <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name} price={bun.price} isLocked={true} /> }
+          { isBun && <ConstructorElement type={'bottom'} isDragIconVisible={false} thumbnail={bun.image} text={bun.name + ' (низ)'} price={bun.price} isLocked={true} /> }
         </div>
       </div>
       <div className={BurgerConstructorStyles.innerContainer}>
