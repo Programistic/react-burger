@@ -10,17 +10,16 @@ function Modal({children, closeModal}) {
   const modalRoot = document.getElementById('modal');
 
   useEffect(() => {
+    const handleEscClick = (event) => {
+      if(event.key === 'Escape') {
+        closeModal();
+      };
+    };
     document.addEventListener('keydown', handleEscClick);
     return () => {
       document.removeEventListener('keydown', handleEscClick);
     }
   },[]);
-
-  const handleEscClick = (event) => {
-    if(event.key === 'Escape') {
-      closeModal();
-    };
-  };
 
   return ReactDOM.createPortal(
     (

@@ -104,5 +104,4 @@ export default BurgerConstructor;
 
 BurgerConstructor.propTypes = {
   onButtonMakeOrderClick: PropTypes.func.isRequired,
-  onDropHandler: PropTypes.func.isRequired,
 };
