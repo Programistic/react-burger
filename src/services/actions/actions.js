@@ -1,7 +1,7 @@
-import { GET_DATA_ERROR, GET_DATA_REQUEST, GET_DATA_SUCCESS } from "../services/actions/all-ingredients";
-import { SET_ORDER_ERROR, SET_ORDER_REQUEST, SET_ORDER_SUCCESS } from "../services/actions/order";
-import { dataURL, orderURL } from "./constants";
-import { checkResponse } from "./constants";
+import { GET_DATA_ERROR, GET_DATA_REQUEST, GET_DATA_SUCCESS } from "./all-ingredients";
+import { SET_ORDER_ERROR, SET_ORDER_REQUEST, SET_ORDER_SUCCESS } from "./order";
+import { dataURL, orderURL } from "../../utils/constants";
+import { checkResponse } from "../../utils/constants";
 
 export const getData = (dispatch) => {
   dispatch({type: GET_DATA_REQUEST});

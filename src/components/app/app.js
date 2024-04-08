@@ -1,16 +1,16 @@
 import AppHeader from '../app-header/app-header';
 import AppMain from '../app-main/app-main';
-import AppStyles from './app.module.css';
-import Preloader from '../preloader/preloader';
-import { useEffect } from 'react';
-import Modal from '../modal/modal';
-import ModalOverlay from '../modal-overlay/modal-overlay';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { getData, setOrder } from '../../utils/api';
+import Modal from '../modal/modal';
+import ModalOverlay from '../modal-overlay/modal-overlay';
+import Preloader from '../preloader/preloader';
+import { getData, setOrder } from '../../services/actions/actions';
+import { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
 import { CURRENT_INGREDIENT_SET } from '../../services/actions/current-ingredient';
+import AppStyles from './app.module.css';
 
 function App() {
 
