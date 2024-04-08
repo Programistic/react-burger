@@ -52,11 +52,11 @@ function App() {
     <div className={AppStyles.page}>
       <AppHeader />
       { isSuccess ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> }
-      { isModalVisible && <ModalOverlay closeModal={handleCloseModal} /> }
       { isModalVisible &&
         <Modal closeModal={handleCloseModal}>
           { isIngredientDetailsVisible && <IngredientDetails card={card} /> }
           { isOrderDetailsVisible && <OrderDetails onOrderDetailsOkButtonClick={handleCloseModal} /> }
+          { <ModalOverlay closeModal={handleCloseModal} /> }
         </Modal>
       }
     </div>
