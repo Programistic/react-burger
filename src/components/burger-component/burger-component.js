@@ -7,7 +7,7 @@ import { DEC_COUNTER } from "../../services/actions/all-ingredients";
 import PropTypes from 'prop-types';
 import BurgerComponentStyles from './burger-component.module.css';
 
-function BurgerComponent({isLocked, text, price, thumbnail, id, oldId, index, ingredients, onMove}) {
+function BurgerComponent({isLocked, text, price, thumbnail, uniqueId, id, index, ingredients, onMove}) {
 
   const componentRef = useRef(null);
 
@@ -57,9 +57,9 @@ function BurgerComponent({isLocked, text, price, thumbnail, id, oldId, index, in
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    const ingredient = ingredients.find(item => item._id === oldId);
+    const ingredient = ingredients.find(item => item._id === id);
     dispatch({type: DEC_COUNTER, ingredient});
-    dispatch({type: CONSTRUCTOR_DELETE_INGREDIENT, id});
+    dispatch({type: CONSTRUCTOR_DELETE_INGREDIENT, uniqueId});
   };
 
   return (
@@ -86,7 +86,7 @@ BurgerComponent.propTypes = {
   price: PropTypes.number.isRequired,
   thumbnail: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  oldId: PropTypes.string.isRequired,
+  uniqueId: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   ingredients: PropTypes.array.isRequired,
   onMove: PropTypes.func.isRequired,

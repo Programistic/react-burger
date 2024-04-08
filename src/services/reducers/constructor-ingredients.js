@@ -5,7 +5,6 @@ import {
   CONSTRUCTOR_UPDATE,
   CONSTRUCTOR_SAVE_ORDER
 } from "../actions/constructor-ingredients";
-import uuid from "react-uuid";
 
 const initialState = {
   bun: null,
@@ -22,12 +21,9 @@ export const constructorReducer = (state = initialState, action) => {
       };
     }
     case CONSTRUCTOR_SET_INGREDIENT: {
-      const oldId = action.ingredient._id;
-      action.ingredient._id = uuid();
-      action.ingredient.oldId = oldId;
       return {
         ...state,
-        ingredients: [...state.ingredients, action.ingredient],
+        ingredients: [...state.ingredients, action.payload],
       };
     }
     case CONSTRUCTOR_UPDATE: {
@@ -39,7 +35,7 @@ export const constructorReducer = (state = initialState, action) => {
     case CONSTRUCTOR_DELETE_INGREDIENT: {
       return {
         ...state,
-        ingredients: [...state.ingredients.filter(item => item._id !== action.id)]
+        ingredients: [...state.ingredients.filter(item => item.uniqueId !== action.uniqueId)]
       };
     }
     case CONSTRUCTOR_SAVE_ORDER: {
