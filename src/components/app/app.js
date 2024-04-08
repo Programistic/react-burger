@@ -17,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(()=> {
-    dispatch(getData);
+    dispatch(getData());
   }, []);
 
   const {

@@ -3,7 +3,7 @@ import { SET_ORDER_ERROR, SET_ORDER_REQUEST, SET_ORDER_SUCCESS } from "./order";
 import { dataURL, orderURL } from "../../utils/constants";
 import { checkResponse } from "../../utils/constants";
 
-export const getData = (dispatch) => {
+export const getData = () => (dispatch) => {
   dispatch({type: GET_DATA_REQUEST});
   fetch(dataURL)
     .then(checkResponse)
