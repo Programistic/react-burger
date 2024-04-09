@@ -3,7 +3,6 @@ import AppMain from '../app-main/app-main';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
-import ModalOverlay from '../modal-overlay/modal-overlay';
 import Preloader from '../preloader/preloader';
 import { getData, setOrder } from '../../services/actions/actions';
 import { useEffect } from 'react';
@@ -56,7 +55,6 @@ function App() {
         <Modal closeModal={handleCloseModal}>
           { isIngredientDetailsVisible && <IngredientDetails card={card} /> }
           { isOrderDetailsVisible && <OrderDetails onOrderDetailsOkButtonClick={handleCloseModal} /> }
-          { <ModalOverlay closeModal={handleCloseModal} /> }
         </Modal>
       }
     </div>

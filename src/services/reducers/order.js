@@ -12,6 +12,7 @@ export const orderReducer = (state = initData, action) => {
         ...state,
         isLoading: true,
         isError: false,
+        success: false,
       };
     }
     case SET_ORDER_SUCCESS: {
