@@ -67,14 +67,10 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
 
   const handleClick = () => {
     const orderIdArray = ingredients.map(item => item._id);
-    if (isBun) {
-      orderIdArray.unshift(bun._id);
-      orderIdArray.push(bun._id);
-      dispatch({type: CONSTRUCTOR_SAVE_ORDER, orderIdArray})
-      onButtonMakeOrderClick(orderIdArray);
-    } else {
-      console.log('В бургере должны быть булки!'); // сделать модалку
-    };
+    orderIdArray.unshift(bun._id);
+    orderIdArray.push(bun._id);
+    dispatch({type: CONSTRUCTOR_SAVE_ORDER, orderIdArray})
+    onButtonMakeOrderClick(orderIdArray);
   };
 
   return (
@@ -93,7 +89,7 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
       <div className={BurgerConstructorStyles.innerContainer}>
         <span className={BurgerConstructorStyles.productPrice}>{totalCost}</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>
-        <Button htmlType={'button'} type={'primary'} size={'large'} aria-label='Оформить заказ' onClick={handleClick}>
+        <Button htmlType={'button'} type={'primary'} size={'large'} disabled={!isBun} aria-label='Оформить заказ' onClick={handleClick}>
           Оформить заказ
         </Button>
       </div>
