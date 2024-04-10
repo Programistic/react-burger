@@ -1,28 +1,32 @@
 import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import BurgerIngredientsStyles from './burger-ingredients.module.css';
 import TabContent from "../tab-content/tab-content";
+import { useState } from "react";
 import PropTypes from 'prop-types';
-import { cardType } from "../../utils/constants";
+import BurgerIngredientsStyles from './burger-ingredients.module.css';
 
-function BurgerIngredients({data, onCardClick}) {
+function BurgerIngredients({onCardClick}) {
 
-  const [current, setCurrent] = React.useState('bun')
+  const [tab, setTab] = useState('bun');
+
+  const handleClick = (value) => {
+    setTab(value);
+  };
 
   return (
     <section className={BurgerIngredientsStyles.ingredients}>
       <div className={BurgerIngredientsStyles.menu}>
-        <Tab value={'bun'} active={current === 'bun'} onClick={setCurrent}>
+        <Tab value={'bun'} active={tab === 'bun'} onClick={handleClick}>
           Булки
         </Tab>
-        <Tab value={'sauce'} active={current === 'sauce'} onClick={setCurrent}>
+        <Tab value={'sauce'} active={tab === 'sauce'} onClick={handleClick}>
           Соусы
         </Tab>
-        <Tab value={'main'} active={current === 'main'} onClick={setCurrent}>
+        <Tab value={'main'} active={tab === 'main'} onClick={handleClick}>
           Начинки
         </Tab>
       </div>
-      <TabContent data={data} onCardClick={onCardClick} />
+      <TabContent onCardClick={onCardClick} onSetTab={setTab} />
     </section>
   );
 }
@@ -30,6 +34,5 @@ function BurgerIngredients({data, onCardClick}) {
 export default BurgerIngredients;
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(cardType).isRequired,
   onCardClick: PropTypes.func.isRequired,
 };

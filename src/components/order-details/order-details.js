@@ -1,8 +1,11 @@
 import React from "react";
 import OrderDetailsStyles from './order-details.module.css';
+import { useSelector, shallowEqual } from "react-redux";
 import PropTypes from 'prop-types';
 
-function OrderDetails({orderNumber, onOrderDetailsOkButtonClick}) {
+function OrderDetails({onOrderDetailsOkButtonClick}) {
+
+  const { orderNumber } = useSelector(store => ({orderNumber: store.order.order}), shallowEqual);
 
   return(
     <div className={OrderDetailsStyles.container}>
@@ -22,6 +25,5 @@ function OrderDetails({orderNumber, onOrderDetailsOkButtonClick}) {
 export default OrderDetails;
 
 OrderDetails.propTypes = {
-  orderNumber: PropTypes.string.isRequired,
   onOrderDetailsOkButtonClick: PropTypes.func.isRequired,
 };

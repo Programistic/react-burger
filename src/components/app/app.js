@@ -1,82 +1,60 @@
 import AppHeader from '../app-header/app-header';
 import AppMain from '../app-main/app-main';
-import AppStyles from './app.module.css';
-import Preloader from '../preloader/preloader';
-import { useEffect, useState } from 'react';
-import { dataURL, checkResponse } from '../../utils/constants';
-import Modal from '../modal/modal';
-import ModalOverlay from '../modal-overlay/modal-overlay';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { orderNumber } from '../../utils/test-data';
+import Modal from '../modal/modal';
+import Preloader from '../preloader/preloader';
+import { getData, setOrder } from '../../services/actions/actions';
+import { useEffect } from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
+import { CURRENT_INGREDIENT_SET } from '../../services/actions/current-ingredient';
+import AppStyles from './app.module.css';
 
 function App() {
 
-  const [state, setState] = useState({
-    isLoading: false,
-    hasError: false,
-    success: false,
-    data: [],
-  });
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    getData();
+  useEffect(()=> {
+    dispatch(getData());
   }, []);
 
-  const getData = async() => {
-    try {
-      setState({ ...state, hasError: false, isLoading: true });
-      const resJson = await fetch(dataURL).then(checkResponse); 
-      setState({ ...state, success: resJson.success, data: resJson.data, isLoading: false });
-    } catch (error) {
-      setState({ ...state, hasError: true, isLoading: false });
-      console.log(error);
-    }
+  const {
+    isSuccess,
+    isModalVisible,
+    isIngredientDetailsVisible,
+    isOrderDetailsVisible,
+    card,
+  } = useSelector(store => ({
+    isSuccess: store.data.success,
+    isModalVisible: store.modal.isModalVisible,
+    isIngredientDetailsVisible: store.modal.isIngredientDetailsVisible,
+    isOrderDetailsVisible: store.modal.isOrderDetailsVisible,
+    card: store.card.card,
+  }), shallowEqual);
+
+  const handleCardClick = () => {
+    dispatch({type: OPEN_INGREDIENT_MODAL});
   };
 
-  const [cardState, setCardState] = useState({
-    card: {},
-  })
-
-  const handleCardClick = (card) => {
-    setModalState({
-      isModalVisible: true,
-      isIngredientDetailsVisible: true,
-    });
-
-    setCardState({
-      card: card,
-    });
-  }
-
-  const handleButtonMakeOrderClick = () => {
-    setModalState({
-      isModalVisible: true,
-      isOrderDetailsVisible: true,
-    });
-  }
-
-  const [modalState, setModalState] = useState({
-    isModalVisible: false,
-    isOrderDetailsVisible: false,
-    isIngredientDetailsVisible: false,
-  });
+  const handleButtonMakeOrderClick = (idArray) => {
+    dispatch(setOrder(idArray));
+    dispatch({type: OPEN_ORDER_MODAL});
+  };
 
   const handleCloseModal = () => {
-    setModalState({
-      isModalVisible: false,
-    })
-  }
+    dispatch({type: CLOSE_MODAL});
+    dispatch({type: CURRENT_INGREDIENT_SET, card: null})
+  };
  
   return(
     <div className={AppStyles.page}>
       <AppHeader />
-      { state.success ? <AppMain data={state.data} onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> }
-      { modalState.isModalVisible && <ModalOverlay closeModal={handleCloseModal} /> }
-      { modalState.isModalVisible &&
+      { isSuccess ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> }
+      { isModalVisible &&
         <Modal closeModal={handleCloseModal}>
-          { modalState.isIngredientDetailsVisible && <IngredientDetails card={cardState.card} /> }
-          { modalState.isOrderDetailsVisible && <OrderDetails orderNumber={orderNumber} onOrderDetailsOkButtonClick={handleCloseModal} /> }
+          { isIngredientDetailsVisible && <IngredientDetails card={card} /> }
+          { isOrderDetailsVisible && <OrderDetails onOrderDetailsOkButtonClick={handleCloseModal} /> }
         </Modal>
       }
     </div>

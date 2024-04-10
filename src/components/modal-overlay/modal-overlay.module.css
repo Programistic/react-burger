@@ -3,4 +3,5 @@
   inset: 0;
   background-color: #000;
   opacity: .6;
+  z-index: -1;
 }
