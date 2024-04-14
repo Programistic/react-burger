@@ -15,9 +15,10 @@ function App() {
 
   const dispatch = useDispatch();
 
-  useEffect(()=> {
-    dispatch(getData());
-  }, []);
+  useEffect(() => {
+      dispatch(getData());
+    }, []
+  );
 
   const {
     isSuccess,
@@ -26,7 +27,8 @@ function App() {
     isOrderDetailsVisible,
     card,
   } = useSelector(store => ({
-    isSuccess: store.data.success,
+    isSuccess: store.data.isSuccess,
+    isOrderSuccess: store.order.isSuccess,
     isModalVisible: store.modal.isModalVisible,
     isIngredientDetailsVisible: store.modal.isIngredientDetailsVisible,
     isOrderDetailsVisible: store.modal.isOrderDetailsVisible,

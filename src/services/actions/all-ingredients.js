@@ -3,4 +3,3 @@ export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
 export const GET_DATA_ERROR = 'GET_DATA_ERROR';
 export const INC_COUNTER = 'INC_COUNTER'
 export const DEC_COUNTER = 'DEC_COUNTER'
-

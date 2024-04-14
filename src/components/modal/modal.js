@@ -20,10 +20,11 @@ function Modal({children, closeModal}) {
     return () => {
       document.removeEventListener('keydown', handleEscClick);
     }
-  },[]);
+    }, []
+  );
 
   return ReactDOM.createPortal(
-    ( 
+    (
       <div className={ModalStyles.modalContainer}>
         <ModalOverlay closeModal={closeModal} />
         <button type='button' className={ModalStyles.button} aria-label="Закрыть модальное окно" onClick={closeModal}>

@@ -27,7 +27,7 @@ function Card({card, onCardClick}) {
     !isDrag &&
     <li className={CardStyles.card} onClick={handleClick} ref={dragRef} >
       <img src={card.image} className={CardStyles.image} alt={card.name} />
-      <Counter count={card.count} size={'default'} extraClass={'m-2'} />
+      { card.count > 0 && <Counter count={card.count} size={'default'} extraClass={'m-2'} /> }
       <div className={CardStyles.innerContainer}>
         <span className={CardStyles.productPrice}>{card.price}</span>
         <CurrencyIcon type={'primary'} />

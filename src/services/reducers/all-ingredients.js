@@ -7,7 +7,7 @@ import {
 } from "../actions/all-ingredients";
 
 const initialState = {
-  success: false,
+  isSuccess: false,
   isLoading: false,
   isError: false,
   data: [],
@@ -31,7 +31,7 @@ export const dataReducer = (state = initialState, action) => {
         data: action.data,
         bun: action.data.filter(item => (item.type === 'bun')).forEach(item => {item.count = 0}),
         ingredients: action.data.filter(item => (item.type !== 'bun')).forEach(item => {item.count = 0}),
-        success: true,
+        isSuccess: true,
         isLoading: false,
       };
     }
@@ -39,7 +39,7 @@ export const dataReducer = (state = initialState, action) => {
       return {
         ...state,
         isError: true,
-        success: false,
+        isSuccess: false,
         isLoading: false,
         error: action.err,
       };
@@ -59,7 +59,6 @@ export const dataReducer = (state = initialState, action) => {
       }) 
       return {
         ...state,
-        
       };
     }
     case DEC_COUNTER: {
@@ -72,7 +71,7 @@ export const dataReducer = (state = initialState, action) => {
       })
       
       return {
-        ...state
+        ...state,
       };
     }
     default:
