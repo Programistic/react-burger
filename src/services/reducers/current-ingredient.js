@@ -9,7 +9,7 @@ export const cardReducer = (state = initData, action) => {
     case CURRENT_INGREDIENT_SET: {
       return {
         ...state,
-        card: action.card,
+        card: action.payload,
       };
     }
     default:

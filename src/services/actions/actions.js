@@ -1,18 +1,18 @@
-import { GET_DATA_ERROR, GET_DATA_REQUEST, GET_DATA_SUCCESS } from "./all-ingredients";
-import { SET_ORDER_ERROR, SET_ORDER_REQUEST, SET_ORDER_SUCCESS } from "./order";
+import { getDataRequest, getDataSuccess, getDataFailed } from "./all-ingredients";
+import { setOrderRequest, setOrderSuccess, setOrderFailed } from "./order";
 import { dataURL, orderURL } from "../../utils/constants";
 import { checkResponse } from "../../utils/constants";
 
 export const getData = () => (dispatch) => {
-  dispatch({type: GET_DATA_REQUEST});
+  dispatch(getDataRequest());
   fetch(dataURL)
     .then(checkResponse)
-    .then(res => dispatch({type: GET_DATA_SUCCESS, data: res.data}))
-    .catch(err => dispatch({type: GET_DATA_ERROR, err}));
+    .then(res => dispatch(getDataSuccess(res.data)))
+    .catch(err => dispatch(getDataFailed(err)));
 };
 
 export const setOrder = (idArray) => (dispatch) => {
-  dispatch({type: SET_ORDER_REQUEST});
+  dispatch(setOrderRequest());
   fetch(orderURL, {
     method: 'POST',
     headers: {
@@ -23,6 +23,6 @@ export const setOrder = (idArray) => (dispatch) => {
     })
   })
     .then(checkResponse)
-    .then(res => dispatch({type: SET_ORDER_SUCCESS, order: res.order.number}))
-    .catch(err => dispatch({type: SET_ORDER_ERROR, err}));
+    .then(res => dispatch(setOrderSuccess(res.order.number)))
+    .catch(err => dispatch(setOrderFailed(err)));
 };

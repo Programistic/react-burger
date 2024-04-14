@@ -1,7 +1,7 @@
 import {
   SET_ORDER_REQUEST,
   SET_ORDER_SUCCESS,
-  SET_ORDER_ERROR
+  SET_ORDER_FAILED
 } from "../actions/order";
 
 const initData = {
@@ -25,18 +25,18 @@ export const orderReducer = (state = initData, action) => {
     case SET_ORDER_SUCCESS: {
       return {
         ...state,
-        order: action.order,
+        orderNumber: action.payload,
         isSuccess: true,
         isLoading: false,
       };
     }
-    case SET_ORDER_ERROR: {
+    case SET_ORDER_FAILED: {
       return {
         ...state,
         isError: true,
         isSuccess: false,
         isLoading: false,
-        error: action.err,
+        error: action.payload,
       };
     }
     default:

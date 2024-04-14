@@ -8,7 +8,7 @@ import { getData, setOrder } from '../../services/actions/actions';
 import { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
-import { CURRENT_INGREDIENT_SET } from '../../services/actions/current-ingredient';
+import { resetCurrentIngredient } from '../../services/actions/current-ingredient'; 
 import AppStyles from './app.module.css';
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
 
   const handleCloseModal = () => {
     dispatch({type: CLOSE_MODAL});
-    dispatch({type: CURRENT_INGREDIENT_SET, card: null})
+    dispatch(resetCurrentIngredient());
   };
  
   return(

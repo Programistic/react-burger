@@ -1,8 +1,8 @@
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux';
-import { CURRENT_INGREDIENT_SET } from '../../services/actions/current-ingredient';
 import { useDrag } from 'react-dnd';
 import { cardType } from '../../utils/constants';
+import { setCurrentIngredient } from '../../services/actions/current-ingredient';
 import PropTypes from 'prop-types';
 import CardStyles from './card.module.css';
 
@@ -11,7 +11,7 @@ function Card({card, onCardClick}) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch({type: CURRENT_INGREDIENT_SET, card})
+    dispatch(setCurrentIngredient(card));
     onCardClick();
   };
 
