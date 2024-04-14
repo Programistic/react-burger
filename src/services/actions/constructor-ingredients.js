@@ -5,6 +5,7 @@ export const CONSTRUCTOR_ADD_INGREDIENT = 'CONSTRUCTOR/ADD_INGREDIENT';
 export const CONSTRUCTOR_UPDATE = 'CONSTRUCTOR/UPDATE';
 export const CONSTRUCTOR_DELETE_INGREDIENT = 'CONSTRUCTOR/DELETE_INGREDIENT';
 export const CONSTRUCTOR_SAVE_ORDER = 'CONSTRUCTOR/SAVE_ORDER';
+export const CONSTRUCTOR_DELETE_ORDER = 'CONSTRUCTOR/DELETE_ORDER';
 
 export const addIngredient = (item) => {
   return {
@@ -47,3 +48,10 @@ export const saveOrder = (item) => {
       [...item],
   };
 };
+
+export const deleteOrder = (item) => {
+  return {
+    type: CONSTRUCTOR_DELETE_ORDER,
+  };
+};
+

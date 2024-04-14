@@ -4,6 +4,7 @@ import {
   GET_DATA_FAILED,
   INC_COUNTER,
   DEC_COUNTER,
+  RESET_COUNTER,
 } from "../actions/all-ingredients";
 
 const initialState = {
@@ -67,6 +68,18 @@ export const dataReducer = (state = initialState, action) => {
         if (item._id === ingId) {
           state.data = [...state.data, item.count = item.count - 1];
         }
+        return 0;
+      })
+      
+      return {
+        ...state,
+      };
+    }
+    case RESET_COUNTER: {
+      state.data.map((item) => { 
+        if (item.count != null) {
+          state.data = [...state.data, item.count = 0];
+        };
         return 0;
       })
       

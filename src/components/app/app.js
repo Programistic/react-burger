@@ -8,6 +8,8 @@ import { getData, setOrder } from '../../services/actions/actions';
 import { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
+import { deleteOrder } from '../../services/actions/constructor-ingredients';
+import { resetCounter } from '../../services/actions/all-ingredients';
 import { resetCurrentIngredient } from '../../services/actions/current-ingredient'; 
 import AppStyles from './app.module.css';
 
@@ -22,6 +24,7 @@ function App() {
 
   const {
     isSuccess,
+    isOrderSuccess,
     isModalVisible,
     isIngredientDetailsVisible,
     isOrderDetailsVisible,
@@ -45,6 +48,10 @@ function App() {
   };
 
   const handleCloseModal = () => {
+    if (isOrderSuccess) {
+      dispatch(deleteOrder());
+      dispatch(resetCounter());
+    };
     dispatch({type: CLOSE_MODAL});
     dispatch(resetCurrentIngredient());
   };

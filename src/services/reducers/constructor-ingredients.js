@@ -4,6 +4,7 @@ import {
   CONSTRUCTOR_UPDATE,
   CONSTRUCTOR_DELETE_INGREDIENT,
   CONSTRUCTOR_SAVE_ORDER,
+  CONSTRUCTOR_DELETE_ORDER
 } from "../actions/constructor-ingredients";
 
 const initialState = {
@@ -42,6 +43,13 @@ export const constructorReducer = (state = initialState, action) => {
       return {
         ...state,
         orderIdArray: action.payload,
+      };
+    }
+    case CONSTRUCTOR_DELETE_ORDER: {
+      return {
+        ...state,
+        bun: null,
+        ingredients: [],
       };
     }
     default:
