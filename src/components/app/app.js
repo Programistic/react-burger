@@ -10,7 +10,9 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
 import { deleteOrder } from '../../services/actions/constructor-ingredients';
 import { resetCounter } from '../../services/actions/all-ingredients';
-import { resetCurrentIngredient } from '../../services/actions/current-ingredient'; 
+import { resetCurrentIngredient } from '../../services/actions/current-ingredient';
+import Ingredient from '../../pages/ingredients/ingredient-details';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppStyles from './app.module.css';
 
 function App() {
@@ -59,7 +61,12 @@ function App() {
   return(
     <div className={AppStyles.page}>
       <AppHeader />
-      { isSuccess ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> }
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={ isSuccess ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> } />
+            <Route path='/ingredient' element={ <Ingredient /> } />
+          </Routes>
+        </BrowserRouter>
       { isModalVisible &&
         <Modal closeModal={handleCloseModal}>
           { isIngredientDetailsVisible && <IngredientDetails card={card} /> }
