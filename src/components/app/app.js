@@ -32,6 +32,7 @@ function App() {
 
   const {
     isSuccess,
+    error,
     isOrderSuccess,
     isModalVisible,
     isIngredientDetailsVisible,
@@ -39,6 +40,7 @@ function App() {
     card,
   } = useSelector(store => ({
     isSuccess: store.data.isSuccess,
+    error: store.error.error,
     isOrderSuccess: store.order.isSuccess,
     isModalVisible: store.modal.isModalVisible,
     isIngredientDetailsVisible: store.modal.isIngredientDetailsVisible,
@@ -76,7 +78,7 @@ function App() {
             <Route path='/forgot-password' element={ <ForgotPassword /> } />
             <Route path='/reset-password' element={ <ResetPassword /> } />
             <Route path='/profile' element={ <Profile /> } />
-            <Route path='/page-not-found' element={ <NotFound /> } />
+            <Route path='/page-not-found' element={ <NotFound error={error} /> } />
           </Routes>
         </BrowserRouter>
       { isModalVisible &&

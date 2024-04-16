@@ -2,32 +2,29 @@ import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-component
 import UserWindowWrapper from "../../components/user-window-wrapper/user-window-wrapper";
 import AdditionalActions from "../../components/additional-actions/additional-actions";
 import { useState, useEffect } from "react";
-import { recoverPassword } from "../../utils/api";
+import { recoverPassword } from "../../services/actions/actions";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function ForgotPassword() {
 
   const navigate = useNavigate();
+  const dispatch= useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    recoverPassword({state, setState});
+    dispatch(recoverPassword(state, setState));
   };
 
   const [state, setState] = useState({
     value: '',
-    isError: false,
-    error: '',
     isSuccess: false,
+    isError: false,
   });
 
   useEffect(() => {
-      if (state.isSuccess) {
-        navigate('/reset-password');
-      }
-      if (state.isError) {
-        navigate('/page-not-found');
-      }
+      state.isSuccess && navigate('/reset-password');
+      state.isError && navigate('/page-not-found');
     }, [state]
   );
 
