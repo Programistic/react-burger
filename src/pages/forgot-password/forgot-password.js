@@ -9,10 +9,14 @@ function ForgotPassword() {
     
   };
 
+  const handleInputEmailChange = () => {
+
+  }
+
   return(
     <>
       <UserWindowWrapper title={'Восстановление пароля'} formName={'forgot-password-form'} onSubmit={handleSubmit}>
-        <Input placeholder="Укажите e-mail" />
+        <Input placeholder="Укажите e-mail" type="email" value="" onChange={handleInputEmailChange} />
         <Button htmlType="submit" type="primary" size="medium">Восстановить</Button>
       </UserWindowWrapper>
       <AdditionalActions text={'Вспомнили пароль?'} link={'/login'} linkText={'Войти'} />

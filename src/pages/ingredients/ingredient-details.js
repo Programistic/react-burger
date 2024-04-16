@@ -43,7 +43,3 @@ function Ingredient() {
 };
 
 export default Ingredient;
-
-Ingredient.propTypes = {
-  card: cardType.isRequired,
-};

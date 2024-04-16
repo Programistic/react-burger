@@ -9,15 +9,27 @@ function Register() {
     
   };
 
+  const handleInputNameChange = () => {
+
+  }
+
+  const handleInputEmailChange = () => {
+    
+  }
+
+  const handleInputPasswordChange = () => {
+    
+  }
+
   return(
     <>
       <UserWindowWrapper title={'Регистрация'} formName={'register-form'} onSubmit={handleSubmit}>
-        <Input placeholder="Имя" />
-        <Input placeholder="E-mail" />
-        <Input placeholder="Пароль" icon="ShowIcon" />
+        <Input placeholder="Имя" type="text" value="" onChange={handleInputNameChange} />
+        <Input placeholder="E-mail" type="email" value="" onChange={handleInputEmailChange} />
+        <Input placeholder="Пароль" type="password" icon="ShowIcon" value="" onChange={handleInputPasswordChange} />
         <Button htmlType="submit" type="primary" size="medium">Зарегистрироваться</Button>
       </UserWindowWrapper>
-      <AdditionalActions text={'Уже зарегистрированы?'} link={'/signin'} linkText={'Войти'} />
+      <AdditionalActions text={'Уже зарегистрированы?'} link={'/login'} linkText={'Войти'} />
     </>
   );
 };

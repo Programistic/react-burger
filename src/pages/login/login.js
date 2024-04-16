@@ -9,11 +9,19 @@ function Login() {
     
   };
 
+  const handleInputEmailChange = () => {
+
+  }
+
+  const handleInputPasswordChange = () => {
+
+  }
+
   return(
     <>
       <UserWindowWrapper title={'Вход'} formName={'login-form'} onSubmit={handleSubmit}>
-        <Input placeholder="E-mail" />
-        <Input placeholder="Пароль" icon="ShowIcon" />
+        <Input placeholder="E-mail" type="email" value="" onChange={handleInputEmailChange} />
+        <Input placeholder="Пароль" type="password" icon="ShowIcon" value="" onChange={handleInputPasswordChange} />
         <Button htmlType="submit" type="primary" size="medium">Войти</Button>
       </UserWindowWrapper>
       <AdditionalActions text={'Вы - новый пользователь?'} link={'/register'} linkText={'Зарегистрироваться'} />
