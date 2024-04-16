@@ -5,6 +5,7 @@ import { modalReducer } from "./modal";
 import { constructorReducer } from "./constructor-ingredients";
 import { cardReducer } from "./current-ingredient";
 import { errorReducer } from "./error";
+import { userReducer } from "./user";
 
 export const rootReducer = combineReducers({
   data: dataReducer,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   ingredients: constructorReducer,
   card: cardReducer,
   error: errorReducer,
+  user: userReducer,
 });
