@@ -12,6 +12,12 @@ import { deleteOrder } from '../../services/actions/constructor-ingredients';
 import { resetCounter } from '../../services/actions/all-ingredients';
 import { resetCurrentIngredient } from '../../services/actions/current-ingredient';
 import Ingredient from '../../pages/ingredients/ingredient-details';
+import Login from '../../pages/login/login';
+import Register from '../../pages/register/register';
+import ForgotPassword from '../../pages/forgot-password/forgot-password';
+import ResetPassword from '../../pages/reset-password/reset-password';
+import Profile from '../../pages/profile/profile';
+import NotFound from '../../pages/not-found/not-found';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppStyles from './app.module.css';
 
@@ -65,6 +71,12 @@ function App() {
           <Routes>
             <Route path='/' element={ isSuccess ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> } />
             <Route path='/ingredient' element={ <Ingredient /> } />
+            <Route path='/login' element={ <Login /> } />
+            <Route path='/register' element={ <Register /> } />
+            <Route path='/forgot-password' element={ <ForgotPassword /> } />
+            <Route path='/reset-password' element={ <ResetPassword /> } />
+            <Route path='/profile' element={ <Profile /> } />
+            <Route path='/page-not-found' element={ <NotFound /> } />
           </Routes>
         </BrowserRouter>
       { isModalVisible &&
