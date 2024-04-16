@@ -63,7 +63,7 @@ function App() {
     dispatch({type: CLOSE_MODAL});
     dispatch(resetCurrentIngredient());
   };
- 
+
   return(
     <div className={AppStyles.page}>
       <AppHeader />

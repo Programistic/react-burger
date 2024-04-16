@@ -5,6 +5,7 @@ import { thunk } from 'redux-thunk';
 export const apiURL = 'https://norma.nomoreparties.space/api';
 export const dataURL = `${apiURL}/ingredients`;
 export const orderURL = `${apiURL}/orders`;
+export const passwordURL = `${apiURL}/password-reset`;
 
 export const cardType = PropTypes.shape(
   {
@@ -24,7 +25,7 @@ export const cardType = PropTypes.shape(
 );
 
 export const checkResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
+  return res.ok ? res.json() : Promise.reject(res);
 };
 
 const enhancer =
