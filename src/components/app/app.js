@@ -4,7 +4,7 @@ import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 import Preloader from '../preloader/preloader';
-import { getData, setOrder } from '../../services/actions/actions';
+import { getData, getUser, setOrder } from '../../services/actions/actions';
 import { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
@@ -18,6 +18,11 @@ import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
 import NotFound from '../../pages/not-found/not-found';
+import Error from '../../pages/error/error';
+import Orders from '../../pages/orders/orders';
+import ProtectedRouteElement from '../protected-route/protected-route';
+import ProtectedAuthUserRouteElement from '../protected-route/protected-auth-user-route';
+import ProtectedResetPasswordRouteElement from '../protected-route/protected-reset-password-route';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppStyles from './app.module.css';
 
@@ -26,6 +31,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+      localStorage.getItem('accessToken') && dispatch(getUser());
       dispatch(getData());
     }, []
   );
@@ -68,19 +74,25 @@ function App() {
 
   return(
     <div className={AppStyles.page}>
-      <AppHeader />
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={ isSuccess ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} /> : <Preloader /> } />
-            <Route path='/ingredient' element={ <Ingredient /> } />
-            <Route path='/login' element={ <Login /> } />
-            <Route path='/register' element={ <Register /> } />
-            <Route path='/forgot-password' element={ <ForgotPassword /> } />
-            <Route path='/reset-password' element={ <ResetPassword /> } />
-            <Route path='/profile' element={ <Profile /> } />
-            <Route path='/page-not-found' element={ <NotFound error={error} /> } />
-          </Routes>
-        </BrowserRouter>
+      <BrowserRouter>
+        <AppHeader />
+        <Routes>
+          <Route path='/' element={
+              isSuccess
+              ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} />
+              : <Preloader />
+            } />
+          <Route path='/ingredient' element={ <Ingredient /> } />
+          <Route path='/login' element={ <ProtectedAuthUserRouteElement element={ <Login /> } /> } />
+          <Route path='/register' element={ <ProtectedAuthUserRouteElement element={ <Register /> } /> } />
+          <Route path='/forgot-password' element={ <ProtectedAuthUserRouteElement element={ <ForgotPassword /> } /> } />
+          <Route path='/reset-password' element={ <ProtectedResetPasswordRouteElement element={ <ResetPassword /> } /> } />
+          <Route path='/profile' element={ <ProtectedRouteElement element={ <Profile /> } /> } />
+          <Route path='/profile/orders' element={ <ProtectedRouteElement element={ <Orders /> } /> } />
+          <Route path='*' element={ <NotFound /> } />
+          <Route path='/error' element={ <Error error={error} /> } />
+        </Routes>
+      </BrowserRouter>
       { isModalVisible &&
         <Modal closeModal={handleCloseModal}>
           { isIngredientDetailsVisible && <IngredientDetails card={card} /> }

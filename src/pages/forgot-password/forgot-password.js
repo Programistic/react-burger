@@ -24,7 +24,7 @@ function ForgotPassword() {
 
   useEffect(() => {
       state.isSuccess && navigate('/reset-password');
-      state.isError && navigate('/page-not-found');
+      state.isError && navigate('/error');
     }, [state]
   );
 

@@ -16,6 +16,12 @@
   block-size: 50px;
   align-self: center;
   cursor: default;
+  transition: opacity .3s ease-in;
+}
+
+.logo:hover {
+  cursor: pointer;
+  opacity: .8;
 }
 
 .profileLink {
@@ -40,4 +46,8 @@
   align-self: center;
   font: 400 1rem/1 'JetBrainsMono', "Inter", sans-serif;
   color: #8585ad;
+}
+
+.active {
+  color: #f2f2f3;
 }

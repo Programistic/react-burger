@@ -37,7 +37,7 @@
   font-weight: 700;
 }
 
-.menuItem__link_active {
+.active {
   color: #f2f2f3;
 }
 

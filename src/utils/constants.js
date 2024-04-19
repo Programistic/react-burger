@@ -12,6 +12,7 @@ export const registerURL = `${authURL}/register`;
 export const loginURL = `${authURL}/login`;
 export const logoutURL = `${authURL}/logout`;
 export const tokenURL = `${authURL}/token`;
+export const userURL = `${authURL}/user`;
 
 export const cardType = PropTypes.shape(
   {

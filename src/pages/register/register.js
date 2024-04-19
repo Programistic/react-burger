@@ -26,7 +26,7 @@ function Register() {
 
   useEffect(() => {
       state.isSuccess && navigate('/login');
-      state.isError && navigate('/page-not-found');
+      state.isError && navigate('/error');
     }, [state]
   );
 
