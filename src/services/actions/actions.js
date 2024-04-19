@@ -32,7 +32,7 @@ export const register = (state, setState) => (dispatch) => {
     .then(res => {
       setState({...state, isSuccess: res.success});
     })
-    .catch(res => {dispatch(setError(res.status)); setState({...state, isError: true})});
+    .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
 };
 
 // Запрос на вход в систему зарегистрированного пользователя, авторизация
@@ -54,28 +54,31 @@ export const login = (state, setState) => (dispatch) => {
       dispatch(setUser({user: res.user, loggedIn: true}));
       setState({...state, isSuccess: res.success});
     })
-    .catch(res => {dispatch(setError(res.status)); setState({...state, isError: true})});
+    .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
 };
 
 // Запрос на получение данных пользователя
-export const getUser = (state, setState, accessToken) => (dispatch) => {
+export const getUser = () => (dispatch) => {
+  let typeRequest = 'getUser';
   fetch(userURL, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: localStorage.getItem('accessToken'),
-    }
-  })
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      }
+    })
     .then(checkResponse)
     .then(res => {
       dispatch(setUser({user: res.user, loggedIn: true}));
-      setState({...state, name: res.user.name, email: res.user.email, isSuccess: res.success});
     })
-    .catch(res => dispatch(setError(res.status)));
+    .catch((err) => {
+      (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest)) : Promise.reject(err);
+    });
 };
 
 // Запрос на обновление данных пользователя
 export const updateUser = (state, setState) => (dispatch) => {
+  let typeRequest = 'updateUser';
   fetch(userURL, {
     method: 'PATCH',
     headers: {
@@ -93,7 +96,29 @@ export const updateUser = (state, setState) => (dispatch) => {
       dispatch(setUser({user: res.user, loggedIn: true}));
       setState({...state, user: res.user, isSuccess: res.success});
     })
-    .catch(res => dispatch(setError(res.status)));
+    .catch((err) => {
+      (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest, state, setState)) : Promise.reject(err);
+    });
+};
+
+// Запрос на обновление токена
+export const updateToken = (typeRequest, state, setState) => (dispatch) => {
+  fetch(tokenURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'token': localStorage.getItem('refreshToken'),
+    })
+  })
+    .then(checkResponse)
+    .then(res => {
+      localStorage.setItem('accessToken', res.accessToken);
+      localStorage.setItem('refreshToken', res.refreshToken);
+      typeRequest === 'gerUser' ? dispatch(getUser()) : dispatch(updateUser(state, setState));
+    })
+    .catch(err => {Promise.reject(err)});
 };
 
 // Запрос на обновление пароля
@@ -112,7 +137,7 @@ export const recoverPassword = (state, setState) => (dispatch) => {
       dispatch(setUser({isPasswordRecoverRequest: true}));
       setState({...state, isSuccess: res.success, message: res.message});
     })
-    .catch(res => {dispatch(setError(res.status)); setState({...state, isError: true})});
+    .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
 };
 
 // Запрос на сброс пароля
@@ -132,26 +157,7 @@ export const resetPassword = (state, setState) => (dispatch) => {
       dispatch(setUser({isPasswordRecoverRequest: false}));
       setState({...state, isSuccess: res.success, message: res.message});
     })
-    .catch(res => {dispatch(setError(res.status)); setState({...state, isError: true})});
-};
-
-// Запрос на обновление токена
-export const updateToken = (state, setState) => (dispatch) => {
-  fetch(tokenURL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      "token": state.refreshToken,
-    })
-  })
-    .then(checkResponse)
-    .then(res => {
-      dispatch(setUser({accessToken: res.accessToken}));
-      setState({...state, isSuccess: res.success});
-    })
-    .catch(res => {dispatch(setError(res.status)); setState({...state, isError: true})});
+    .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
 };
 
 // Запрос на получение данных об ингредиентах
@@ -160,7 +166,7 @@ export const getData = () => (dispatch) => {
   fetch(dataURL)
     .then(checkResponse)
     .then(res => dispatch(getDataSuccess(res.data)))
-    .catch(res => dispatch(setError(res.status)));
+    .catch(err => dispatch(setError(err)));
 };
 
 // Запрос на формирование заказа
@@ -177,7 +183,7 @@ export const setOrder = (idArray) => (dispatch) => {
   })
     .then(checkResponse)
     .then(res => dispatch(setOrderSuccess(res.order.number)))
-    .catch(res => dispatch(setError(res.status)));
+    .catch(err => dispatch(setError(err)));
 };
 
 // Запрос на выход из системы
@@ -198,5 +204,5 @@ export const logout = (state, setState) => (dispatch) => {
       dispatch(resetUser());
       setState({...state, isSuccess: res.success, message: res.message});
     })
-    .catch(res => {dispatch(setError(res.status)); setState({...state, isError: true})});
+    .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
 };

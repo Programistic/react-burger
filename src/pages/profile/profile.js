@@ -28,6 +28,7 @@ function Profile() {
   });
 
   useEffect(() => {
+    state.isSuccess && navigate('/');
     state.isError && navigate('/error');
     }, [state]
   );

@@ -32,7 +32,8 @@ export const cardType = PropTypes.shape(
 );
 
 export const checkResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(res);
+  //return res.ok ? res.json() : Promise.reject(res);
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
 const enhancer =
