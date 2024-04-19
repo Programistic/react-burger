@@ -1,7 +1,9 @@
+import OrderStyles from './orders.module.css';
+
 function Orders() {
   return (
     <>
-      <p>Страница заказов</p>
+      <p className={OrderStyles.text}>Страница заказов</p>
     </>
   )
 }

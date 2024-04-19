@@ -87,8 +87,9 @@ function App() {
           <Route path='/register' element={ <ProtectedAuthUserRouteElement element={ <Register /> } /> } />
           <Route path='/forgot-password' element={ <ProtectedAuthUserRouteElement element={ <ForgotPassword /> } /> } />
           <Route path='/reset-password' element={ <ProtectedResetPasswordRouteElement element={ <ResetPassword /> } /> } />
-          <Route path='/profile' element={ <ProtectedRouteElement element={ <Profile /> } /> } />
-          <Route path='/profile/orders' element={ <ProtectedRouteElement element={ <Orders /> } /> } />
+          <Route path='/profile' element={ <ProtectedRouteElement element={ <Profile /> } /> }>
+            <Route path='/profile/orders' element={ <Orders /> } />
+          </Route>
           <Route path='*' element={ <NotFound /> } />
           <Route path='/error' element={ <Error error={error} /> } />
         </Routes>
