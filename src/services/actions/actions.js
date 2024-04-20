@@ -32,7 +32,7 @@ export const register = (state, setState) => (dispatch) => {
     .then(res => {
       setState({...state, isSuccess: res.success});
     })
-    .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
+    .catch(err => {dispatch(setError(err))});
 };
 
 // Запрос на вход в систему зарегистрированного пользователя, авторизация
@@ -118,7 +118,7 @@ export const updateToken = (typeRequest, state, setState) => (dispatch) => {
       localStorage.setItem('refreshToken', res.refreshToken);
       typeRequest === 'gerUser' ? dispatch(getUser()) : dispatch(updateUser(state, setState));  // надо исправить изначально стейт не определён при загрузке updateUser
     })
-    .catch(err => {Promise.reject(err)});
+    .catch(err => {console.log(err); Promise.reject(err)});
 };
 
 // Запрос на обновление пароля

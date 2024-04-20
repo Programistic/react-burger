@@ -1,15 +1,14 @@
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import UserWindowWrapper from "../../components/user-window-wrapper/user-window-wrapper";
 import AdditionalActions from "../../components/additional-actions/additional-actions";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../services/actions/actions";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 function Login() {
 
-  const navigate = useNavigate();
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,17 +19,11 @@ function Login() {
     email: '',
     password: '',
     isSuccess: false,
-    isError: false,
   });
-
-  useEffect(() => {
-      state.isSuccess && navigate('/');
-      state.isError && navigate('/error');
-    }, [state]
-  );
 
   return(
     <>
+      { state.isSuccess && <Navigate to="/" replace={true} /> }
       <UserWindowWrapper title={'Вход'} formName={'login-form'} onSubmit={handleSubmit}>
         <Input placeholder="E-mail" type="email" value={state.email} onChange={event => setState({...state, email: event.target.value})} />
         <Input placeholder="Пароль" type="password" icon="ShowIcon" value={state.password} onChange={event => setState({...state, password: event.target.value})} />

@@ -5,7 +5,7 @@ function ProtectedResetPasswordRouteElement({element}) {
 
   const { loggedIn, isPasswordRecoverRequest } = useSelector(store => ({
     loggedIn: store.user.loggedIn,
-    isPasswordRecoverRequest: store.user.isPasswordRecoverRequest
+    isPasswordRecoverRequest: store.user.isPasswordRecoverRequest,
   }));
 
   if (loggedIn) {
@@ -14,9 +14,7 @@ function ProtectedResetPasswordRouteElement({element}) {
     return element;
   } else {
     return <Navigate to={'/login'} />;
-  }
- 
-    //!loggedIn && isPasswordRecoverRequest ? element : <Navigate to={'/login'} />
+  };
 };
 
 export default ProtectedResetPasswordRouteElement;
