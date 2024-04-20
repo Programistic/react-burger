@@ -1,5 +1,5 @@
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { updateUser } from "../../services/actions/actions";
 import { logout } from "../../services/actions/actions";
@@ -11,7 +11,7 @@ function Profile() {
 
   const dispatch= useDispatch();
 
-  const { user } = useSelector(store => ({user: store.user.user}));
+  const { user } = useSelector(store => ({user: store.user.user}), shallowEqual);
 
   const handleSubmit = (event) => {
     event.preventDefault();

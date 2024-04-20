@@ -3,6 +3,7 @@ import { setOrderRequest, setOrderSuccess } from "./order";
 import { checkResponse } from "../../utils/constants";
 import { setError } from "./error";
 import { setUser, resetUser } from "./user";
+import { setLoggedIn, resetLoggedIn } from "./flag";
 import {
   dataURL,
   orderURL,
@@ -51,7 +52,8 @@ export const login = (state, setState) => (dispatch) => {
     .then(res => {
       localStorage.setItem('accessToken', res.accessToken);
       localStorage.setItem('refreshToken', res.refreshToken);
-      dispatch(setUser({user: res.user, loggedIn: true}));
+      dispatch(setUser({user: res.user}));
+      dispatch(setLoggedIn());
       setState({...state, isSuccess: res.success});
     })
     .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
@@ -69,7 +71,8 @@ export const getUser = () => (dispatch) => {
     })
     .then(checkResponse)
     .then(res => {
-      dispatch(setUser({user: res.user, loggedIn: true}));
+      dispatch(setUser({user: res.user}));
+      dispatch(setLoggedIn());
     })
     .catch((err) => {
       (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest)) : Promise.reject(err);
@@ -93,7 +96,7 @@ export const updateUser = (state, setState) => (dispatch) => {
   })
     .then(checkResponse)
     .then(res => {
-      dispatch(setUser({user: res.user, loggedIn: true}));
+      dispatch(setUser({user: res.user}));
       setState({...state, user: res.user, isSuccess: res.success});
     })
     .catch((err) => {
@@ -134,8 +137,8 @@ export const recoverPassword = (state, setState) => (dispatch) => {
   })
     .then(checkResponse)
     .then(res => {
-      dispatch(setUser({isPasswordRecoverRequest: true}));
-      setState({...state, isSuccess: res.success, message: res.message});
+      localStorage.setItem('isPasswordRecoverRequest', true);
+      setState({...state, isSuccess: res.success});
     })
     .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
 };
@@ -154,8 +157,8 @@ export const resetPassword = (state, setState) => (dispatch) => {
   })
     .then(checkResponse)
     .then(res => {
-      dispatch(setUser({isPasswordRecoverRequest: false}));
-      setState({...state, isSuccess: res.success, message: res.message});
+      localStorage.setItem('isPasswordRecoverRequest', false);
+      setState({...state, isSuccess: res.success});
     })
     .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
 };
@@ -202,7 +205,8 @@ export const logout = (state, setState) => (dispatch) => {
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('accessToken');
       dispatch(resetUser());
-      setState({...state, isSuccess: res.success, message: res.message});
+      dispatch(resetLoggedIn());
+      setState({...state, isSuccess: res.success});
     })
-    .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
+    .catch(err => {dispatch(setError(err))});
 };

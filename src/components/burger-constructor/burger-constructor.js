@@ -11,6 +11,7 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
 
   const { bun, ingredients } = useSelector(store => ({bun: store.ingredients.bun, ingredients: store.ingredients.ingredients}), shallowEqual);
   const { ingredientsArr } = useSelector(store => ({ingredientsArr: store.data.data}), shallowEqual);
+  const { loggedIn } = useSelector(store => ({ loggedIn: store.flag.loggedIn }), shallowEqual);
 
   const dispatch = useDispatch();
 
@@ -88,7 +89,7 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
       <div className={BurgerConstructorStyles.innerContainer}>
         <span className={BurgerConstructorStyles.productPrice}>{totalCost}</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>
-        <Button htmlType={'button'} type={'primary'} size={'large'} disabled={!isBun} aria-label='Оформить заказ' onClick={handleClick}>
+        <Button htmlType={'button'} type={'primary'} size={'large'} disabled={!isBun || !loggedIn} aria-label='Оформить заказ' onClick={handleClick}>
           Оформить заказ
         </Button>
       </div>
