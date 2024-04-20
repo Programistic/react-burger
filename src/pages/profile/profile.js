@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { updateUser } from "../../services/actions/actions";
 import { logout } from "../../services/actions/actions";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import ProfileStyles from './profile.module.css';
 
 function Profile() {
@@ -47,7 +47,7 @@ function Profile() {
     <div className={ProfileStyles.container}>
       <ul className={ProfileStyles.menu}>
         <li className={ProfileStyles.menuItem}>
-          <NavLink to='/profile' className={
+          <NavLink to='/profile' end className={
               ({isActive}) => isActive ? `${ProfileStyles.menuItem__link} ${ProfileStyles.active}` : ProfileStyles.menuItem__link
             }>Профиль
           </NavLink>
@@ -67,15 +67,18 @@ function Profile() {
       <p className={ProfileStyles.supportText}>
         В этом разделе вы можете изменить свои персональные данные
       </p>
-      <form className={ProfileStyles.form} name='profile-form' onSubmit={handleSubmit}>
-        <Input placeholder="Имя" type="text" icon="EditIcon" value={state.name} onChange={event => setState({...state, name: event.target.value})} />
-        <Input placeholder="Логин" type="text" icon="EditIcon" value={state.email} onChange={event => setState({...state, email: event.target.value})} />
-        <Input placeholder="Пароль" type="password" icon="EditIcon" value={state.password} onChange={event => setState({...state, password: event.target.value})} />
-        <div className={ProfileStyles.innerContainer}>
-          <Button  htmlType="button" type="secondary" size="medium" onClick={handleButtonCancelClick}>Отмена</Button>
-          <Button htmlType="submit" type="primary" size="medium">Сохранить</Button>
-        </div>
-      </form>
+      <div className={ProfileStyles.innerContainer}>
+        <form className={ProfileStyles.form} name='profile-form' onSubmit={handleSubmit}>
+          <Input placeholder="Имя" type="text" icon="EditIcon" value={state.name} onChange={event => setState({...state, name: event.target.value})} />
+          <Input placeholder="Логин" type="text" icon="EditIcon" value={state.email} onChange={event => setState({...state, email: event.target.value})} />
+          <Input placeholder="Пароль" type="password" icon="EditIcon" value={state.password} onChange={event => setState({...state, password: event.target.value})} />
+          <div className={ProfileStyles.buttonContainer}>
+            <Button  htmlType="button" type="secondary" size="medium" onClick={handleButtonCancelClick}>Отмена</Button>
+            <Button htmlType="submit" type="primary" size="medium">Сохранить</Button>
+          </div>
+        </form>
+        <Outlet />
+      </div>
     </div>
   )
 };

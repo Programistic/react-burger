@@ -41,16 +41,22 @@
   color: #f2f2f3;
 }
 
-.form {
+.innerContainer {
   grid-column: 2 / 3;
-  grid-row: 1 / 3;
+  grid-row: 1 / 4;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.form {
   display: flex;
   flex-direction: column;
   row-gap: 1.5rem;
   align-items: center;
 }
 
-.innerContainer {
+.buttonContainer {
   align-self: flex-end;
 }
 

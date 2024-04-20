@@ -116,7 +116,7 @@ export const updateToken = (typeRequest, state, setState) => (dispatch) => {
     .then(res => {
       localStorage.setItem('accessToken', res.accessToken);
       localStorage.setItem('refreshToken', res.refreshToken);
-      typeRequest === 'gerUser' ? dispatch(getUser()) : dispatch(updateUser(state, setState));
+      typeRequest === 'gerUser' ? dispatch(getUser()) : dispatch(updateUser(state, setState));  // надо исправить изначально стейт не определён при загрузке updateUser
     })
     .catch(err => {Promise.reject(err)});
 };
