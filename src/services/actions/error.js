@@ -1,8 +1,15 @@
-export const ERROR = 'ERROR';
+export const SET_ERROR = 'SET_ERROR';
+export const RESET_ERROR = 'RESET_ERROR';
 
 export const setError = (item) => {
   return {
-    type: ERROR,
+    type: SET_ERROR,
     payload: item,
+  };
+};
+
+export const resetError = () => {
+  return {
+    type: RESET_ERROR,
   };
 };

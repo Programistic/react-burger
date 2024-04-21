@@ -24,7 +24,7 @@ function Profile() {
 
   return(
     <>
-      { state.isSuccess && <Navigate to="/" replace={true} /> }
+      { state.isSuccess && <Navigate to="/login" replace={true} /> }
       <div className={ProfileStyles.container}>
         <ul className={ProfileStyles.menu}>
           <li className={ProfileStyles.menuItem}>
@@ -40,7 +40,7 @@ function Profile() {
             </NavLink>
           </li>
           <li className={ProfileStyles.menuItem}>
-            <NavLink to='/' className={ProfileStyles.menuItem__link} onClick={handleLinkClick}>
+            <NavLink className={ProfileStyles.menuItem__link} onClick={handleLinkClick}>
               Выход
             </NavLink>
           </li>
