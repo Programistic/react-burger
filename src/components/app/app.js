@@ -27,6 +27,7 @@ import ProtectedAuthUserRouteElement from '../protected-route/protected-auth-use
 import ProtectedResetPasswordRouteElement from '../protected-route/protected-reset-password-route';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import AppStyles from './app.module.css';
 
 function App() {
@@ -44,7 +45,8 @@ function App() {
 
   const {
     isSuccess,
-    error,
+    isError,
+    errorStatus,
     isOrderSuccess,
     isModalVisible,
     isIngredientDetailsVisible,
@@ -52,7 +54,8 @@ function App() {
     card,
   } = useSelector(store => ({
     isSuccess: store.data.isSuccess,
-    error: store.error.error,
+    isError: store.error.isError,
+    errorStatus: store.error.error,
     isOrderSuccess: store.order.isSuccess,
     isModalVisible: store.modal.isModalVisible,
     isIngredientDetailsVisible: store.modal.isIngredientDetailsVisible,
@@ -79,8 +82,9 @@ function App() {
     dispatch(resetCurrentIngredient());
   };
 
-  return(
+  return (
     <div className={AppStyles.page}>
+      { isError && <Navigate to="/error" /> }
       <AppHeader />
       <Routes location={background || location}>
         <Route path='/' element={
@@ -100,7 +104,7 @@ function App() {
           <Route path='profile/user-orders' element={ <UserOrders /> } />
         </Route>
         <Route path='*' element={ <NotFound /> } />
-        <Route path='/error' element={ <Error error={error} /> } />
+        <Route path='/error' element={ <Error errorStatus={errorStatus} /> } />
       </Routes>
 
       { background &&  (

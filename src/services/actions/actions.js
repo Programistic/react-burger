@@ -1,6 +1,7 @@
 import { getDataRequest, getDataSuccess } from "./all-ingredients";
 import { setOrderRequest, setOrderSuccess } from "./order";
 import { checkResponse } from "../../utils/constants";
+import { checkResponseWithToken } from "../../utils/constants";
 import { setError } from "./error";
 import { setUser, resetUser } from "./user";
 import { setLoggedIn, resetLoggedIn } from "./flag";
@@ -33,7 +34,7 @@ export const register = (state, setState) => (dispatch) => {
     .then(res => {
       setState({...state, isSuccess: res.success});
     })
-    .catch(err => {dispatch(setError(err))});
+    .catch(err => dispatch(setError(err.status)));
 };
 
 // Запрос на вход в систему зарегистрированного пользователя, авторизация
@@ -56,7 +57,7 @@ export const login = (state, setState) => (dispatch) => {
       dispatch(setLoggedIn());
       setState({...state, isSuccess: res.success});
     })
-    .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
+    .catch(err => dispatch(setError(err.status)));
 };
 
 let typeRequest;
@@ -71,13 +72,13 @@ export const getUser = () => (dispatch) => {
         authorization: localStorage.getItem('accessToken'),
       }
     })
-    .then(checkResponse)
+    .then(checkResponseWithToken)
     .then(res => {
       dispatch(setUser({user: res.user}));
       dispatch(setLoggedIn());
     })
-    .catch((err) => {
-      (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest)) : Promise.reject(err);
+    .catch(err => {
+      (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest)) : console.log(err);
     });
 };
 
@@ -96,13 +97,13 @@ export const updateUser = (state, setState) => (dispatch) => {
       "name": state.name,
     })
   })
-    .then(checkResponse)
+    .then(checkResponseWithToken)
     .then(res => {
       dispatch(setUser({user: res.user}));
       setState({...state, name: res.user.name, email: res.user.email, isSuccess: res.success});
     })
-    .catch((err) => {
-      (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest, state, setState)) : Promise.reject(err);
+    .catch(err => {
+      (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest, state, setState)) : console.log(err);
     });
 };
 
@@ -121,9 +122,9 @@ export const updateToken = (typeRequest, state, setState) => (dispatch) => {
     .then(res => {
       localStorage.setItem('accessToken', res.accessToken);
       localStorage.setItem('refreshToken', res.refreshToken);
-      typeRequest === 'getUser' ? dispatch(getUser()) : dispatch(updateUser(state, setState));  // надо исправить изначально стейт не определён при загрузке updateUser
+      typeRequest === 'getUser' ? dispatch(getUser()) : dispatch(updateUser(state, setState));
     })
-    .catch(err => {console.log(err); Promise.reject(err)});
+    .catch(err => dispatch(setError(err.status)));
 };
 
 // Запрос на обновление пароля
@@ -142,7 +143,7 @@ export const recoverPassword = (state, setState) => (dispatch) => {
       localStorage.setItem('isPasswordRecoverRequest', true);
       setState({...state, isSuccess: res.success});
     })
-    .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
+    .catch(err => dispatch(setError(err.status)));
 };
 
 // Запрос на сброс пароля
@@ -162,7 +163,7 @@ export const resetPassword = (state, setState) => (dispatch) => {
       localStorage.setItem('isPasswordRecoverRequest', false);
       setState({...state, isSuccess: res.success});
     })
-    .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
+    .catch(err => dispatch(setError(err.status)));
 };
 
 // Запрос на получение данных об ингредиентах
@@ -171,7 +172,7 @@ export const getData = () => (dispatch) => {
   fetch(dataURL)
     .then(checkResponse)
     .then(res => dispatch(getDataSuccess(res.data)))
-    .catch(err => dispatch(setError(err)));
+    .catch(err => dispatch(setError(err.status)));
 };
 
 // Запрос на формирование заказа
@@ -188,7 +189,7 @@ export const setOrder = (idArray) => (dispatch) => {
   })
     .then(checkResponse)
     .then(res => dispatch(setOrderSuccess(res.order.number)))
-    .catch(err => dispatch(setError(err)));
+    .catch(err => dispatch(setError(err.status)));
 };
 
 // Запрос на выход из системы
@@ -210,5 +211,5 @@ export const logout = (state, setState) => (dispatch) => {
       dispatch(resetLoggedIn());
       setState({...state, isSuccess: res.success});
     })
-    .catch(err => {dispatch(setError(err))});
+    .catch(err => dispatch(setError(err.status)));
 };

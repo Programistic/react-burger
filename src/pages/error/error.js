@@ -2,7 +2,7 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate } from "react-router-dom";
 import ErrorPageStyles from './error.module.css';
 
-function Error({error}) {
+function Error({errorStatus}) {
 
   const navigate = useNavigate();
 
@@ -10,8 +10,8 @@ function Error({error}) {
     navigate(-1);
   };
 
-  const handleError = (error) => {
-    switch (error) {
+  const handleError = (errorStatus) => {
+    switch (errorStatus) {
       case 400:
         return 'Невалидный запрос к серверу!';
       case 401 || 403:
@@ -27,8 +27,8 @@ function Error({error}) {
 
   return (
     <div className={ErrorPageStyles.page}>
-      <h2 className={ErrorPageStyles.title}>{error}</h2>
-      <p className={ErrorPageStyles.text}>{handleError(error)}</p>
+      <h2 className={ErrorPageStyles.title}>{errorStatus}</h2>
+      <p className={ErrorPageStyles.text}>{handleError(errorStatus)}</p>
       <Button  htmlType="button" type="secondary" size="medium" onClick={handleClick}>Назад</Button>
     </div>
   );
