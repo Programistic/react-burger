@@ -76,7 +76,7 @@ export const getUser = () => (dispatch) => {
       dispatch(setUser({user: res.user}));
       dispatch(setLoggedIn());
     })
-    .catch((err) => {console.log(err);
+    .catch((err) => {
       (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest)) : Promise.reject(err);
     });
 };
@@ -121,7 +121,7 @@ export const updateToken = (typeRequest, state, setState) => (dispatch) => {
     .then(res => {
       localStorage.setItem('accessToken', res.accessToken);
       localStorage.setItem('refreshToken', res.refreshToken);
-      typeRequest === 'gerUser' ? dispatch(getUser()) : dispatch(updateUser(state, setState));  // надо исправить изначально стейт не определён при загрузке updateUser
+      typeRequest === 'getUser' ? dispatch(getUser()) : dispatch(updateUser(state, setState));  // надо исправить изначально стейт не определён при загрузке updateUser
     })
     .catch(err => {console.log(err); Promise.reject(err)});
 };
