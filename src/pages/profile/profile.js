@@ -9,7 +9,7 @@ import ProfileStyles from './profile.module.css';
 
 function Profile() {
 
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
 
   const { user } = useSelector(store => ({user: store.user.user}), shallowEqual);
 
@@ -28,7 +28,7 @@ function Profile() {
   const handleButtonCancelClick = () => {
     const oldName = user.name;
     const oldEmail = user.email;
-    setState({name: oldName, email: oldEmail})
+    setState({...state, password: '', name: oldName, email: oldEmail});
   };
 
   const handleLinkClick = () => {

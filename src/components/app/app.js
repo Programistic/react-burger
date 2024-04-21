@@ -11,7 +11,8 @@ import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../serv
 import { deleteOrder } from '../../services/actions/constructor-ingredients';
 import { resetCounter } from '../../services/actions/all-ingredients';
 import { resetCurrentIngredient } from '../../services/actions/current-ingredient';
-import Ingredient from '../../pages/ingredients/ingredient-details';
+import Ingredients from '../../pages/ingredients/ingredients';
+import Ingredient from '../../pages/ingredient/ingredient';
 import Login from '../../pages/login/login';
 import Register from '../../pages/register/register';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
@@ -23,12 +24,16 @@ import Orders from '../../pages/orders/orders';
 import ProtectedRouteElement from '../protected-route/protected-route';
 import ProtectedAuthUserRouteElement from '../protected-route/protected-auth-user-route';
 import ProtectedResetPasswordRouteElement from '../protected-route/protected-reset-password-route';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AppStyles from './app.module.css';
 
 function App() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const background = location.state && location.state.background;
 
   useEffect(() => {
       localStorage.getItem('accessToken') && dispatch(getUser());
@@ -69,35 +74,48 @@ function App() {
       dispatch(resetCounter());
     };
     dispatch({type: CLOSE_MODAL});
+    navigate('/');
     dispatch(resetCurrentIngredient());
   };
 
   return(
     <div className={AppStyles.page}>
-      <BrowserRouter>
-        <AppHeader />
+      <AppHeader />
+      <Routes location={background || location}>
+        <Route path='/' element={
+            isSuccess
+            ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} />
+            : <Preloader />
+          } />
+        <Route path='/ingredients' element={ <Ingredients /> }>
+          <Route path=':id' element={<Ingredient />} />
+        </Route>
+        <Route path='/login' element={ <ProtectedAuthUserRouteElement element={ <Login /> } /> } />
+        <Route path='/register' element={ <ProtectedAuthUserRouteElement element={ <Register /> } /> } />
+        <Route path='/forgot-password' element={ <ProtectedAuthUserRouteElement element={ <ForgotPassword /> } /> } />
+        <Route path='/reset-password' element={ <ProtectedResetPasswordRouteElement element={ <ResetPassword /> } /> } />
+        <Route path='/profile' element={ <ProtectedRouteElement element={ <Profile /> } /> }>
+          <Route path='/profile/orders' element={ <Orders /> } />
+        </Route>
+        <Route path='*' element={ <NotFound /> } />
+        <Route path='/error' element={ <Error error={error} /> } />
+      </Routes>
+
+      { background &&  (
         <Routes>
-          <Route path='/' element={
-              isSuccess
-              ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} />
-              : <Preloader />
-            } />
-          <Route path='/ingredient' element={ <Ingredient /> } />
-          <Route path='/login' element={ <ProtectedAuthUserRouteElement element={ <Login /> } /> } />
-          <Route path='/register' element={ <ProtectedAuthUserRouteElement element={ <Register /> } /> } />
-          <Route path='/forgot-password' element={ <ProtectedAuthUserRouteElement element={ <ForgotPassword /> } /> } />
-          <Route path='/reset-password' element={ <ProtectedResetPasswordRouteElement element={ <ResetPassword /> } /> } />
-          <Route path='/profile' element={ <ProtectedRouteElement element={ <Profile /> } /> }>
-            <Route path='/profile/orders' element={ <Orders /> } />
+          <Route path='/ingredients/:id' element={
+            <Modal closeModal={handleCloseModal}>
+              { isIngredientDetailsVisible && <IngredientDetails card={card} /> }
+            </Modal>
+          }>
           </Route>
-          <Route path='*' element={ <NotFound /> } />
-          <Route path='/error' element={ <Error error={error} /> } />
         </Routes>
-      </BrowserRouter>
-      { isModalVisible &&
+        )
+      }
+
+      { isModalVisible && isOrderDetailsVisible &&
         <Modal closeModal={handleCloseModal}>
-          { isIngredientDetailsVisible && <IngredientDetails card={card} /> }
-          { isOrderDetailsVisible && <OrderDetails onOrderDetailsOkButtonClick={handleCloseModal} /> }
+          <OrderDetails onOrderDetailsOkButtonClick={handleCloseModal} />
         </Modal>
       }
     </div>

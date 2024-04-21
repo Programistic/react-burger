@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-block-start: 120px;
 }
 
 .cardTitle {
   margin: 0;
+  align-self: center;
   font: 700 2.25rem/1 'JetBrainsMono', 'Inter', sans-serif;
   color: #f2f2f3;
 }

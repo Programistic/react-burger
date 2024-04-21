@@ -59,9 +59,11 @@ export const login = (state, setState) => (dispatch) => {
     .catch(err => {dispatch(setError(err)); setState({...state, isError: true})});
 };
 
+let typeRequest;
+
 // Запрос на получение данных пользователя
 export const getUser = () => (dispatch) => {
-  let typeRequest = 'getUser';
+  typeRequest = 'getUser';
   fetch(userURL, {
       method: 'GET',
       headers: {
@@ -74,14 +76,14 @@ export const getUser = () => (dispatch) => {
       dispatch(setUser({user: res.user}));
       dispatch(setLoggedIn());
     })
-    .catch((err) => {
+    .catch((err) => {console.log(err);
       (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest)) : Promise.reject(err);
     });
 };
 
 // Запрос на обновление данных пользователя
 export const updateUser = (state, setState) => (dispatch) => {
-  let typeRequest = 'updateUser';
+  typeRequest = 'updateUser';
   fetch(userURL, {
     method: 'PATCH',
     headers: {
@@ -97,7 +99,7 @@ export const updateUser = (state, setState) => (dispatch) => {
     .then(checkResponse)
     .then(res => {
       dispatch(setUser({user: res.user}));
-      setState({...state, user: res.user, isSuccess: res.success});
+      setState({...state, name: res.user.name, email: res.user.email, isSuccess: res.success});
     })
     .catch((err) => {
       (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest, state, setState)) : Promise.reject(err);
