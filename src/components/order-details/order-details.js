@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector, shallowEqual } from "react-redux";
 import PropTypes from 'prop-types';
 import OrderDetailsStyles from './order-details.module.css';

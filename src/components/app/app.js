@@ -7,10 +7,9 @@ import Preloader from '../preloader/preloader';
 import { getData, getUser, setOrder } from '../../services/actions/actions';
 import { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
+import { OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
 import { deleteOrder } from '../../services/actions/constructor-ingredients';
 import { resetCounter } from '../../services/actions/all-ingredients';
-import { resetCurrentIngredient } from '../../services/actions/current-ingredient';
 import Ingredients from '../../pages/ingredients/ingredients';
 import Ingredient from '../../pages/ingredient/ingredient';
 import Login from '../../pages/login/login';
@@ -49,23 +48,15 @@ function App() {
     errorStatus,
     isOrderSuccess,
     isModalVisible,
-    isIngredientDetailsVisible,
     isOrderDetailsVisible,
-    card,
   } = useSelector(store => ({
     isSuccess: store.data.isSuccess,
     isError: store.error.isError,
     errorStatus: store.error.error,
     isOrderSuccess: store.order.isSuccess,
     isModalVisible: store.modal.isModalVisible,
-    isIngredientDetailsVisible: store.modal.isIngredientDetailsVisible,
     isOrderDetailsVisible: store.modal.isOrderDetailsVisible,
-    card: store.card.card,
   }), shallowEqual);
-
-  const handleCardClick = () => {
-    dispatch({type: OPEN_INGREDIENT_MODAL});
-  };
 
   const handleButtonMakeOrderClick = (idArray) => {
     dispatch(setOrder(idArray));
@@ -73,13 +64,12 @@ function App() {
   };
 
   const handleCloseModal = () => {
-    if (isOrderSuccess) {
+  if (isOrderSuccess) {
       dispatch(deleteOrder());
       dispatch(resetCounter());
     };
     dispatch({type: CLOSE_MODAL});
     navigate('/');
-    dispatch(resetCurrentIngredient());
   };
 
   return (
@@ -89,7 +79,7 @@ function App() {
       <Routes location={background || location}>
         <Route path='/' element={
             isSuccess
-            ? <AppMain onCardClick={handleCardClick} onButtonMakeOrderClick={handleButtonMakeOrderClick} />
+            ? <AppMain  onButtonMakeOrderClick={handleButtonMakeOrderClick} />
             : <Preloader />
           } />
         <Route path='/ingredients' element={ <Ingredients /> }>
@@ -111,7 +101,7 @@ function App() {
         <Routes>
           <Route path='/ingredients/:id' element={
             <Modal closeModal={handleCloseModal}>
-              { isIngredientDetailsVisible && <IngredientDetails card={card} /> }
+               <IngredientDetails />
             </Modal>
           }>
           </Route>

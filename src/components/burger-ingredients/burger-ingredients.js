@@ -1,11 +1,9 @@
-import React from "react";
 import TabContent from "../tab-content/tab-content";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import PropTypes from 'prop-types';
 import BurgerIngredientsStyles from './burger-ingredients.module.css';
 
-function BurgerIngredients({onCardClick}) {
+function BurgerIngredients() {
 
   const [tab, setTab] = useState('bun');
 
@@ -26,13 +24,9 @@ function BurgerIngredients({onCardClick}) {
           Начинки
         </Tab>
       </div>
-      <TabContent onCardClick={onCardClick} onSetTab={setTab} />
+      <TabContent onSetTab={setTab} />
     </section>
   );
 }
 
 export default BurgerIngredients;
-
-BurgerIngredients.propTypes = {
-  onCardClick: PropTypes.func.isRequired,
-};
