@@ -5,6 +5,7 @@ import { checkResponseWithToken } from "../../utils/constants";
 import { setError } from "./error";
 import { setUser, resetUser } from "./user";
 import { setLoggedIn, resetLoggedIn } from "./flag";
+import { setIsPasswordResetRequest, resetIsPasswordResetRequest } from "./flag";
 import {
   dataURL,
   orderURL,
@@ -140,7 +141,7 @@ export const recoverPassword = (state, setState) => (dispatch) => {
   })
     .then(checkResponse)
     .then(res => {
-      localStorage.setItem('isPasswordRecoverRequest', true);
+      dispatch(setIsPasswordResetRequest());
       setState({...state, isSuccess: res.success});
     })
     .catch(err => dispatch(setError(err.status)));
@@ -160,7 +161,7 @@ export const resetPassword = (state, setState) => (dispatch) => {
   })
     .then(checkResponse)
     .then(res => {
-      localStorage.setItem('isPasswordRecoverRequest', false);
+      dispatch(resetIsPasswordResetRequest());
       setState({...state, isSuccess: res.success});
     })
     .catch(err => dispatch(setError(err.status)));

@@ -1,7 +1,13 @@
-import { SET_LOGGED_IN, RESET_LOGGED_IN } from "../actions/flag";
+import {
+  SET_LOGGED_IN,
+  RESET_LOGGED_IN,
+  SET_IS_PASSWORD_RESET_REQUEST,
+  RESET_IS_PASSWORD_RESET_REQUEST,
+} from "../actions/flag";
 
 const initData = {
   loggedIn: false,
+  isPasswordResetRequest: false,
 };
 
 export const flagReducer = (state = initData, action) => {
@@ -16,6 +22,18 @@ export const flagReducer = (state = initData, action) => {
       return {
         ...state,
         loggedIn: false,
+      };
+    }
+    case SET_IS_PASSWORD_RESET_REQUEST: {
+      return {
+        ...state,
+        isPasswordResetRequest: true,
+      };
+    }
+    case RESET_IS_PASSWORD_RESET_REQUEST: {
+      return {
+        ...state,
+        isPasswordResetRequest: false,
       };
     }
     default:

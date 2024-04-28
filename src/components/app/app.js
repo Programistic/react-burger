@@ -21,9 +21,8 @@ import UserProfile from '../../pages/user-profile/user-profile';
 import UserOrders from '../../pages/user-orders/user-orders';
 import NotFound from '../../pages/not-found/not-found';
 import Error from '../../pages/error/error';
-import ProtectedRouteElement from '../protected-route/protected-route';
-import ProtectedAuthUserRouteElement from '../protected-route/protected-auth-user-route';
-import ProtectedResetPasswordRouteElement from '../protected-route/protected-reset-password-route';
+import ProtectedRoute from '../protected-route/protected-route';
+import ProtectedResetPasswordRoute from '../protected-route/protected-reset-password-route';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
@@ -85,11 +84,17 @@ function App() {
         <Route path='/ingredients' element={ <Ingredients /> }>
           <Route path=':id' element={<Ingredient />} />
         </Route>
-        <Route path='/login' element={ <ProtectedAuthUserRouteElement element={ <Login /> } /> } />
-        <Route path='/register' element={ <ProtectedAuthUserRouteElement element={ <Register /> } /> } />
-        <Route path='/forgot-password' element={ <ProtectedAuthUserRouteElement element={ <ForgotPassword /> } /> } />
-        <Route path='/reset-password' element={ <ProtectedResetPasswordRouteElement element={ <ResetPassword /> } /> } />
-        <Route path='/profile' element={ <ProtectedRouteElement element={ <Profile /> } /> }>
+        <Route path='/login' element={ <ProtectedRoute element={ <Login /> } isAuthAccess={true} /> } />
+        <Route path='/register' element={ <ProtectedRoute element={ <Register /> } isAuthAccess={true} /> } />
+        <Route path='/forgot-password' element={ <ProtectedRoute element={ <ForgotPassword /> } isAuthAccess={true} /> } />
+        <Route path='/reset-password' element={
+          <ProtectedRoute element={
+            <ProtectedResetPasswordRoute element={
+              <ResetPassword />
+            } />
+          } isAuthAccess={true} /> 
+        } />
+        <Route path='/profile' element={ <ProtectedRoute element={ <Profile /> } isAuthAccess={false} /> }>
           <Route path='/profile' element={ <UserProfile /> } />
           <Route path='profile/user-orders' element={ <UserOrders /> } />
         </Route>

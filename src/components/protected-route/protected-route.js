@@ -1,13 +1,21 @@
 import { shallowEqual, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
-function ProtectedRouteElement({element}) {
+function ProtectedRoute({element, isAuthAccess}) {
 
   const { loggedIn } = useSelector(store => ({ loggedIn: store.flag.loggedIn }), shallowEqual);
+  const location = useLocation();
+  const from = location.state?.from || '/';
 
-  return (
-    loggedIn ? element : <Navigate to='/login' replace={true} />
-  );
+  if (isAuthAccess && loggedIn) {
+    return <Navigate to={ from } />;
+  }
+
+  if (!isAuthAccess && !loggedIn) {
+    return <Navigate to="/login" state={{ from: location}} />;
+  }
+
+  return element;
 };
 
-export default ProtectedRouteElement;
+export default ProtectedRoute;

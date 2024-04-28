@@ -1,18 +1,15 @@
-import { shallowEqual, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useSelector, shallowEqual } from 'react-redux';
 
-function ProtectedResetPasswordRouteElement({element}) {
+function ProtectedResetPasswordRoute({element}) {
 
-  const { loggedIn } = useSelector(store => ({ loggedIn: store.flag.loggedIn }), shallowEqual);
-  const isPasswordRecoverRequest = localStorage.getItem('isPasswordRecoverRequest');
+  const { isPasswordResetRequest } = useSelector(store => ({ isPasswordResetRequest: store.flag.isPasswordResetRequest }), shallowEqual);
+  const location = useLocation();
 
-  if (loggedIn) {
-    return <Navigate to='/' replace={true} />
-  } else if (isPasswordRecoverRequest) {
-    return element;
-  } else {
-    return <Navigate to='/login' replace={true} />;
-  };
+  return (
+    isPasswordResetRequest ? element : <Navigate to="/login" state={{ from: location}} />
+  );
 };
 
-export default ProtectedResetPasswordRouteElement;
+export default ProtectedResetPasswordRoute;
