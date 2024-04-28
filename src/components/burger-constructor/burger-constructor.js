@@ -4,6 +4,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { addBun, addIngredient, updateConstructor, saveOrder } from "../../services/actions/constructor-ingredients";
 import { incCounter } from "../../services/actions/all-ingredients";
 import { useDrop } from "react-dnd";
+import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import BurgerConstructorStyles from './burger-constructor.module.css';
 
@@ -12,6 +13,7 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
   const { bun, ingredients } = useSelector(store => ({bun: store.ingredients.bun, ingredients: store.ingredients.ingredients}), shallowEqual);
   const { ingredientsArr } = useSelector(store => ({ingredientsArr: store.data.data}), shallowEqual);
   const { loggedIn } = useSelector(store => ({ loggedIn: store.flag.loggedIn }), shallowEqual);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -69,8 +71,12 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
     const orderIdArray = ingredients.map(item => item._id);
     orderIdArray.unshift(bun._id);
     orderIdArray.push(bun._id);
-    dispatch(saveOrder(orderIdArray));
-    onButtonMakeOrderClick(orderIdArray);
+    if (loggedIn) {
+      dispatch(saveOrder(orderIdArray));
+      onButtonMakeOrderClick(orderIdArray);
+    } else {
+      navigate('/login');
+    };
   };
 
   return (
@@ -89,7 +95,7 @@ function BurgerConstructor({onButtonMakeOrderClick}) {
       <div className={BurgerConstructorStyles.innerContainer}>
         <span className={BurgerConstructorStyles.productPrice}>{totalCost}</span>
         <div className={BurgerConstructorStyles.currencyIconLarge}></div>
-        <Button htmlType={'button'} type={'primary'} size={'large'} disabled={!isBun || !loggedIn} aria-label='Оформить заказ' onClick={handleClick}>
+        <Button htmlType={'button'} type={'primary'} size={'large'} disabled={!isBun} aria-label='Оформить заказ' onClick={handleClick}>
           Оформить заказ
         </Button>
       </div>
