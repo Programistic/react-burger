@@ -1,11 +1,10 @@
-import React from "react";
-import OrderDetailsStyles from './order-details.module.css';
 import { useSelector, shallowEqual } from "react-redux";
 import PropTypes from 'prop-types';
+import OrderDetailsStyles from './order-details.module.css';
 
 function OrderDetails({onOrderDetailsOkButtonClick}) {
 
-  const { orderNumber } = useSelector(store => ({orderNumber: store.order.order}), shallowEqual);
+  const { orderNumber } = useSelector(store => ({orderNumber: store.order.orderNumber}), shallowEqual);
 
   return(
     <div className={OrderDetailsStyles.container}>

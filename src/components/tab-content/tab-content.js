@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import TabContentStyles from './tab-content.module.css';
 
-function TabContent({onCardClick, onSetTab}) {
+function TabContent({onSetTab}) {
 
   const { data } = useSelector(store => ({data: store.data}), shallowEqual);
 
@@ -23,7 +23,6 @@ function TabContent({onCardClick, onSetTab}) {
       <Card
         key={card._id}
         card={card}
-        onCardClick={onCardClick}
       />
     );
   });
@@ -33,7 +32,6 @@ function TabContent({onCardClick, onSetTab}) {
       <Card
         key={card._id}
         card={card}
-        onCardClick={onCardClick}
       />
     );
   });
@@ -43,7 +41,6 @@ function TabContent({onCardClick, onSetTab}) {
       <Card
         key={card._id}
         card={card}
-        onCardClick={onCardClick}
       />
     );
   });
@@ -95,6 +92,5 @@ function TabContent({onCardClick, onSetTab}) {
 export default TabContent;
 
 TabContent.propTypes = {
-  onCardClick: PropTypes.func.isRequired,
   onSetTab: PropTypes.func.isRequired,
 };

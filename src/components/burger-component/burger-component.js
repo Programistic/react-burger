@@ -1,9 +1,9 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { CONSTRUCTOR_DELETE_INGREDIENT } from "../../services/actions/constructor-ingredients";
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from "react";
-import { DEC_COUNTER } from "../../services/actions/all-ingredients";
+import { decCounter } from "../../services/actions/all-ingredients";
+import { deleteIngredient } from "../../services/actions/constructor-ingredients";
 import PropTypes from 'prop-types';
 import BurgerComponentStyles from './burger-component.module.css';
 
@@ -58,8 +58,8 @@ function BurgerComponent({isLocked, text, price, thumbnail, uniqueId, id, index,
 
   const handleDelete = () => {
     const ingredient = ingredients.find(item => item._id === id);
-    dispatch({type: DEC_COUNTER, ingredient});
-    dispatch({type: CONSTRUCTOR_DELETE_INGREDIENT, uniqueId});
+    dispatch(decCounter(ingredient));
+    dispatch(deleteIngredient(uniqueId));
   };
 
   return (

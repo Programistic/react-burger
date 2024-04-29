@@ -5,14 +5,14 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import AppMainStyles from './app-main.module.css';
 import PropTypes from 'prop-types';
 
-function AppMain({onCardClick, onButtonMakeOrderClick}) {
+function AppMain({onButtonMakeOrderClick}) {
 
   return (
     <main className={AppMainStyles.main}>
       <div className={AppMainStyles.container}>
         <h1 className={AppMainStyles.title}>Соберите бургер</h1>
         <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients onCardClick={onCardClick} />
+          <BurgerIngredients />
           <BurgerConstructor onButtonMakeOrderClick={onButtonMakeOrderClick} />
         </DndProvider>
       </div>
@@ -23,6 +23,5 @@ function AppMain({onCardClick, onButtonMakeOrderClick}) {
 export default AppMain;
 
 AppMain.propTypes = {
-  onCardClick: PropTypes.func.isRequired,
   onButtonMakeOrderClick: PropTypes.func.isRequired,
 };

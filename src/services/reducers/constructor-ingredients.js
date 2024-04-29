@@ -1,9 +1,10 @@
 import {
-  CONSTRUCTOR_SET_BUN,
-  CONSTRUCTOR_SET_INGREDIENT,
-  CONSTRUCTOR_DELETE_INGREDIENT,
+  CONSTRUCTOR_ADD_BUN,
+  CONSTRUCTOR_ADD_INGREDIENT,
   CONSTRUCTOR_UPDATE,
-  CONSTRUCTOR_SAVE_ORDER
+  CONSTRUCTOR_DELETE_INGREDIENT,
+  CONSTRUCTOR_SAVE_ORDER,
+  CONSTRUCTOR_DELETE_ORDER
 } from "../actions/constructor-ingredients";
 
 const initialState = {
@@ -14,13 +15,13 @@ const initialState = {
 
 export const constructorReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CONSTRUCTOR_SET_BUN: {
+    case CONSTRUCTOR_ADD_BUN: {
       return {
         ...state,
-        bun: action.bun,
+        bun: action.payload,
       };
     }
-    case CONSTRUCTOR_SET_INGREDIENT: {
+    case CONSTRUCTOR_ADD_INGREDIENT: {
       return {
         ...state,
         ingredients: [...state.ingredients, action.payload],
@@ -29,19 +30,26 @@ export const constructorReducer = (state = initialState, action) => {
     case CONSTRUCTOR_UPDATE: {
       return {
         ...state,
-        ingredients: action.newIngredients,
+        ingredients: action.payload,
       };
     }
     case CONSTRUCTOR_DELETE_INGREDIENT: {
       return {
         ...state,
-        ingredients: [...state.ingredients.filter(item => item.uniqueId !== action.uniqueId)]
+        ingredients: [...state.ingredients.filter(item => item.uniqueId !== action.payload)]
       };
     }
     case CONSTRUCTOR_SAVE_ORDER: {
       return {
         ...state,
-        orderIdArray: action.orderIdArray,
+        orderIdArray: action.payload,
+      };
+    }
+    case CONSTRUCTOR_DELETE_ORDER: {
+      return {
+        ...state,
+        bun: null,
+        ingredients: [],
       };
     }
     default:
