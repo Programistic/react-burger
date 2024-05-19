@@ -1,4 +1,4 @@
-.constructor {
+.outerContainer {
   display: flex;
   flex-direction: column;
   padding: 0 1rem 3.25rem 0;

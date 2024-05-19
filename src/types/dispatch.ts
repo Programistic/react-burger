@@ -1,0 +1,1 @@
+export type TDispatch = (action: any) => void;
