@@ -51,9 +51,9 @@ function UserProfile() {
   return (
     <div className={UserProfileStyles.innerContainer}>
       <form className={UserProfileStyles.form} name='profile-form' onSubmit={handleSubmit}>
-        <Input placeholder="Имя" type="text" icon="EditIcon" value={state.name} onChange={event => setState({...state, name: event.target.value})} onPointerEnterCapture onPointerLeaveCapture />
-        <Input placeholder="Логин" type="text" icon="EditIcon" value={state.email} onChange={event => setState({...state, email: event.target.value})} onPointerEnterCapture onPointerLeaveCapture />
-        <Input placeholder="Пароль" type="password" icon="EditIcon" value={state.password} onChange={event => setState({...state, password: event.target.value})} onPointerEnterCapture onPointerLeaveCapture />
+        <Input placeholder="Имя" type="text" icon="EditIcon" value={state.name} onChange={event => setState({...state, name: event.target.value})} />
+        <Input placeholder="Логин" type="text" icon="EditIcon" value={state.email} onChange={event => setState({...state, email: event.target.value})} />
+        <Input placeholder="Пароль" type="password" icon="EditIcon" value={state.password} onChange={event => setState({...state, password: event.target.value})} />
         { visible.isVisible &&
           <div className={UserProfileStyles.buttonContainer}>
             <Button  htmlType="button" type="secondary" size="medium" onClick={handleButtonCancelClick}>Отмена</Button>

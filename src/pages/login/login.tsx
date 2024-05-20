@@ -26,8 +26,8 @@ function Login() {
     <>
       { state.isSuccess && <Navigate to="/" replace={true} /> }
       <UserWindowWrapper title={'Вход'} formName={'login-form'} onSubmit={handleSubmit}>
-        <Input placeholder="E-mail" type="email" value={state.email} onChange={event => setState({...state, email: event.target.value})} onPointerEnterCapture onPointerLeaveCapture />
-        <Input placeholder="Пароль" type="password" icon="ShowIcon" value={state.password} onChange={event => setState({...state, password: event.target.value})} onPointerEnterCapture onPointerLeaveCapture />
+        <Input placeholder="E-mail" type="email" value={state.email} onChange={event => setState({...state, email: event.target.value})} />
+        <Input placeholder="Пароль" type="password" icon="ShowIcon" value={state.password} onChange={event => setState({...state, password: event.target.value})} />
         <Button htmlType="submit" type="primary" size="medium">Войти</Button>
       </UserWindowWrapper>
       <AdditionalActions text={'Вы - новый пользователь?'} link={'/register'} linkText={'Зарегистрироваться'} />

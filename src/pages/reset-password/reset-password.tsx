@@ -25,8 +25,8 @@ function ResetPassword() {
     <>
       { state.isSuccess && <Navigate to="/login" replace={true} /> }
       <UserWindowWrapper title={'Восстановление пароля'} formName={'reset-password-form'} onSubmit={handleSubmit}>
-        <Input placeholder="Введите новый пароль" icon="ShowIcon" type="password" value={state.password} onChange={event => setState({...state, password: event.target.value})} onPointerEnterCapture onPointerLeaveCapture />
-        <Input placeholder="Введите код из письма" type="text" value={state.token} onChange={event => setState({...state, token: event.target.value})} onPointerEnterCapture onPointerLeaveCapture />
+        <Input placeholder="Введите новый пароль" icon="ShowIcon" type="password" value={state.password} onChange={event => setState({...state, password: event.target.value})} />
+        <Input placeholder="Введите код из письма" type="text" value={state.token} onChange={event => setState({...state, token: event.target.value})} />
         <Button htmlType="submit" type="primary" size="medium">Сохранить</Button>
       </UserWindowWrapper>
       <AdditionalActions text={'Вспомнили пароль?'} link={'/login'} linkText={'Войти'} />

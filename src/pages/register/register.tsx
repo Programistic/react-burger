@@ -26,9 +26,9 @@ function Register() {
     <>
       { state.isSuccess && <Navigate to="/login" replace={true} /> }
       <UserWindowWrapper title={'Регистрация'} formName={'register-form'} onSubmit={handleSubmit}>
-        <Input placeholder="Имя" type="text" value={state.name} onChange={event => setState({...state, name: event.target.value})} onPointerEnterCapture onPointerLeaveCapture  />
-        <Input placeholder="E-mail" type="email" value={state.email} onChange={event => setState({...state, email: event.target.value})} onPointerEnterCapture onPointerLeaveCapture  />
-        <Input placeholder="Пароль" type="password" icon="ShowIcon" value={state.password} onChange={event => setState({...state, password: event.target.value})} onPointerEnterCapture onPointerLeaveCapture  />
+        <Input placeholder="Имя" type="text" value={state.name} onChange={event => setState({...state, name: event.target.value})} />
+        <Input placeholder="E-mail" type="email" value={state.email} onChange={event => setState({...state, email: event.target.value})} />
+        <Input placeholder="Пароль" type="password" icon="ShowIcon" value={state.password} onChange={event => setState({...state, password: event.target.value})} />
         <Button htmlType="submit" type="primary" size="medium">Зарегистрироваться</Button>
       </UserWindowWrapper>
       <AdditionalActions text={'Уже зарегистрированы?'} link={'/login'} linkText={'Войти'} />
