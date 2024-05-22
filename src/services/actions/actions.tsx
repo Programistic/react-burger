@@ -21,16 +21,35 @@ import { TDispatch } from "../../types/dispatch";
 import { TUser } from "../../types/user";
 import { TLogin } from "../../types/login";
 
+type TRegisterFn = (state: TUser & TResult, setState: TSetStateRegister) => any;
+
+type TSetStateRegister = (state: TUser & TResult) => void;
+
+type TLoginFn = (state: TLogin, setState: TSetStateLogin) => any;
+type TSetStateLogin = (state: TLogin & TResult) => void;
+
 type TGetUserFn = () => any;
+
+type TUpdateUserFn = (state: TUser, setState: TSetStateUpdateUser) => any;
+type TSetStateUpdateUser = (state: TUser & TResult) => void;
+
+type TUpdateTokenFn = (typeRequest: string, state: TUser, setState: TSetStateUpdateToken) => any;
+type TSetStateUpdateToken = (state: TUser & TResult) => void;
+
+type TRecoverPasswordFn = (state: TValue & TResult, setState: TSetStateRecoverPassword) => any;
+type TSetStateRecoverPassword = (state: TValue & TResult) => void;
+
+type TResetPasswordFn = (state: TPassword & TResult, setState: TSetStateResetPassword) => any;
+type TSetStateResetPassword = (state: TPassword & TResult) => void;
+
 type TGetDataFn = () => any;
+
 type TSetOrderFn = (id: string[]) => any;
-type TLoginFn = (state: TLogin, setState: any) => any;
-type TLoguotFn = (state: TUser & TResult, setState: any) => any;
-type TRegisterFn = (state: TUser & TResult, setState: any) => any;
-type TResetPasswordFn = (state: TPassword & TResult, setState: any) => any;
-type TUpdateUserFn = (state: TUser, setState: any) => any;
-type TUpdateTokenFn = (typeRequest: string, state: TUser, setState: any) => any;
-type TRecoverPasswordFn = (state: TValue & TResult, setState: any) => any;
+
+type TLoguotFn = (state: TUser & TResult, setState: TSetStateLogout) => any;
+type TSetStateLogout = (state: TUser & TResult) => void;
+
+
 type THeader = {
   authorization: string,
 };
@@ -70,8 +89,6 @@ export const register: TRegisterFn = (state, setState) => (dispatch: TDispatch) 
 
 // Запрос на вход в систему зарегистрированного пользователя, авторизация
 export const login: TLoginFn = (state, setState) => (dispatch: TDispatch) => {
-  console.log(typeof(setState))
-  console.log(setState)
   fetch(loginURL, {
     method: 'POST',
     headers: {
@@ -99,6 +116,7 @@ let emptyUser: {
   email: '',
   password: '',
 };
+let emptySetUser = () => {};
 
 // Запрос на получение данных пользователя
 export const getUser: TGetUserFn = () => (dispatch: TDispatch) => {
@@ -116,7 +134,7 @@ export const getUser: TGetUserFn = () => (dispatch: TDispatch) => {
       dispatch(setLoggedIn());
     })
     .catch(err => {
-      (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest, emptyUser, null)) : console.log(err);
+      (err.message === 'jwt expired') ? dispatch(updateToken(typeRequest, emptyUser, emptySetUser)) : console.log(err);
     });
 };
 
@@ -232,6 +250,7 @@ export const setOrder: TSetOrderFn = (idArray) => (dispatch: TDispatch) => {
 
 // Запрос на выход из системы
 export const logout: TLoguotFn = (state, setState) => (dispatch: TDispatch) => {
+  console.log(state)
   fetch(logoutURL, {
     method: 'POST',
     headers: {

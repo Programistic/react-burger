@@ -9,9 +9,7 @@ type TCardProps = {
   card: TIngredient,
 };
 
-type TCard = (card: TCardProps) => any;
-
-const Card: TCard = ({ card }) => {
+const Card = ({ card }: TCardProps) => {
 
   const location = useLocation();
 
@@ -24,7 +22,6 @@ const Card: TCard = ({ card }) => {
   });
 
   return (
-    !isDrag &&
     <Link to={`/ingredients/${card._id}`} key={card._id} state={{background: location}} ref={dragRef}>
       <li className={CardStyles.card}>
         <img src={card.image} className={CardStyles.image} alt={card.name} />

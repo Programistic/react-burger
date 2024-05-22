@@ -13,11 +13,11 @@ export const logoutURL = `${authURL}/logout`;
 export const tokenURL = `${authURL}/token`;
 export const userURL = `${authURL}/user`;
 
-export const checkResponse = (res: any) => {
+export const checkResponse = (res: Response) => {
   return res.ok ? res.json() : Promise.reject(res);
 };
 
-export const checkResponseWithToken = (res: any) => {
+export const checkResponseWithToken = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err: number) => Promise.reject(err));
 };
 
