@@ -1,1 +1,3 @@
-export type TDispatch = (action: any) => void;
+import { store } from "../utils/constants";
+
+export type AppDispatch = typeof store.dispatch; 

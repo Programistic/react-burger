@@ -1,15 +1,21 @@
 import { OPEN_INGREDIENT_MODAL, OPEN_ORDER_MODAL, CLOSE_MODAL } from "../actions/modal";
-import { TAction } from "../../types/action";
+import { TModalActions } from "../actions/modal";
 
+type TModalState = {
+  isModalVisible: boolean,
+  isIngredientDetailsVisible: boolean,
+  isOrderDetailsVisible: boolean,
+  orderNumber: string,
+};
 
-const initialState = {
+const initialState: TModalState = {
   isModalVisible: false,
   isIngredientDetailsVisible: false,
   isOrderDetailsVisible: false,
   orderNumber: '',
 }
 
-export const modalReducer = (state = initialState, action: TAction) => {
+export const modalReducer = (state = initialState, action: TModalActions): TModalState => {
   switch (action.type) {
     case OPEN_INGREDIENT_MODAL: {
       return {

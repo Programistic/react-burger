@@ -6,7 +6,7 @@ import Modal from '../modal/modal';
 import Preloader from '../preloader/preloader';
 import { getData, getUser, setOrder } from '../../services/actions/actions';
 import { useEffect } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { shallowEqual } from 'react-redux';
 import { OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
 import { deleteOrder } from '../../services/actions/constructor-ingredients';
 import { resetCounter } from '../../services/actions/all-ingredients';
@@ -26,26 +26,21 @@ import ProtectedResetPasswordRoute from '../protected-route/protected-reset-pass
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import AppStyles from './app.module.css';
-
-interface IAppStore {
-  ingredients: any,
-  data: any,
-  error: any,
-  order: any,
-  modal: any,
-};
+import { AppDispatch } from '../../types/dispatch';
 
 function App() {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const background = location.state && location.state.background;
 
   useEffect(() => {
-      localStorage.getItem('accessToken') && dispatch(getUser());
-      dispatch(getData());
+      localStorage.getItem('accessToken') && dispatch(getUser() as any);
+      dispatch<any>(getData());
     }, []
   );
 
@@ -56,7 +51,7 @@ function App() {
     isOrderSuccess,
     isModalVisible,
     isOrderDetailsVisible,
-  } = useSelector((store: IAppStore) => ({
+  } = useAppSelector((store) => ({
     isSuccess: store.data.isSuccess,
     isError: store.error.isError,
     errorStatus: store.error.error,
@@ -66,7 +61,7 @@ function App() {
   }), shallowEqual);
 
   const handleButtonMakeOrderClick = (idArray: string[]) => {
-    dispatch(setOrder(idArray));
+    dispatch(setOrder(idArray) as any);
     dispatch({type: OPEN_ORDER_MODAL});
   };
 

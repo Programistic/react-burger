@@ -4,14 +4,19 @@ import {
   SET_IS_PASSWORD_RESET_REQUEST,
   RESET_IS_PASSWORD_RESET_REQUEST,
 } from "../actions/flag";
-import { TAction } from "../../types/action";
+import { TFlagActions } from "../actions/flag";
 
-const initData = {
+type TFlagState = {
+  loggedIn: boolean,
+  isPasswordResetRequest: boolean,
+}
+
+const initData: TFlagState = {
   loggedIn: false,
   isPasswordResetRequest: false,
 };
 
-export const flagReducer = (state = initData, action: TAction) => {
+export const flagReducer = (state = initData, action: TFlagActions): TFlagState => {
   switch (action.type) {
     case SET_LOGGED_IN: {
       return {

@@ -1,12 +1,17 @@
 import { SET_ERROR, RESET_ERROR } from "../actions/error";
-import { TAction } from "../../types/action";
+import { TErrorActions } from "../actions/error";
 
-const initData = {
+type TErrorState = {
+  isError: boolean,
+  error: number,
+}
+
+const initData: TErrorState = {
   isError: false,
-  error: '',
+  error: 400,
 };
 
-export const errorReducer = (state = initData, action: TAction) => {
+export const errorReducer = (state = initData, action: TErrorActions): TErrorState => {
   switch (action.type) {
     case SET_ERROR: {
       return {

@@ -3,9 +3,17 @@ import {
   SET_ORDER_SUCCESS,
   SET_ORDER_FAILED
 } from "../actions/order";
-import { TAction } from "../../types/action";
+import { TOrderActions } from "../actions/order";
 
-const initData = {
+type TOrderState = {
+  isSuccess: boolean,
+  isLoading: boolean,
+  isError: boolean,
+  orderNumber: string,
+  error: string,
+}
+
+const initData: TOrderState = {
   isSuccess: false,
   isLoading: false,
   isError: false,
@@ -13,7 +21,7 @@ const initData = {
   error: '',
 };
 
-export const orderReducer = (state = initData, action: TAction) => {
+export const orderReducer = (state = initData, action: TOrderActions): TOrderState => {
   switch (action.type) {
     case SET_ORDER_REQUEST: {
       return {

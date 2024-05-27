@@ -1,22 +1,28 @@
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import UserWindowWrapper from "../../components/user-window-wrapper/user-window-wrapper";
 import AdditionalActions from "../../components/additional-actions/additional-actions";
-import { useDispatch } from "react-redux";
 import { login } from "../../services/actions/actions";
 import { useState } from "react";
 import { FormEvent } from "react";
 import { Navigate } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/hooks";
 
 function Login() {
 
-  const dispatch = useDispatch();
+  interface ILogin {
+    email: string,
+    password: string,
+    isSuccess: boolean,
+  };
+
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(login(state, setState));
+    dispatch(login(state, setState) as any);
   };
 
-  const [state, setState] = useState({
+  const [state, setState] = useState<ILogin>({
     email: '',
     password: '',
     isSuccess: false,

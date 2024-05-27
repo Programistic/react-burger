@@ -1,17 +1,14 @@
 import { useParams } from "react-router-dom";
-import { useSelector, shallowEqual } from "react-redux";
+import { shallowEqual } from "react-redux";
 import { TIngredient } from "../../types/ingredient";
+import { useAppSelector } from "../../hooks/hooks";
 import InggredientDetailsStyles from './ingredient-details.module.css';
-
-interface IAppStore {
-  data: any,
-};
 
 function IngredientDetails() {
 
   let {id}  = useParams();
 
-  const { ingredients } = useSelector((store: IAppStore) => ({ingredients: store.data.data}), shallowEqual);
+  const { ingredients } = useAppSelector((store) => ({ingredients: store.data.data}), shallowEqual);
   const ingredient = ingredients.find((item: TIngredient) => item._id === id);
   const isModalVisible = ingredient ? true : false;
 

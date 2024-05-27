@@ -1,19 +1,17 @@
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { shallowEqual } from "react-redux";
 import { useState } from "react";
 import { logout } from "../../services/actions/actions";
 import { NavLink, Outlet } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import ProfileStyles from './profile.module.css';
-
-interface IAppStore {
-  user: any,
-};
 
 function Profile() {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { user } = useSelector((store: IAppStore) => ({user: store.user.user}), shallowEqual);
+  const { user } = useAppSelector((store) => ({user: store.user.user} as any), shallowEqual);
 
   const [state, setState] = useState({
     name: user.name,
@@ -23,7 +21,7 @@ function Profile() {
   });
 
   const handleLinkClick = () => {
-    dispatch(logout(state, setState));
+    dispatch(logout(state, setState) as any);
   };
 
   return(

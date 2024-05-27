@@ -1,22 +1,19 @@
 import Card from '../card/card';
-import { useSelector, shallowEqual } from 'react-redux';
+import { shallowEqual } from 'react-redux';
 import { InView } from 'react-intersection-observer';
 import { useState, useEffect, useMemo } from 'react';
 import { FC } from 'react';
 import { TIngredient } from '../../types/ingredient';
+import { useAppSelector } from '../../hooks/hooks';
 import TabContentStyles from './tab-content.module.css';
 
 interface ITabContentProps {
   onSetTab: (item: string) => void,
-}
-
-interface IAppStore {
-  data: any,
-}
+};
 
 const TabContent: FC<ITabContentProps> = ({ onSetTab }) => {
 
-  const { data } = useSelector((store: IAppStore) => ({data: store.data}), shallowEqual);
+  const { data } = useAppSelector((store) => ({data: store.data}), shallowEqual);
 
   const { cardsBun, cardsSauce, cardsMain } = useMemo (
     () => ({

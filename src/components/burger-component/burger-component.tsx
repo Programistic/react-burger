@@ -1,11 +1,11 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from "react";
 import { decCounter } from "../../services/actions/all-ingredients";
 import { deleteIngredient } from "../../services/actions/constructor-ingredients";
 import { FC } from "react";
 import { TIngredient } from "../../types/ingredient";
+import { useAppDispatch } from "../../hooks/hooks";
 import BurgerComponentStyles from './burger-component.module.css';
 
 interface IBurgerComponentProps {
@@ -73,10 +73,10 @@ const BurgerComponent: FC<IBurgerComponentProps> = ({ isLocked, text, price, thu
 
   dragRef(dropRef(componentRef));
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleDelete = () => {
-    const ingredient = ingredients.find(item => item._id === id);
+    const ingredient = ingredients.find(item => item._id === id) as unknown as TIngredient;
     dispatch(decCounter(ingredient));
     dispatch(deleteIngredient(uniqueId));
   };

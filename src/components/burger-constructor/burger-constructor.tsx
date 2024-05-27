@@ -1,32 +1,28 @@
 import BurgerComponent from "../burger-component/burger-component";
 import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import { addBun, addIngredient, updateConstructor, saveOrder } from "../../services/actions/constructor-ingredients";
 import { incCounter } from "../../services/actions/all-ingredients";
 import { useDrop } from "react-dnd";
 import { useNavigate } from "react-router-dom";
 import { TIngredient } from "../../types/ingredient";
 import { FC } from "react";
+import { useAppDispatch } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import BurgerConstructorStyles from './burger-constructor.module.css';
 
 interface IBurgerConstructorProps {
   onButtonMakeOrderClick: (item: string[]) => void,
 }
 
-interface IAppStore {
-  ingredients: any,
-  data: any,
-  flag: any,
-}
-
 const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onButtonMakeOrderClick }) => {
 
-  const { bun, ingredients } = useSelector((store: IAppStore)=> ({bun: store.ingredients.bun, ingredients: store.ingredients.ingredients}), shallowEqual);
-  const { ingredientsArr } = useSelector((store: IAppStore) => ({ingredientsArr: store.data.data}), shallowEqual);
-  const { loggedIn } = useSelector((store: IAppStore) => ({ loggedIn: store.flag.loggedIn }), shallowEqual);
+  const { bun, ingredients } = useAppSelector((store)=> ({bun: store.ingredients.bun, ingredients: store.ingredients.ingredients}), shallowEqual);
+  const { ingredientsArr } = useAppSelector((store) => ({ingredientsArr: store.data.data}), shallowEqual);
+  const { loggedIn } = useAppSelector((store) => ({ loggedIn: store.flag.loggedIn }), shallowEqual);
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [{isHover}, dropTarget] = useDrop({
     accept: 'card',
@@ -80,8 +76,10 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onButtonMakeOrderClick
 
   const handleClick = () => {
     const orderIdArray = ingredients.map((item: TIngredient) => item._id);
-    orderIdArray.unshift(bun._id);
-    orderIdArray.push(bun._id);
+    if (bun !== null) {
+      orderIdArray.unshift(bun._id);
+      orderIdArray.push(bun._id);
+    }
     if (loggedIn) {
       dispatch(saveOrder(orderIdArray));
       onButtonMakeOrderClick(orderIdArray);

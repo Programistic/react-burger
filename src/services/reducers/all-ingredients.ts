@@ -6,20 +6,20 @@ import {
   DEC_COUNTER,
   RESET_COUNTER,
 } from "../actions/all-ingredients";
-import { TAction } from "../../types/action";
 import { TIngredient } from "../../types/ingredient";
+import { TAllIngredientsActions } from "../actions/all-ingredients";
 
-type TState = {
+type TAllIngredientsState = {
   isSuccess: boolean,
   isLoading: boolean,
   isError: boolean,
   data: any,
-  bun: TIngredient[],
-  ingredients: TIngredient[],
+  bun: any,
+  ingredients: any,
   error: string,
 }
 
-const initialState = {
+const initialState: TAllIngredientsState = {
   isSuccess: false,
   isLoading: false,
   isError: false,
@@ -29,7 +29,7 @@ const initialState = {
   error: '',
 }
 
-export const dataReducer = (state: TState = initialState, action: TAction) => {
+export const dataReducer = (state = initialState, action: TAllIngredientsActions): TAllIngredientsState => {
   switch (action.type) {
     case GET_DATA_REQUEST: {
       return {

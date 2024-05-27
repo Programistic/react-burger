@@ -1,18 +1,18 @@
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import UserWindowWrapper from "../../components/user-window-wrapper/user-window-wrapper";
 import AdditionalActions from "../../components/additional-actions/additional-actions";
-import { useDispatch } from "react-redux";
 import { resetPassword } from "../../services/actions/actions";
 import { FormEvent, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/hooks";
 
 function ResetPassword() {
 
-  const dispatch= useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(resetPassword(state, setState));
+    dispatch(resetPassword(state, setState) as any);
   };
 
   const [state, setState] = useState({

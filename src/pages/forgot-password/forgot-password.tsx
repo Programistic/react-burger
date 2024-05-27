@@ -3,17 +3,17 @@ import UserWindowWrapper from "../../components/user-window-wrapper/user-window-
 import AdditionalActions from "../../components/additional-actions/additional-actions";
 import { useState } from "react";
 import { recoverPassword } from "../../services/actions/actions";
-import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { FormEvent } from "react";
+import { useAppDispatch } from "../../hooks/hooks";
 
 function ForgotPassword() {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(recoverPassword(state, setState));
+    dispatch(recoverPassword(state, setState) as any);
   };
 
   const [state, setState] = useState({

@@ -1,18 +1,15 @@
-import { useSelector, shallowEqual } from "react-redux";
+import { shallowEqual } from "react-redux";
 import { FC } from "react";
+import { useAppSelector } from "../../hooks/hooks";
 import OrderDetailsStyles from './order-details.module.css';
-
-interface IAppStore {
-  order: any,
-};
 
 interface IOrderDetailsProps {
   onOrderDetailsOkButtonClick: () => void,
-}
+};
 
 const OrderDetails: FC<IOrderDetailsProps> = ({ onOrderDetailsOkButtonClick }) => {
 
-  const { orderNumber } = useSelector((store: IAppStore) => ({orderNumber: store.order.orderNumber}), shallowEqual);
+  const { orderNumber } = useAppSelector((store) => ({orderNumber: store.order.orderNumber}), shallowEqual);
 
   return (
     <div className={OrderDetailsStyles.container}>

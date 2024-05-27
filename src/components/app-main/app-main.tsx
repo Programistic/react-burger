@@ -10,7 +10,6 @@ interface IAppMainProps {
 }
 
 const AppMain: FC<IAppMainProps> = ({ onButtonMakeOrderClick }) => {
-
   return (
     <main className={AppMainStyles.main}>
       <div className={AppMainStyles.container}>

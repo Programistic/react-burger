@@ -1,8 +1,8 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { resetError } from "../../services/actions/error";
 import { FC } from "react";
+import { useAppDispatch } from "../../hooks/hooks";
 import ErrorPageStyles from './error.module.css';
 
 interface IErrorStatusProps {
@@ -12,7 +12,7 @@ interface IErrorStatusProps {
 const Error: FC<IErrorStatusProps> = ({ errorStatus }) => {
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleClick = () => {
     dispatch(resetError());

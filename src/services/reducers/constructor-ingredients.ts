@@ -6,16 +6,22 @@ import {
   CONSTRUCTOR_SAVE_ORDER,
   CONSTRUCTOR_DELETE_ORDER
 } from "../actions/constructor-ingredients";
-import { TAction } from "../../types/action";
 import { TIngredient } from "../../types/ingredient";
+import { TConstructorIngredientsActions } from "../actions/constructor-ingredients";
 
-const initialState = {
+type TConstructorIngredientsState = {
+  bun: TIngredient | null,
+  ingredients: TIngredient[],
+  orderIdArray: string[],
+};
+
+const initialState: TConstructorIngredientsState = {
   bun: null,
   ingredients: [],
   orderIdArray: [],
-}
+};
 
-export const constructorReducer = (state = initialState, action: TAction) => {
+export const constructorReducer = (state = initialState, action: TConstructorIngredientsActions): TConstructorIngredientsState => {
   switch (action.type) {
     case CONSTRUCTOR_ADD_BUN: {
       return {
@@ -26,7 +32,7 @@ export const constructorReducer = (state = initialState, action: TAction) => {
     case CONSTRUCTOR_ADD_INGREDIENT: {
       return {
         ...state,
-        ingredients: [...state.ingredients, action.payload],
+        ingredients: [...state.ingredients, action.payload] as any,
       };
     }
     case CONSTRUCTOR_UPDATE: {
@@ -38,7 +44,7 @@ export const constructorReducer = (state = initialState, action: TAction) => {
     case CONSTRUCTOR_DELETE_INGREDIENT: {
       return {
         ...state,
-        ingredients: [...state.ingredients.filter((item: TIngredient) => item.uniqueId !== action.payload)]
+        ingredients: [...state.ingredients.filter((item) => item.uniqueId !== action.payload)]
       };
     }
     case CONSTRUCTOR_SAVE_ORDER: {

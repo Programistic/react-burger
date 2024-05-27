@@ -1,37 +1,33 @@
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { shallowEqual } from "react-redux";
 import { useState, useEffect } from "react";
 import { updateUser } from "../../services/actions/actions";
 import { FormEvent } from "react";
+import { useAppDispatch } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import UserProfileStyles from './user-profile.module.css';
-
-interface IAppStore {
-  user: any,
-};
 
 interface IUser {
   name: string,
   email: string,
   password: string,
-  isSuccess: boolean,
 }
 
 function UserProfile() {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { user } = useSelector((store: IAppStore) => ({user: store.user.user}), shallowEqual);
+  const { user } = useAppSelector((store) => ({user: store.user.user} as any), shallowEqual);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(updateUser(state, setState));
+    dispatch(updateUser(state, setState) as any);
   };
 
   const [state, setState] = useState<IUser>({
     name: user.name,
     email: user.email,
     password: '',
-    isSuccess: false,
   });
 
   const [visible , setVisible] = useState({isVisible: false});
