@@ -24,4 +24,3 @@ export const resetUser = (): IResetUserAction => ({
 export type TUserActions =
   ISetUserAction
   | IResetUserAction;
-

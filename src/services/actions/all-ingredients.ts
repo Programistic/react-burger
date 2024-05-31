@@ -11,47 +11,39 @@ interface IGetDataRequestAction {
   readonly type: typeof GET_DATA_REQUEST;
 };
 
-export const getDataRequest = (): IGetDataRequestAction => {
-  return {
-    type: GET_DATA_REQUEST,
-  };
-};
+export const getDataRequest = (): IGetDataRequestAction => ({
+  type: GET_DATA_REQUEST,
+});
 
 interface IGetDataSuccessAction {
   readonly type: typeof GET_DATA_SUCCESS,
   payload: TIngredient[],
 };
 
-export const getDataSuccess = (item: TIngredient[]): IGetDataSuccessAction => {
-  return {
-    type: GET_DATA_SUCCESS,
-    payload: [...item],
-  };
-};
+export const getDataSuccess = (item: TIngredient[]): IGetDataSuccessAction => ({
+  type: GET_DATA_SUCCESS,
+  payload: [...item],
+});
 
 interface IGetDataFailedAction {
   readonly type: typeof GET_DATA_FAILED,
   payload: string,
 };
 
-export const getDataFailed = (item: string): IGetDataFailedAction => {
-  return {
-    type: GET_DATA_FAILED,
-    payload: item,
-  };
-};
+export const getDataFailed = (item: string): IGetDataFailedAction => ({
+  type: GET_DATA_FAILED,
+  payload: item,
+});
 
 interface IIncCounterAction {
   readonly type: typeof INC_COUNTER,
   payload: TIngredient,
 };
 
-export const incCounter = (item: TIngredient): IIncCounterAction => {
-  return {
-    type: INC_COUNTER,
-    payload: item,
-  };
-};
+export const incCounter = (item: TIngredient): IIncCounterAction => ({
+  type: INC_COUNTER,
+  payload: item,
+});
 
 interface IDecCounterAction {
   readonly type: typeof DEC_COUNTER,
@@ -78,3 +70,4 @@ export type TAllIngredientsActions =
   | IIncCounterAction
   | IDecCounterAction
   | IResetCounterAction;
+  

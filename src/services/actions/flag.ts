@@ -7,41 +7,33 @@ interface ISetLoggedInAction {
   readonly type: typeof SET_LOGGED_IN,
 };
 
-export const setLoggedIn = (): ISetLoggedInAction => {
-  return {
-    type: SET_LOGGED_IN,
-  };
-};
+export const setLoggedIn = (): ISetLoggedInAction => ({
+  type: SET_LOGGED_IN,
+});
 
 interface IResetLoggedInAction {
   readonly type: typeof RESET_LOGGED_IN,
 };
 
-export const resetLoggedIn = (): IResetLoggedInAction => {
-  return {
-    type: RESET_LOGGED_IN,
-  };
-};
+export const resetLoggedIn = (): IResetLoggedInAction => ({
+  type: RESET_LOGGED_IN,
+});
 
 interface ISetIsPasswordResetRequestAction {
   readonly type: typeof SET_IS_PASSWORD_RESET_REQUEST,
 };
 
-export const setIsPasswordResetRequest = (): ISetIsPasswordResetRequestAction => {
-  return {
-    type: SET_IS_PASSWORD_RESET_REQUEST,
-  };
-};
+export const setIsPasswordResetRequest = (): ISetIsPasswordResetRequestAction => ({
+  type: SET_IS_PASSWORD_RESET_REQUEST,
+});
 
 interface IResetIsPasswordResetRequest {
   readonly type: typeof RESET_IS_PASSWORD_RESET_REQUEST,
 };
 
-export const resetIsPasswordResetRequest = (): IResetIsPasswordResetRequest => {
-  return {
-    type: RESET_IS_PASSWORD_RESET_REQUEST,
-  };
-};
+export const resetIsPasswordResetRequest = (): IResetIsPasswordResetRequest => ({
+  type: RESET_IS_PASSWORD_RESET_REQUEST,
+});
 
 export type TFlagActions =
   ISetLoggedInAction
