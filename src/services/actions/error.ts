@@ -6,22 +6,18 @@ interface ISetErrorAction {
   payload: number,
 };
 
-export const setError = (item: number): ISetErrorAction => {
-  return {
-    type: SET_ERROR,
-    payload: item,
-  };
-};
+export const setError = (item: number): ISetErrorAction => ({
+  type: SET_ERROR,
+  payload: item,
+});
 
 interface IResetErrorAction {
   readonly type: typeof RESET_ERROR,
-}
-
-export const resetError = (): IResetErrorAction => {
-  return {
-    type: RESET_ERROR,
-  };
 };
+
+export const resetError = (): IResetErrorAction => ({
+  type: RESET_ERROR,
+});
 
 export type TErrorActions =
   ISetErrorAction

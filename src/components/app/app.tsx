@@ -29,7 +29,6 @@ import { Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/hooks';
 import { useAppSelector } from '../../hooks/hooks';
 import AppStyles from './app.module.css';
-import { AppDispatch } from '../../types/dispatch';
 
 function App() {
 
@@ -40,7 +39,7 @@ function App() {
 
   useEffect(() => {
       localStorage.getItem('accessToken') && dispatch(getUser() as any);
-      dispatch<any>(getData());
+      dispatch(getData() as any);
     }, []
   );
 
