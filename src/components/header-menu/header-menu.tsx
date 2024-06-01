@@ -17,7 +17,7 @@ function HeaderMenu() {
         </NavLink>
       </li>
       <li className={HeaderMenuStyles.menuItem}>
-        <NavLink to={'/ordeer-list'} className={HeaderMenuStyles.menuItem__link}>
+        <NavLink to={'/feed'} className={HeaderMenuStyles.menuItem__link}>
           {({isActive}) => (
             <>
               <ListIcon type={isActive ? 'primary' : 'secondary'} />

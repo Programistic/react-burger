@@ -36,7 +36,7 @@ function Profile() {
             </NavLink>
           </li>
           <li className={ProfileStyles.menuItem}>
-            <NavLink to='profile/user-orders' className={
+            <NavLink to='profile/orders' className={
               ({isActive}) => isActive ? `${ProfileStyles.menuItem__link} ${ProfileStyles.active}` : ProfileStyles.menuItem__link
               }>История заказов
             </NavLink>

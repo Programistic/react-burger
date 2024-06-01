@@ -18,7 +18,10 @@ import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
 import UserProfile from '../../pages/user-profile/user-profile';
-import UserOrders from '../../pages/user-orders/user-orders';
+import OrderFeed from '../../pages/order-feed/order-feed';
+import Order from '../../pages/order/order';
+import OrderHistory from '../../pages/order-history/order-history';
+import UserOrder from '../../pages/user-order/user-order';
 import NotFound from '../../pages/not-found/not-found';
 import Error from '../../pages/error/error';
 import ProtectedRoute from '../protected-route/protected-route';
@@ -86,6 +89,9 @@ function App() {
         <Route path='/ingredients' element={ <Ingredients /> }>
           <Route path=':id' element={<Ingredient />} />
         </Route>
+        <Route path='/feed' element={ <OrderFeed /> }>
+          <Route path=':number' element={ <Order /> } />
+        </Route>
         <Route path='/login' element={ <ProtectedRoute element={ <Login /> } isAuthAccess={true} /> } />
         <Route path='/register' element={ <ProtectedRoute element={ <Register /> } isAuthAccess={true} /> } />
         <Route path='/forgot-password' element={ <ProtectedRoute element={ <ForgotPassword /> } isAuthAccess={true} /> } />
@@ -98,7 +104,9 @@ function App() {
         } />
         <Route path='/profile' element={ <ProtectedRoute element={ <Profile /> } isAuthAccess={false} /> }>
           <Route path='/profile' element={ <UserProfile /> } />
-          <Route path='profile/user-orders' element={ <UserOrders /> } />
+          <Route path='profile/orders' element={ <OrderHistory /> } >
+            <Route path=':number' element={ <UserOrder /> } />
+          </Route>
         </Route>
         <Route path='*' element={ <NotFound /> } />
         <Route path='/error' element={ <Error errorStatus={errorStatus} /> } />
