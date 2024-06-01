@@ -1,13 +1,19 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url(./fonts/font-iceland.css);
+@import url(./fonts/font-jet-brains-mono.css);
+
+.page {
+  display: grid;
+  overflow: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.main {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+}
+
+.modal {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  place-self: center;
+  z-index: 1;
 }
