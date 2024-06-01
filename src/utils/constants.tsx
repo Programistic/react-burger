@@ -12,6 +12,9 @@ export const loginURL = `${authURL}/login`;
 export const logoutURL = `${authURL}/logout`;
 export const tokenURL = `${authURL}/token`;
 export const userURL = `${authURL}/user`;
+export const wsURL = `wss://norma.nomoreparties.space`;
+export const wsOrdersURL = `${wsURL}/orders`; //timeout 15s
+export const wsAllOrdersURL = `${wsOrdersURL}/all`;
 
 export const checkResponse = (res: Response) => {
   return res.ok ? res.json() : Promise.reject(res);
