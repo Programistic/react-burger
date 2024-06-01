@@ -1,4 +1,4 @@
-### One-page website "Burger"
+### Multipage website "Stellar-Burger"
 
 #### About
 It's my training project from Yandex.Praktikum.
@@ -11,7 +11,11 @@ It's my training project from Yandex.Praktikum.
 - Flex
 - Grid
 - JavaScript
+- Drag&Drop
 - React
+- Redux
+- TypeScript
+- WebSocket
 
 #### Website link
 - https://...
