@@ -5,7 +5,7 @@ import { updateUser } from "../../services/actions/actions";
 import { FormEvent } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
 import { useAppSelector } from "../../hooks/hooks";
-import UserProfileStyles from './user-profile.module.css';
+import styles from './user-profile.module.css';
 
 interface IUser {
   name: string,
@@ -45,13 +45,13 @@ function UserProfile() {
   };
 
   return (
-    <div className={UserProfileStyles.innerContainer}>
-      <form className={UserProfileStyles.form} name='profile-form' onSubmit={handleSubmit}>
+    <div className={styles.innerContainer}>
+      <form className={styles.form} name='profile-form' onSubmit={handleSubmit}>
         <Input placeholder="Имя" type="text" icon="EditIcon" value={state.name} onChange={event => setState({...state, name: event.target.value})} />
         <Input placeholder="Логин" type="text" icon="EditIcon" value={state.email} onChange={event => setState({...state, email: event.target.value})} />
         <Input placeholder="Пароль" type="password" icon="EditIcon" value={state.password} onChange={event => setState({...state, password: event.target.value})} />
         { visible.isVisible &&
-          <div className={UserProfileStyles.buttonContainer}>
+          <div className={styles.buttonContainer}>
             <Button  htmlType="button" type="secondary" size="medium" onClick={handleButtonCancelClick}>Отмена</Button>
             <Button htmlType="submit" type="primary" size="medium">Сохранить</Button>
           </div>

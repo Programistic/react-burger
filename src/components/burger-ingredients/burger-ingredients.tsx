@@ -1,7 +1,7 @@
 import TabContent from "../tab-content/tab-content";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import BurgerIngredientsStyles from './burger-ingredients.module.css';
+import styles from './burger-ingredients.module.css';
 
 function BurgerIngredients() {
 
@@ -12,8 +12,8 @@ function BurgerIngredients() {
   };
 
   return (
-    <section className={BurgerIngredientsStyles.ingredients}>
-      <div className={BurgerIngredientsStyles.menu}>
+    <section className={styles.ingredients}>
+      <div className={styles.menu}>
         <Tab value={'bun'} active={tab === 'bun'} onClick={handleClick}>
           Булки
         </Tab>

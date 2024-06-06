@@ -9,7 +9,7 @@ import { TIngredient } from "../../types/ingredient";
 import { FC } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
 import { useAppSelector } from "../../hooks/hooks";
-import BurgerConstructorStyles from './burger-constructor.module.css';
+import styles from './burger-constructor.module.css';
 
 interface IBurgerConstructorProps {
   onButtonMakeOrderClick: (item: string[]) => void,
@@ -89,21 +89,21 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onButtonMakeOrderClick
   };
 
   return (
-    <section className={BurgerConstructorStyles.outerContainer}>
-      <div className={BurgerConstructorStyles.container} style={{borderColor}} ref={dropTarget}>
+    <section className={styles.outerContainer}>
+      <div className={styles.container} style={{borderColor}} ref={dropTarget}>
         <div>
           { isBun && <ConstructorElement type={'top'} thumbnail={bun.image} text={bun.name + ' (верх)'} price={bun.price} isLocked={true} /> }
         </div>
-        <ul className={BurgerConstructorStyles.componentsList} >
+        <ul className={styles.componentsList} >
           {componentList}
         </ul>
         <div>
           { isBun && <ConstructorElement type={'bottom'} thumbnail={bun.image} text={bun.name + ' (низ)'} price={bun.price} isLocked={true} /> }
         </div>
       </div>
-      <div className={BurgerConstructorStyles.innerContainer}>
-        <span className={BurgerConstructorStyles.productPrice}>{totalCost}</span>
-        <div className={BurgerConstructorStyles.currencyIconLarge}></div>
+      <div className={styles.innerContainer}>
+        <span className={styles.productPrice}>{totalCost}</span>
+        <div className={styles.currencyIconLarge}></div>
         <Button htmlType={'button'} type={'primary'} size={'large'} disabled={!isBun} aria-label='Оформить заказ' onClick={handleClick}>
           Оформить заказ
         </Button>

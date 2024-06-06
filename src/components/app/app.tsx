@@ -1,6 +1,7 @@
 import AppHeader from '../app-header/app-header';
 import AppMain from '../app-main/app-main';
 import OrderDetails from '../order-details/order-details';
+import OrderInfo from '../order-info/order-info';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 import Preloader from '../preloader/preloader';
@@ -19,7 +20,7 @@ import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
 import UserProfile from '../../pages/user-profile/user-profile';
 import OrderFeed from '../../pages/order-feed/order-feed';
-import Order from '../../pages/order/order';
+import Orders from '../../pages/order/order';
 import OrderHistory from '../../pages/order-history/order-history';
 import UserOrder from '../../pages/user-order/user-order';
 import NotFound from '../../pages/not-found/not-found';
@@ -76,6 +77,11 @@ function App() {
     navigate('/');
   };
 
+  const handleCloseOrderInfoModal = () => {
+    dispatch({type: CLOSE_MODAL});
+    navigate('/profile/orders');
+  };
+
   return (
     <div className={AppStyles.page}>
       { isError && <Navigate to="/error" /> }
@@ -89,8 +95,9 @@ function App() {
         <Route path='/ingredients' element={ <Ingredients /> }>
           <Route path=':id' element={<Ingredient />} />
         </Route>
-        <Route path='/feed' element={ <OrderFeed /> }>
-          <Route path=':number' element={ <Order /> } />
+        <Route path='/feed' element={ <OrderFeed /> } />
+        <Route path='/feed' element={ <Orders /> }>
+          <Route path=':number' element={ <OrderInfo /> } />
         </Route>
         <Route path='/login' element={ <ProtectedRoute element={ <Login /> } isAuthAccess={true} /> } />
         <Route path='/register' element={ <ProtectedRoute element={ <Register /> } isAuthAccess={true} /> } />
@@ -104,19 +111,25 @@ function App() {
         } />
         <Route path='/profile' element={ <ProtectedRoute element={ <Profile /> } isAuthAccess={false} /> }>
           <Route path='/profile' element={ <UserProfile /> } />
-          <Route path='profile/orders' element={ <OrderHistory /> } >
-            <Route path=':number' element={ <UserOrder /> } />
+          <Route path='/profile/orders' element={ <OrderHistory /> } >
+            <Route path=':number' element={ <OrderInfo /> } />
           </Route>
         </Route>
         <Route path='*' element={ <NotFound /> } />
         <Route path='/error' element={ <Error errorStatus={errorStatus} /> } />
       </Routes>
 
-      { background &&  (
+      { background && (
         <Routes>
           <Route path='/ingredients/:id' element={
             <Modal closeModal={handleCloseModal}>
                <IngredientDetails />
+            </Modal>
+          }>
+          </Route>
+          <Route path='/profile/orders' element={
+            <Modal closeModal={handleCloseOrderInfoModal}> 
+               <OrderInfo />
             </Modal>
           }>
           </Route>

@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { FC } from 'react';
 import { TIngredient } from '../../types/ingredient';
 import { useAppSelector } from '../../hooks/hooks';
-import TabContentStyles from './tab-content.module.css';
+import styles from './tab-content.module.css';
 
 interface ITabContentProps {
   onSetTab: (item: string) => void,
@@ -66,27 +66,27 @@ const TabContent: FC<ITabContentProps> = ({ onSetTab }) => {
   );
 
   return (
-    <div className={TabContentStyles.content}>
+    <div className={styles.content}>
       <InView onChange={bunView => {setState({...state, isBunView: bunView})}} threshold={0.2}>
         <div>
-          <h2 className={TabContentStyles.title}>Булки</h2>
-          <ul className={TabContentStyles.cardList}>
+          <h2 className={styles.title}>Булки</h2>
+          <ul className={styles.cardList}>
             {cardListBun}
           </ul>
         </div>
       </InView>
       <InView onChange={sauceView => {setState({...state, isSauceView: sauceView})}} threshold={1}>
         <div>
-          <h2 className={TabContentStyles.title}>Соусы</h2>
-          <ul className={TabContentStyles.cardList}>
+          <h2 className={styles.title}>Соусы</h2>
+          <ul className={styles.cardList}>
             {cardListSauce}
           </ul>
         </div>
       </InView>
       <InView onChange={mainView => {setState({...state, isMainView: mainView})}} threshold={0.65}>
         <div>
-          <h2 className={TabContentStyles.title}>Начинки</h2>
-          <ul className={TabContentStyles.cardList}>
+          <h2 className={styles.title}>Начинки</h2>
+          <ul className={styles.cardList}>
             {cardListMain}
           </ul>
         </div>

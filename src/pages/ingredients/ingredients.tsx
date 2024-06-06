@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import InggredientsStyles from './ingredients.module.css';
+import styles from './ingredients.module.css';
 
 function Ingredients() {
 
   return(
-    <div className={InggredientsStyles.container}>
+    <div className={styles.container}>
       <Outlet />
     </div>
   );

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import { FC } from 'react';
-import ModalStyles from './modal.module.css';
+import styles from './modal.module.css';
 
 interface IModalProps {
   children: React.ReactNode,
@@ -33,9 +33,9 @@ const Modal: FC<IModalProps> = ({ children, closeModal }) => {
 
   return ReactDOM.createPortal(
     (
-      <div className={ModalStyles.modalContainer}>
+      <div className={styles.modalContainer}>
         <ModalOverlay closeModal={closeModal} />
-        <button type='button' className={ModalStyles.button} aria-label="Закрыть модальное окно" onClick={closeModal}>
+        <button type='button' className={styles.button} aria-label="Закрыть модальное окно" onClick={closeModal}>
           <CloseIcon type={'primary'} />
         </button>
         {children}

@@ -1,12 +1,13 @@
-import OrderStyles from './order.module.css';
+import { Outlet } from "react-router-dom";
+import styles from './order.module.css';
 
-function Order() {
+function Orders() {
 
   return (
-    <>
-      
-    </>
+    <div className={styles.container}>
+      <Outlet />
+    </div>
   )
 };
 
-export default Order;
+export default Orders;
