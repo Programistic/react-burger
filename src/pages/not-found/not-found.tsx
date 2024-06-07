@@ -1,6 +1,6 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate } from "react-router-dom";
-import NotFoundStyles from './not-found.module.css';
+import styles from './not-found.module.css';
 
 function NotFound() {
 
@@ -11,9 +11,9 @@ function NotFound() {
   };
 
   return (
-    <div className={NotFoundStyles.page}>
-      <h2 className={NotFoundStyles.title}>{'404'}</h2>
-      <p className={NotFoundStyles.text}>Страница не найдена</p>
+    <div className={styles.page}>
+      <h2 className={styles.title}>{'404'}</h2>
+      <p className={styles.text}>Страница не найдена</p>
       <Button  htmlType="button" type="secondary" size="medium" onClick={handleClick}>Назад</Button>
     </div>
   );

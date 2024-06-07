@@ -6,7 +6,7 @@ import { deleteIngredient } from "../../services/actions/constructor-ingredients
 import { FC } from "react";
 import { TIngredient } from "../../types/ingredient";
 import { useAppDispatch } from "../../hooks/hooks";
-import BurgerComponentStyles from './burger-component.module.css';
+import styles from './burger-component.module.css';
 
 interface IBurgerComponentProps {
   isLocked: boolean,
@@ -82,8 +82,8 @@ const BurgerComponent: FC<IBurgerComponentProps> = ({ isLocked, text, price, thu
   };
 
   return (
-    <li className={BurgerComponentStyles.componentsListItem} style={{opacity}} ref={componentRef}>
-      <button className={BurgerComponentStyles.buttonDragIcon} type='button'>
+    <li className={styles.componentsListItem} style={{opacity}} ref={componentRef}>
+      <button className={styles.buttonDragIcon} type='button'>
         <DragIcon type="primary" />
       </button>
       <ConstructorElement

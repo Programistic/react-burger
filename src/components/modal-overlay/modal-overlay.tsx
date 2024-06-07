@@ -1,5 +1,5 @@
-import ModalOverlayStyles from './modal-overlay.module.css';
 import { FC } from 'react';
+import styles from './modal-overlay.module.css';
 
 interface IModalProps {
   closeModal: () => void,
@@ -8,7 +8,7 @@ interface IModalProps {
 const ModalOverlay: FC<IModalProps> = ({ closeModal }) => {
 
   return(
-    <div className={ModalOverlayStyles.modalOverlay} onClick={closeModal} />
+    <div className={styles.modalOverlay} onClick={closeModal} />
   );
 }
 

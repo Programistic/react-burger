@@ -1,6 +1,6 @@
 import BurgerComponent from "../burger-component/burger-component";
 import { Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector, shallowEqual } from 'react-redux';
+import { shallowEqual } from 'react-redux';
 import { addBun, addIngredient, updateConstructor, saveOrder } from "../../services/actions/constructor-ingredients";
 import { incCounter } from "../../services/actions/all-ingredients";
 import { useDrop } from "react-dnd";

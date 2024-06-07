@@ -12,7 +12,7 @@ function Register() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(register(state, setState) as any);
+    dispatch(register(state, setState) as string & boolean);
   };
 
   const [state, setState] = useState({

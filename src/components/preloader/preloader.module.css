@@ -51,13 +51,13 @@
   z-index: 10;
 }
 
-.preloader__container {
+.preloaderContainer {
   width: 100px;
   height: 100px;
   position: relative;
 }
 
-.preloader__round {
+.preloaderRound {
   width: 100px;
   height: 100px;
   position: absolute;
@@ -68,8 +68,8 @@
   border-radius: 50px;
 }
 
-.preloader__round::after,
-.preloader__round::before {
+.preloaderRound::after,
+.preloaderRound::before {
   content: '';
   width: 100px;
   height: 100px;
@@ -79,12 +79,12 @@
   border-radius: 50px;
 }
 
-.preloader__round::after {
+.preloaderRound::after {
   background: white;
   animation: preloader-inside-white 1s ease-in-out infinite;
 }
 
-.preloader__round::before {
+.preloaderRound::before {
   z-index: 10;
   background: #4c4cff;
   animation: preloader-inside-red 1s ease-in-out infinite;

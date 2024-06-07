@@ -22,7 +22,6 @@ import UserProfile from '../../pages/user-profile/user-profile';
 import OrderFeed from '../../pages/order-feed/order-feed';
 import Orders from '../../pages/order/order';
 import OrderHistory from '../../pages/order-history/order-history';
-import UserOrder from '../../pages/user-order/user-order';
 import NotFound from '../../pages/not-found/not-found';
 import Error from '../../pages/error/error';
 import ProtectedRoute from '../protected-route/protected-route';

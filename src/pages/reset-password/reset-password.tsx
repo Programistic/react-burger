@@ -12,7 +12,7 @@ function ResetPassword() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(resetPassword(state, setState) as any);
+    dispatch(resetPassword(state, setState) as string & boolean);
   };
 
   const [state, setState] = useState({

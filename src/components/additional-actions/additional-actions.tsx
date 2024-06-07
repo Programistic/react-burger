@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
-import AdditonalActionsStyles from './additional-actions.module.css';
+import styles from './additional-actions.module.css';
 
 interface IAdditionalActionsProps {
   text: string,
@@ -10,9 +10,9 @@ interface IAdditionalActionsProps {
 
 const AdditionalActions: FC<IAdditionalActionsProps> = ({ text, link, linkText }) => {
   return (
-    <p className={AdditonalActionsStyles.container}>
+    <p className={styles.container}>
         {text}
-        <Link to={link} className={AdditonalActionsStyles.link}>
+        <Link to={link} className={styles.link}>
           {linkText}
         </Link>
     </p>

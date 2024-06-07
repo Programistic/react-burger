@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { resetError } from "../../services/actions/error";
 import { FC } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
-import ErrorPageStyles from './error.module.css';
+import styles from './error.module.css';
 
 interface IErrorStatusProps {
   errorStatus: number,
@@ -37,9 +37,9 @@ const Error: FC<IErrorStatusProps> = ({ errorStatus }) => {
   };
 
   return (
-    <div className={ErrorPageStyles.page}>
-      <h2 className={ErrorPageStyles.title}>{errorStatus}</h2>
-      <p className={ErrorPageStyles.text}>{handleError(errorStatus)}</p>
+    <div className={styles.page}>
+      <h2 className={styles.title}>{errorStatus}</h2>
+      <p className={styles.text}>{handleError(errorStatus)}</p>
       <Button  htmlType="button" type="secondary" size="medium" onClick={handleClick}>Назад</Button>
     </div>
   );
