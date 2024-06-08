@@ -3,18 +3,15 @@ import type { AppDispatch } from '../../types/dispatch';
 import type { RootState } from '../../types/state';
 import type { TWSActions } from '../actions/ws-actions';
 import {
-  wsOpen,
   wsSuccessOpen,
   wsError,
   wsClose,
   wsGetMessage,
-  wsSendMessage,
  } from '../actions/ws-actions';
 
 export const socketMiddleware = (wsUrl: string): Middleware => {
     return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
       let ws: WebSocket | null = null;
-
       return next => (action: TWSActions) => {
         const { dispatch } = store;
         const { type } = action;
