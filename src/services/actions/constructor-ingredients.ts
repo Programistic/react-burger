@@ -9,12 +9,12 @@ export const CONSTRUCTOR_SAVE_ORDER: 'CONSTRUCTOR/SAVE_ORDER' = 'CONSTRUCTOR/SAV
 export const CONSTRUCTOR_DELETE_ORDER: 'CONSTRUCTOR/DELETE_ORDER' = 'CONSTRUCTOR/DELETE_ORDER';
 
 interface IAddIngredientAction {
-  readonly type: typeof CONSTRUCTOR_ADD_INGREDIENT,
+  readonly type: typeof CONSTRUCTOR_ADD_INGREDIENT;
   payload: {
     item?: TIngredient,
     uniqueId: string,
-  }
-};
+  };
+}
 
 export const addIngredient = (item: TIngredient): IAddIngredientAction => ({
   type: CONSTRUCTOR_ADD_INGREDIENT,
@@ -25,9 +25,9 @@ export const addIngredient = (item: TIngredient): IAddIngredientAction => ({
 });
 
 interface IAddBunAction {
-  readonly type: typeof CONSTRUCTOR_ADD_BUN,
-  payload: TIngredient,
-};
+  readonly type: typeof CONSTRUCTOR_ADD_BUN;
+  payload: TIngredient;
+}
 
 export const addBun = (item: TIngredient): IAddBunAction => ({
   type: CONSTRUCTOR_ADD_BUN,
@@ -37,9 +37,9 @@ export const addBun = (item: TIngredient): IAddBunAction => ({
 });
 
 interface IUpdateConstructorAction {
-  readonly type: typeof CONSTRUCTOR_UPDATE,
-  payload: TIngredient[],
-};
+  readonly type: typeof CONSTRUCTOR_UPDATE;
+  payload: TIngredient[];
+}
 
 export const updateConstructor = (item: TIngredient[]): IUpdateConstructorAction => ({
   type: CONSTRUCTOR_UPDATE,
@@ -47,9 +47,9 @@ export const updateConstructor = (item: TIngredient[]): IUpdateConstructorAction
 });
 
 interface IDeleteIngredientAction {
-  readonly type: typeof CONSTRUCTOR_DELETE_INGREDIENT,
-  payload: string,
-};
+  readonly type: typeof CONSTRUCTOR_DELETE_INGREDIENT;
+  payload: string;
+}
 
 export const deleteIngredient = (item: string): IDeleteIngredientAction => ({
   type: CONSTRUCTOR_DELETE_INGREDIENT,
@@ -57,9 +57,9 @@ export const deleteIngredient = (item: string): IDeleteIngredientAction => ({
 });
 
 interface ISetOrderAction {
-  readonly type: typeof CONSTRUCTOR_SAVE_ORDER,
-  payload: string[],
-};
+  readonly type: typeof CONSTRUCTOR_SAVE_ORDER;
+  payload: string[];
+}
 
 export const saveOrder = (item: string[]): ISetOrderAction => ({
   type: CONSTRUCTOR_SAVE_ORDER,
@@ -67,8 +67,8 @@ export const saveOrder = (item: string[]): ISetOrderAction => ({
 });
 
 interface IDeleteOrderAction {
-  readonly type: typeof CONSTRUCTOR_DELETE_ORDER,
-};
+  readonly type: typeof CONSTRUCTOR_DELETE_ORDER;
+}
 
 export const deleteOrder = (): IDeleteOrderAction => ({
   type: CONSTRUCTOR_DELETE_ORDER,

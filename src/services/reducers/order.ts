@@ -13,7 +13,7 @@ type TOrderState = {
   error: string,
 }
 
-const initData: TOrderState = {
+const initialState: TOrderState = {
   isSuccess: false,
   isLoading: false,
   isError: false,
@@ -21,7 +21,7 @@ const initData: TOrderState = {
   error: '',
 };
 
-export const orderReducer = (state = initData, action: TOrderActions): TOrderState => {
+export const orderReducer = (state = initialState, action: TOrderActions): TOrderState => {
   switch (action.type) {
     case SET_ORDER_REQUEST: {
       return {

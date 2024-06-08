@@ -6,6 +6,7 @@ import { constructorReducer } from "./constructor-ingredients";
 import { errorReducer } from "./error";
 import { userReducer } from "./user";
 import { flagReducer } from "./flag";
+import { wsReducer } from "./ws-reducer";
 
 export const rootReducer = combineReducers({
   data: dataReducer,
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers({
   error: errorReducer,
   user: userReducer,
   flag: flagReducer,
+  ws: wsReducer,
 });

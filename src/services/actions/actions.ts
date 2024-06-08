@@ -16,7 +16,7 @@ import {
   tokenURL,
   logoutURL,
   userURL
-} from "../../utils/constants";
+} from "../../utils/api-constants";
 import { TUserFields } from "../../types/user";
 import { TLogin } from "../../types/login";
 import { TLogout } from "../../types/logout";

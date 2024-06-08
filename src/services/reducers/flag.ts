@@ -11,12 +11,12 @@ type TFlagState = {
   isPasswordResetRequest: boolean,
 }
 
-const initData: TFlagState = {
+const initialState: TFlagState = {
   loggedIn: false,
   isPasswordResetRequest: false,
 };
 
-export const flagReducer = (state = initData, action: TFlagActions): TFlagState => {
+export const flagReducer = (state = initialState, action: TFlagActions): TFlagState => {
   switch (action.type) {
     case SET_LOGGED_IN: {
       return {

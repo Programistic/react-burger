@@ -4,9 +4,9 @@ export const SET_USER: 'SET_USER' = 'SET_USER';
 export const RESET_USER: 'RESET_USER' = 'RESET_USER';
 
 interface ISetUserAction {
-  readonly type: typeof SET_USER,
-  payload: TUser,
-};
+  readonly type: typeof SET_USER;
+  payload: TUser;
+}
 
 export const setUser = (item: TUser): ISetUserAction => ({
   type: SET_USER,
@@ -14,8 +14,8 @@ export const setUser = (item: TUser): ISetUserAction => ({
 });
 
 interface IResetUserAction {
-  readonly type: typeof RESET_USER,
-};
+  readonly type: typeof RESET_USER;
+}
 
 export const resetUser = (): IResetUserAction => ({
   type: RESET_USER,

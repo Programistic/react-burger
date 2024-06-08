@@ -6,12 +6,12 @@ type TErrorState = {
   error: number,
 }
 
-const initData: TErrorState = {
+const initialState: TErrorState = {
   isError: false,
   error: 400,
 };
 
-export const errorReducer = (state = initData, action: TErrorActions): TErrorState => {
+export const errorReducer = (state = initialState, action: TErrorActions): TErrorState => {
   switch (action.type) {
     case SET_ERROR: {
       return {

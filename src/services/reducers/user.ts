@@ -1,18 +1,18 @@
 import { SET_USER, RESET_USER } from "../actions/user";
 import { TUserActions } from "../actions/user";
-import { TUser, TUserFields } from "../../types/user";
+import { TUser } from "../../types/user";
 
 type TUserState = {
   isSuccess: boolean,
   user: TUser,
 }
 
-const initData: TUserState = {
+const initialState: TUserState = {
   isSuccess: false,
   user: {},
 };
 
-export const userReducer = (state = initData, action: TUserActions): TUserState => {
+export const userReducer = (state = initialState, action: TUserActions): TUserState => {
   switch (action.type) {
     case SET_USER: {
       return {
