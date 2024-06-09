@@ -1,11 +1,21 @@
-export interface IMessageResponse {
-  message: string;
+export interface IMessage {
   success: boolean;
-
-  id?: string;
-  isBot?: boolean;
+  orders: [
+    {
+      _id?: string | undefined,
+      ingredients: string[],
+      status: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      number: number,
+    }
+  ];
+  total: number;
+  totalToday: number;
 }
 
-export interface IMessage extends Omit<IMessageResponse, 'success'> {
-  timestamp: number;
+export interface ISendMessage {
+  message: string;
+  success: boolean;
 }

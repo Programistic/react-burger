@@ -1,4 +1,4 @@
-import { IMessage } from "../../types/ws";
+import { IMessage, ISendMessage } from "../../types/ws";
 
 export const WS_CONNECTION_START: 'WS_CONNECTION_START' = 'WS_CONNECTION_START';
 export const WS_CONNECTION_SUCCESS: 'WS_CONNECTION_SUCCESS' = 'WS_CONNECTION_SUCCESS';
@@ -9,10 +9,12 @@ export const WS_SEND_MESSAGE: 'WS_SEND_MESSAGE' = 'WS_SEND_MESSAGE';
 
 export interface IWSConnectionStart {
   readonly type: typeof WS_CONNECTION_START;
+  payload: string;
 }
 
-export const wsOpen = (): IWSConnectionStart => ({
+export const wsInit = (url: string): IWSConnectionStart => ({
   type: WS_CONNECTION_START,
+  payload: url,
 });
 
 export interface IWSConnectionSuccessAction {
@@ -20,7 +22,7 @@ export interface IWSConnectionSuccessAction {
   payload: Event,
 }
 
-export const wsSuccessOpen = (item: Event): IWSConnectionSuccessAction => ({
+export const wsOpen = (item: Event): IWSConnectionSuccessAction => ({
   type: WS_CONNECTION_SUCCESS,
   payload: item,
 })
@@ -37,12 +39,10 @@ export const wsError = (item: Event): IWSConnectionErrorAction => ({
 
 export interface IWSConnectionClosedAction {
   readonly type: typeof WS_CONNECTION_CLOSED;
-  payload: Event,
 }
 
-export const wsClose = (item: Event): IWSConnectionClosedAction => ({
+export const wsClose = (): IWSConnectionClosedAction => ({
   type: WS_CONNECTION_CLOSED,
-  payload: item,
 });
 
 export interface IWSGetMessageAction {
@@ -60,7 +60,7 @@ export interface IWSSendMessageAction {
   readonly payload: { message: string };
 }
 
-export const wsSendMessage = (item: IMessage): IWSSendMessageAction => ({
+export const wsSendMessage = (item: ISendMessage): IWSSendMessageAction => ({
   type: WS_SEND_MESSAGE,
   payload: item,
 });

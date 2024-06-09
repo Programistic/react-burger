@@ -14,15 +14,20 @@ const IngredientPreview: FC<IIngredientPreviewProps> = ({ id, index, count }) =>
 
   const { ingredients } = useAppSelector(store => ({ingredients: store.data.data}), shallowEqual);
   const ingredient = ingredients.find((item: TIngredient) => item._id === id);
-  const isCountVisible = index > 5;
+  const isVisible = ingredient !== undefined;
+  const isCountVisible = index > 4;
 
   return (
     <li className={styles.ingredient} style={{'--position': (-index)} as string & number}>
-      <img src={ingredient.image} className={styles.image} alt={ingredient.name}></img>
-      { isCountVisible &&
+      {isVisible &&
         <>
-          <span className={styles.count}>{`+${count-index}`}</span>
-          <div className={styles.overlay}></div>
+          <img src={ingredient.image} className={styles.image} alt={ingredient.name}></img>
+          { isCountVisible &&
+            <>
+              <span className={styles.count}>{`+${count-index+1}`}</span>
+              <div className={styles.overlay}></div>
+            </>
+          }
         </>
       }
     </li>

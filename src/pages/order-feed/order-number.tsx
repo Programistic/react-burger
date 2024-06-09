@@ -8,16 +8,14 @@ interface OrderNumberProps {
 
 const OrderNumber: FC<OrderNumberProps> = ({ orderNumber, orderStatus }) => {
 
-  let orderStatusColor;
+  let statusColor = 'f2f2f3';
 
-  if (orderStatus === 'В работе') {
-    orderStatusColor = '#f2f2f3'
-  } else if (orderStatus === 'Готов') {
-    orderStatusColor = '#00cccc';
+  if (orderStatus === ('done' || 'created')) {
+    statusColor = '#00cccc';
   };
 
   return (
-    <span className={styles.orderNumber} style={{'--color': orderStatusColor} as string & number}>{orderNumber}</span>
+    <span className={styles.orderNumber} style={{'--color': statusColor} as string & number}>{orderNumber}</span>
   )
 };
 

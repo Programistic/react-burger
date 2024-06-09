@@ -31,8 +31,6 @@ import { Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/hooks';
 import { useAppSelector } from '../../hooks/hooks';
-import { WS_CONNECTION_START } from '../../services/actions/ws-actions';
-import { wsOpen } from '../../services/actions/ws-actions';
 import AppStyles from './app.module.css';
 
 
@@ -46,8 +44,7 @@ function App() {
   useEffect(() => {
       localStorage.getItem('accessToken') && dispatch(getUser() as any);
       dispatch(getData() as any);
-      dispatch(wsOpen());
-    }, [dispatch]
+    }, []
   );
 
   const {
@@ -130,7 +127,13 @@ function App() {
             </Modal>
           }>
           </Route>
-          <Route path='/profile/orders' element={
+          <Route path='profile/orders:number' element={
+            <Modal closeModal={handleCloseOrderInfoModal}> 
+               <OrderInfo />
+            </Modal>
+          }>
+          </Route>
+          <Route path='feed/:number' element={
             <Modal closeModal={handleCloseOrderInfoModal}> 
                <OrderInfo />
             </Modal>

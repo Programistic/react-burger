@@ -67,9 +67,17 @@
 }
 
 .orderNumberList {
-  block-size: 12.88rem;
-  margin-block-start: 1.5rem;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 9rem;
+  max-inline-size: 12rem;
+  max-block-size: 24rem;
+  margin: 1.5rem 0 0;
+  box-sizing: border-box;
+  padding: 0 7.2rem .5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .quantityHeading {

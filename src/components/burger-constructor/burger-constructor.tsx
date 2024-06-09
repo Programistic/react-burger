@@ -21,7 +21,6 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onButtonMakeOrderClick
   const { ingredientsArr } = useAppSelector((store) => ({ingredientsArr: store.data.data}), shallowEqual);
   const { loggedIn } = useAppSelector((store) => ({ loggedIn: store.flag.loggedIn }), shallowEqual);
   const navigate = useNavigate();
-
   const dispatch = useAppDispatch();
 
   const [{isHover}, dropTarget] = useDrop({
