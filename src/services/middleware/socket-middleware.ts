@@ -39,7 +39,7 @@ export const socketMiddleware = (): Middleware => {
               updateAccessToken()
                 .then(checkResponse)
                 .then(res => {
-                  //localStorage.setItem('accessToken', res.accessToken);               
+                  localStorage.setItem('accessToken', res.accessToken);               
                   const wsUrl = new URL(url);
                   wsUrl.searchParams.set(
                     'token',

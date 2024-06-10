@@ -5,11 +5,15 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { useAppSelector } from '../../hooks/hooks';
 import { shallowEqual } from 'react-redux';
 import { wsInit, wsClose } from '../../services/actions/ws-actions';
+import { useLocation } from 'react-router-dom';
 import Preloader from '../../components/preloader/preloader';
 import { wsAllOrderUrl } from '../../utils/ws-constants';
 import styles from './order-feed.module.css';
 
 function OrderFeed() {
+
+  const location = useLocation();
+  const path = location.pathname;
 
   const dispatch = useAppDispatch();
 
@@ -35,11 +39,8 @@ function OrderFeed() {
       return (
         <CardOrder
           key={order._id}
-          orderNumber={'#' + String(order.number)}
-          orderDate={order.createdAt}
-          orderName={order.name}
-          orderStatus={'none'}
-          ingredientsId={order.ingredients}
+          order={order}
+          path={path}
         />
       )
     });

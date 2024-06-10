@@ -2,12 +2,16 @@ import CardOrder from '../../components/card-order/card-order';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { shallowEqual } from 'react-redux';
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { wsInit, wsClose } from '../../services/actions/ws-actions';
 import { wsOrderUrl } from '../../utils/ws-constants';
 import Preloader from '../../components/preloader/preloader';
 import styles from './order-history.module.css';
 
 function OrderHistory() {
+
+  const location = useLocation();
+  const path = location.pathname;
 
   const dispatch = useAppDispatch();
   const accessToken = localStorage.getItem('accessToken');
@@ -38,11 +42,8 @@ function OrderHistory() {
       return (
         <CardOrder
           key={order._id}
-          orderNumber={'#' + String(order.number)}
-          orderDate={order.createdAt}
-          orderName={order.name}
-          orderStatus={order.status}
-          ingredientsId={order.ingredients}
+          order={order}
+          path={path}
         />
       )
     }).reverse();

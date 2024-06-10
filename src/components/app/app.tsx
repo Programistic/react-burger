@@ -12,7 +12,6 @@ import { OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
 import { deleteOrder } from '../../services/actions/constructor-ingredients';
 import { resetCounter } from '../../services/actions/all-ingredients';
 import Ingredients from '../../pages/ingredients/ingredients';
-import Ingredient from '../../pages/ingredient/ingredient';
 import Login from '../../pages/login/login';
 import Register from '../../pages/register/register';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
@@ -20,7 +19,6 @@ import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
 import UserProfile from '../../pages/user-profile/user-profile';
 import OrderFeed from '../../pages/order-feed/order-feed';
-import Orders from '../../pages/order/order';
 import OrderHistory from '../../pages/order-history/order-history';
 import NotFound from '../../pages/not-found/not-found';
 import Error from '../../pages/error/error';
@@ -67,17 +65,17 @@ function App() {
   };
 
   const handleCloseModal = () => {
+    dispatch({type: CLOSE_MODAL});
+    navigate(-1);
+  };
+
+  const handleCloseOrderModal = () => {
     if (isOrderSuccess) {
       dispatch(deleteOrder());
       dispatch(resetCounter());
     };
     dispatch({type: CLOSE_MODAL});
     navigate('/');
-  };
-
-  const handleCloseOrderInfoModal = () => {
-    dispatch({type: CLOSE_MODAL});
-    navigate('/profile/orders');
   };
 
   return (
@@ -91,11 +89,11 @@ function App() {
             : <Preloader />
           } />
         <Route path='/ingredients' element={ <Ingredients /> }>
-          <Route path=':id' element={<Ingredient />} />
+          <Route path=':id' element={<OrderInfo />} />
         </Route>
         <Route path='/feed' element={ <OrderFeed /> } />
-        <Route path='/feed' element={ <Orders /> }>
-          <Route path=':number' element={ <OrderInfo /> } />
+        <Route path='/feed' element={ <Ingredients /> }>
+          <Route path=':id' element={ <OrderInfo /> } />
         </Route>
         <Route path='/login' element={ <ProtectedRoute element={ <Login /> } isAuthAccess={true} /> } />
         <Route path='/register' element={ <ProtectedRoute element={ <Register /> } isAuthAccess={true} /> } />
@@ -110,7 +108,7 @@ function App() {
         <Route path='/profile' element={ <ProtectedRoute element={ <Profile /> } isAuthAccess={false} /> }>
           <Route path='/profile' element={ <UserProfile /> } />
           <Route path='/profile/orders' element={ <OrderHistory /> } >
-            <Route path=':number' element={ <OrderInfo /> } />
+            <Route path=':id' element={ <OrderInfo /> } />
           </Route>
         </Route>
         <Route path='*' element={ <NotFound /> } />
@@ -125,14 +123,14 @@ function App() {
             </Modal>
           }>
           </Route>
-          <Route path='profile/orders:number' element={
-            <Modal closeModal={handleCloseOrderInfoModal}> 
+          <Route path='/profile/orders/:id' element={
+            <Modal closeModal={handleCloseModal}> 
                <OrderInfo />
             </Modal>
           }>
           </Route>
-          <Route path='feed/:number' element={
-            <Modal closeModal={handleCloseOrderInfoModal}> 
+          <Route path='/feed/:id' element={
+            <Modal closeModal={handleCloseModal}> 
                <OrderInfo />
             </Modal>
           }>
@@ -142,8 +140,8 @@ function App() {
       }
 
       { isModalVisible && isOrderDetailsVisible &&
-        <Modal closeModal={handleCloseModal}>
-          <OrderDetails onOrderDetailsOkButtonClick={handleCloseModal} />
+        <Modal closeModal={handleCloseOrderModal}>
+          <OrderDetails onOrderDetailsOkButtonClick={handleCloseOrderModal} />
         </Modal>
       }
     </div>

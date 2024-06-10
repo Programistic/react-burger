@@ -6,57 +6,55 @@ import { useAppSelector } from '../../hooks/hooks';
 import { shallowEqual } from 'react-redux';
 import { TIngredient } from '../../types/ingredient';
 import uuid from 'react-uuid';
+import { TOrder } from '../../types/order';
 import styles from './card-order.module.css';
 
 interface ICardOrderProps {
-  orderNumber: string;
-  orderDate: string;
-  orderName: string;
-  orderStatus: string;
-  ingredientsId: string[];
+  order: TOrder;
+  path: string;
 }
 
-const CardOrder: FC<ICardOrderProps> = ({orderNumber, orderDate, orderName, orderStatus, ingredientsId}) => {
-  
-  const location = useLocation();
+const CardOrder: FC<ICardOrderProps> = ({ order, path }) => {
 
-  const { ingredients } = useAppSelector(store => ({ingredients: store.data.data}), shallowEqual);
+  const {_id, name, ingredients, status, number, createdAt} = {...order};
+  const orderNumber = '#' + String(number)
+  const location = useLocation();
+  const { ingredientsArr } = useAppSelector(store => ({ingredientsArr: store.data.data}), shallowEqual);
 
   let totalCost = 0;
 
-  ingredientsId.forEach(id => {
-    const ingredient = ingredients.find((item: TIngredient) => item._id === id);
+  ingredients.forEach(id => {
+    const ingredient = ingredientsArr.find((item: TIngredient) => item._id === id);
     if (ingredient) {
       totalCost = totalCost + ingredient.price;
     };
   });
 
-
   let statusColor = 'f2f2f3';
-  let status;
+  let statusOrder;
 
-  if (orderStatus === ('done' || 'created')) {
+  if (status === ('done' || 'created')) {
     statusColor = '#00cccc';
-    status = 'Готов';
-  } else if (orderStatus === 'pending') {
-    status = 'Готовится';
-  } else if (orderStatus === 'none') {
-    status = '';
+    statusOrder = 'Готов';
+  } else if (status === 'pending') {
+    statusOrder = 'Готовится';
+  } else if (status === 'none') {
+    statusOrder = '';
   } else {
     statusColor = '#e52b1a';
-    status = 'Отменён';
+    statusOrder = 'Отменён';
   };
 
   let index = 0;
 
-  const ingredientPreviewList = ingredientsId.map(id => {
+  const ingredientPreviewList = ingredients.map(id => {
     if (index < 6) {
       return (
         <IngredientPreview
           id={id}
           key={uuid()}
           index={index++}
-          count={ingredientsId.length-1}
+          count={ingredients.length-1}
         />
       )
     };
@@ -64,14 +62,14 @@ const CardOrder: FC<ICardOrderProps> = ({orderNumber, orderDate, orderName, orde
   });
 
   return (
-    <Link to={`/profile/orders/`} key={orderNumber} state={{background: location}} className={styles.orderLink}>
+    <Link to={`${path}/:${_id}`} key={_id} state={{background: location}} className={styles.orderLink}>
       <li className={styles.card}>
         <div className={styles.innerContainer}>
           <span className={styles.orderNumber}>{orderNumber}</span>
-          <FormattedDate date={new Date(orderDate)} className={styles.orderDate} />
+          <FormattedDate date={new Date(createdAt)} className={styles.orderDate} />
         </div>
-        <h2 className={styles.orderName}>{orderName}</h2>
-        <span className={styles.orderStatus} style={{'--color': statusColor} as string & number}>{status}</span>
+        <h2 className={styles.orderName}>{name}</h2>
+        <span className={styles.orderStatus} style={{'--color': statusColor} as string & number}>{statusOrder}</span>
         <div className={styles.innerContainer}>
           <ul className={styles.ingredientsList}>
             {ingredientPreviewList}
