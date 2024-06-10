@@ -13,7 +13,7 @@ function ForgotPassword() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(recoverPassword(state, setState) as any);
+    dispatch(recoverPassword(state, setState) as string & boolean);
   };
 
   const [state, setState] = useState({

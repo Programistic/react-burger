@@ -5,7 +5,7 @@ import OrderInfo from '../order-info/order-info';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 import Preloader from '../preloader/preloader';
-import { getData, getUser, setOrder } from '../../services/actions/actions';
+import { getData, getUser } from '../../services/actions/actions';
 import { useEffect } from 'react';
 import { shallowEqual } from 'react-redux';
 import { OPEN_ORDER_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
@@ -42,10 +42,9 @@ function App() {
   const background = location.state && location.state.background;
 
   useEffect(() => {
-      localStorage.getItem('accessToken') && dispatch(getUser() as any);
-      dispatch(getData() as any);
-    }, []
-  );
+    localStorage.getItem('accessToken') && dispatch(getUser() as any);
+    dispatch(getData() as any);
+  }, [dispatch]);
 
   const {
     isSuccess,
@@ -63,8 +62,7 @@ function App() {
     isOrderDetailsVisible: store.modal.isOrderDetailsVisible,
   }), shallowEqual);
 
-  const handleButtonMakeOrderClick = (idArray: string[]) => {
-    dispatch(setOrder(idArray) as any);
+  const handleButtonMakeOrderClick = () => {
     dispatch({type: OPEN_ORDER_MODAL});
   };
 

@@ -8,8 +8,8 @@ import { useAppSelector } from '../../hooks/hooks';
 import styles from './tab-content.module.css';
 
 interface ITabContentProps {
-  onSetTab: (item: string) => void,
-};
+  onSetTab: (item: string) => void;
+}
 
 const TabContent: FC<ITabContentProps> = ({ onSetTab }) => {
 

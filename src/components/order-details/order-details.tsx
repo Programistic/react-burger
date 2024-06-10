@@ -4,8 +4,8 @@ import { useAppSelector } from "../../hooks/hooks";
 import styles from './order-details.module.css';
 
 interface IOrderDetailsProps {
-  onOrderDetailsOkButtonClick: () => void,
-};
+  onOrderDetailsOkButtonClick: () => void;
+}
 
 const OrderDetails: FC<IOrderDetailsProps> = ({ onOrderDetailsOkButtonClick }) => {
 

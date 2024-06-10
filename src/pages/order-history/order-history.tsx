@@ -1,13 +1,56 @@
 import CardOrder from '../../components/card-order/card-order';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { shallowEqual } from 'react-redux';
+import { useEffect } from 'react';
+import { wsInit, wsClose } from '../../services/actions/ws-actions';
+import { wsOrderUrl } from '../../utils/ws-constants';
+import Preloader from '../../components/preloader/preloader';
 import styles from './order-history.module.css';
 
 function OrderHistory() {
 
+  const dispatch = useAppDispatch();
+  const accessToken = localStorage.getItem('accessToken');
+  
+  useEffect(()=> {
+    const wsUrl = new URL(wsOrderUrl);
+    if (accessToken) {
+      wsUrl.searchParams.set(
+        'token',
+        accessToken.replace('Bearer ', '')
+      );
+      dispatch(wsInit(wsUrl.toString()));
+    };
+    return () => {
+      dispatch(wsClose());
+    };
+  }, [dispatch, accessToken]);
+
+  const { messages } = useAppSelector((store) => ({messages: store.ws.messages}), shallowEqual);
+  const message = messages[messages.length-1];
+
+  let isVisible = false;
+  let cardOrderList;
+
+  if (message !== undefined && message.orders !== undefined) {
+    isVisible = true;
+    cardOrderList = message.orders.map(order => {
+      return (
+        <CardOrder
+          key={order._id}
+          orderNumber={'#' + String(order.number)}
+          orderDate={order.createdAt}
+          orderName={order.name}
+          orderStatus={order.status}
+          ingredientsId={order.ingredients}
+        />
+      )
+    }).reverse();
+  };
+
   return (
     <ul className={styles.cardsOrderList}>
-      <CardOrder orderNumber='#034535' orderDate='2024-06-02T18:33:32.877Z' orderName='Death Star Starship Main бургер' orderStatus='Создан' ingredientsId={[]} />
-      <CardOrder orderNumber='#034537' orderDate='2024-06-03T13:33:32.877Z' orderName='Death Star Starship Main бургер' orderStatus='Готовится' ingredientsId={[]} />
-      <CardOrder orderNumber='#034543' orderDate='2024-06-04T17:33:32.877Z' orderName='Death Star Starship Main бургер' orderStatus='Отменён' ingredientsId={[]} />
+      {isVisible ? cardOrderList : <Preloader />}
     </ul>
   )
 };

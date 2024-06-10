@@ -6,7 +6,7 @@ import { TIngredient } from '../../types/ingredient';
 import styles from './card.module.css';
 
 type TCardProps = {
-  card: TIngredient,
+  card: TIngredient;
 };
 
 const Card = ({ card }: TCardProps) => {

@@ -25,6 +25,7 @@ import { TRegister } from "../../types/register";
 import { AppDispatch } from "../../types/dispatch";
 import { Dispatch } from "react";
 import { SetStateAction } from "react";
+import { updateTokenOptions } from "../../utils/api-constants";
 
 // Запрос на регистрацию нового пользователя
 export function register(state: TRegister, setState: Dispatch<SetStateAction<TRegister>>) {
@@ -136,15 +137,6 @@ export function updateUser(state: TUserFields, setState: Dispatch<SetStateAction
 
 // Запрос на обновление токена
 export function updateToken(typeRequest: string, state: TUserFields, setState: Dispatch<SetStateAction<TUserFields>>) {
-  const updateTokenOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      'token': localStorage.getItem('refreshToken'),
-    })
-  }
   return async function (dispatch: AppDispatch) {
     return fetch(tokenURL, updateTokenOptions)
       .then(checkResponse)
@@ -219,6 +211,7 @@ export function setOrder(idArray: string[]) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: localStorage.getItem('accessToken') as string,
     },
     body: JSON.stringify({
       "ingredients": idArray,

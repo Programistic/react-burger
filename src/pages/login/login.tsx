@@ -9,20 +9,14 @@ import { useAppDispatch } from "../../hooks/hooks";
 
 function Login() {
 
-  interface ILogin {
-    email: string,
-    password: string,
-    isSuccess: boolean,
-  };
-
   const dispatch = useAppDispatch();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(login(state, setState) as any);
+    dispatch(login(state, setState) as string & boolean);
   };
 
-  const [state, setState] = useState<ILogin>({
+  const [state, setState] = useState({
     email: '',
     password: '',
     isSuccess: false,

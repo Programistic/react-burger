@@ -5,10 +5,10 @@ import { FC } from 'react';
 import styles from './ingredient-preview.module.css';
 
 interface IIngredientPreviewProps {
-  id: string,
-  index: number,
-  count: number,
-};
+  id: string;
+  index: number;
+  count: number;
+}
 
 const IngredientPreview: FC<IIngredientPreviewProps> = ({ id, index, count }) => {
 

@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/hooks';
 import { FC } from 'react';
 
 interface IProtectedResetPasswordRouteProps {
-  element: JSX.Element,
+  element: JSX.Element;
 }
 
 const ProtectedResetPasswordRoute: FC<IProtectedResetPasswordRouteProps> = ({ element }) => {

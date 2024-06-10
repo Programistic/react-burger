@@ -6,13 +6,13 @@ import { FC } from 'react';
 import styles from './modal.module.css';
 
 interface IModalProps {
-  children: React.ReactNode,
-  closeModal: () => void,
+  children: React.ReactNode;
+  closeModal: () => void;
 }
 
 type TEvent = {
-  key: string,
-}
+  key: string;
+};
 
 const Modal: FC<IModalProps> = ({ children, closeModal }) => {
 

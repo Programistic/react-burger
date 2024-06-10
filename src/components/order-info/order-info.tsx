@@ -1,5 +1,3 @@
-import { shallowEqual } from "react-redux";
-import { useAppSelector } from "../../hooks/hooks";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientInfo from "./ingredient-info";
 import styles from './order-info.module.css';

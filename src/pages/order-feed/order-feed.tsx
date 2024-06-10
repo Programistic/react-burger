@@ -22,7 +22,7 @@ function OrderFeed() {
 
   const { messages } = useAppSelector((store) => ({messages: store.ws.messages}), shallowEqual);
 
-  const message = messages[messages.length-1];
+  const message = messages[0];
 
   let isVisible = false;
   let cardOrderList;

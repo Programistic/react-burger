@@ -6,7 +6,7 @@ import { FC } from "react";
 import styles from './app-main.module.css';
 
 interface IAppMainProps {
-  onButtonMakeOrderClick: (item: string[]) => void,
+  onButtonMakeOrderClick: () => void;
 }
 
 const AppMain: FC<IAppMainProps> = ({ onButtonMakeOrderClick }) => {

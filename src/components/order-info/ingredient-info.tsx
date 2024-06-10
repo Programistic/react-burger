@@ -6,8 +6,8 @@ import { FC } from 'react';
 import styles from './order-info.module.css'
 
 interface IIngredientInfoProps {
-  id: string,
-};
+  id: string;
+}
 
 const IngredientInfo: FC<IIngredientInfoProps> = ({ id }) => {
 

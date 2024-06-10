@@ -3,10 +3,10 @@ import { FormEvent } from 'react';
 import styles from './user-window-wrapper.module.css';
 
 interface IUserWindowWrapperProps {
-  children: React.ReactNode,
-  title: string,
-  formName: string,
-  onSubmit: (event: FormEvent) => void,
+  children: React.ReactNode;
+  title: string;
+  formName: string;
+  onSubmit: (event: FormEvent) => void;
 }
 
 const UserWindowWrapper: FC<IUserWindowWrapperProps> = ({ children, title, formName, onSubmit }) => {

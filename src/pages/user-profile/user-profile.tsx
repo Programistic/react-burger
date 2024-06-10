@@ -7,12 +7,6 @@ import { useAppDispatch } from "../../hooks/hooks";
 import { useAppSelector } from "../../hooks/hooks";
 import styles from './user-profile.module.css';
 
-interface IUser {
-  name: string,
-  email: string,
-  password: string,
-}
-
 function UserProfile() {
 
   const dispatch = useAppDispatch();
@@ -21,10 +15,10 @@ function UserProfile() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(updateUser(state, setState) as any);
+    dispatch(updateUser(state, setState) as string & boolean);
   };
 
-  const [state, setState] = useState<IUser>({
+  const [state, setState] = useState({
     name: user.name,
     email: user.email,
     password: '',

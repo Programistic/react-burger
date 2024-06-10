@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../hooks/hooks";
 import styles from './error.module.css';
 
 interface IErrorStatusProps {
-  errorStatus: number,
+  errorStatus: number;
 }
 
 const Error: FC<IErrorStatusProps> = ({ errorStatus }) => {

@@ -9,6 +9,17 @@ export const loginURL = `${authURL}/login`;
 export const logoutURL = `${authURL}/logout`;
 export const tokenURL = `${authURL}/token`;
 export const userURL = `${authURL}/user`;
-export const wsURL = `wss://norma.nomoreparties.space`;
-export const wsOrdersURL = `${wsURL}/orders`; //timeout 15s
-export const wsAllOrdersURL = `${wsOrdersURL}/all`;
+
+export const updateTokenOptions = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    'token': localStorage.getItem('refreshToken'),
+  })
+};
+
+export const updateAccessToken = () => {
+  return fetch(tokenURL, updateTokenOptions);
+};

@@ -9,22 +9,22 @@ import { useAppDispatch } from "../../hooks/hooks";
 import styles from './burger-component.module.css';
 
 interface IBurgerComponentProps {
-  isLocked: boolean,
-  text: string,
-  price: number,
-  image: string,
-  thumbnail: string,
-  uniqueId: string,
-  id: string,
-  index: number,
-  ingredients: TIngredient[],
-  onMove: (dragIndex: number, hoverIndex: number) => void,
+  isLocked: boolean;
+  text: string;
+  price: number;
+  image: string;
+  thumbnail: string;
+  uniqueId: string;
+  id: string;
+  index: number;
+  ingredients: TIngredient[];
+  onMove: (dragIndex: number, hoverIndex: number) => void;
 }
 
 type TDropItem = {
-  id: string,
-  index: number,
-}
+  id: string;
+  index: number;
+};
 
 const BurgerComponent: FC<IBurgerComponentProps> = ({ isLocked, text, price, thumbnail, uniqueId, id, index, ingredients, onMove }) => {
 
