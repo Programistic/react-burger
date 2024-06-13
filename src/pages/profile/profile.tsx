@@ -1,7 +1,7 @@
 import { shallowEqual } from "react-redux";
 import { useState } from "react";
 import { logout } from "../../services/actions/actions";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/hooks";
 import { useAppSelector } from "../../hooks/hooks";
@@ -23,6 +23,16 @@ function Profile() {
 
   const handleLinkClick = () => {
     dispatch(logout(state, setState) as string & boolean);
+  };
+
+  const params = useParams();
+
+  if (params?.number) {
+    return (
+      <div className={styles.outlet}>
+        <Outlet />
+      </div>
+    );
   };
 
   return (

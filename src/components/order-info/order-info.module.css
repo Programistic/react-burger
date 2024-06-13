@@ -1,3 +1,8 @@
+.container {
+  inline-size: 40rem;
+  block-size: 38.75rem;
+}
+
 .orderNumber {
   display: block;
   margin-block-end: 2.5rem;
@@ -27,7 +32,8 @@
 }
 
 .ingredientsList {
-  block-size: 19.5rem;
+  max-block-size: 19.5rem;
+  block-size: 100%;
   margin-block-end: 2.5rem;
   box-sizing: border-box;
   padding: 0 1.5rem 0 0;
@@ -36,7 +42,8 @@
 }
 
 .ingredientsListItem {
-  display: flex;
+  display: grid;
+  grid-template-columns: min-content 1fr max-content;
   margin-block-end: 1rem;
   align-items: center;
 }
@@ -82,7 +89,7 @@
 }
 
 .priceContainer {
-  margin-inline-start: 7rem;
+  margin-inline-start: 4rem;
   display: flex;
   align-items: center;
 }

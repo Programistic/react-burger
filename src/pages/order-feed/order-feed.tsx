@@ -25,7 +25,6 @@ function OrderFeed() {
   }, [dispatch]);
 
   const { messages } = useAppSelector((store) => ({messages: store.ws.messages}), shallowEqual);
-
   const message = messages[0];
 
   let isVisible = false;
@@ -71,9 +70,9 @@ function OrderFeed() {
   return (
     <section>
       <div className={styles.container}>
-        <h1 className={styles.title}>Лента заказов</h1>
         { isVisible ?
           <>
+            <h1 className={styles.title}>Лента заказов</h1>
             <ul className={styles.cardsOrderList}>
               {cardOrderList}
             </ul>

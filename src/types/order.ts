@@ -6,4 +6,5 @@ export type TOrder = {
   number: number | string;
   createdAt: string;
   updatedAt: string;
+  owner?: string;
 };

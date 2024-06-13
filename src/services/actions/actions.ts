@@ -1,5 +1,5 @@
 import { getDataRequest, getDataSuccess } from "./all-ingredients";
-import { setOrderRequest, setOrderSuccess } from "./order";
+import { setOrderRequest, setOrderSuccess, getOrderRequest, getOrderSuccess } from "./order";
 import { checkResponse } from "../../utils/constants";
 import { checkResponseWithToken } from "../../utils/constants";
 import { setError } from "./error";
@@ -222,6 +222,17 @@ export function setOrder(idArray: string[]) {
     return fetch(orderURL, orderOptions)
       .then(checkResponse)
       .then(res => dispatch(setOrderSuccess(res.order.number)))
+      .catch(err => dispatch(setError(err.status)));
+  };
+};
+
+// Запрос на получение данных конкретного заказа
+export function getOrder(number: string | undefined) {
+  return async function (dispatch: AppDispatch) {
+    dispatch(getOrderRequest());
+    return fetch(`${orderURL}/${number}`)
+      .then(checkResponse)
+      .then(res => dispatch(getOrderSuccess(res.orders)))
       .catch(err => dispatch(setError(err.status)));
   };
 };

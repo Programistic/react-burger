@@ -61,3 +61,11 @@
   font-weight: 400;
   color: #8585ad;
 }
+
+.outlet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+}

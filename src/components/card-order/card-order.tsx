@@ -17,7 +17,7 @@ interface ICardOrderProps {
 const CardOrder: FC<ICardOrderProps> = ({ order, path }) => {
 
   const {_id, name, ingredients, status, number, createdAt} = {...order};
-  const orderNumber = '#' + String(number)
+  const orderNumber = '#' + String(number);
   const location = useLocation();
   const { ingredientsArr } = useAppSelector(store => ({ingredientsArr: store.data.data}), shallowEqual);
 
@@ -62,7 +62,7 @@ const CardOrder: FC<ICardOrderProps> = ({ order, path }) => {
   });
 
   return (
-    <Link to={`${path}/:${_id}`} key={_id} state={{background: location}} className={styles.orderLink}>
+    <Link to={`${path}/:${number}`} key={_id} state={{background: location}} className={styles.orderLink}>
       <li className={styles.card}>
         <div className={styles.innerContainer}>
           <span className={styles.orderNumber}>{orderNumber}</span>

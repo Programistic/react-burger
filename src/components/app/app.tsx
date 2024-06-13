@@ -19,6 +19,7 @@ import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
 import UserProfile from '../../pages/user-profile/user-profile';
 import OrderFeed from '../../pages/order-feed/order-feed';
+import Feed from '../../pages/order-feed/feed';
 import OrderHistory from '../../pages/order-history/order-history';
 import NotFound from '../../pages/not-found/not-found';
 import Error from '../../pages/error/error';
@@ -89,11 +90,11 @@ function App() {
             : <Preloader />
           } />
         <Route path='/ingredients' element={ <Ingredients /> }>
-          <Route path=':id' element={<OrderInfo />} />
+          <Route path=':id' element={<IngredientDetails />} />
         </Route>
-        <Route path='/feed' element={ <OrderFeed /> } />
-        <Route path='/feed' element={ <Ingredients /> }>
-          <Route path=':id' element={ <OrderInfo /> } />
+        <Route path='/feed' element={ <Feed /> }>
+          <Route index element={ <OrderFeed /> } />
+          <Route path=':number' element={ <OrderInfo /> } />
         </Route>
         <Route path='/login' element={ <ProtectedRoute element={ <Login /> } isAuthAccess={true} /> } />
         <Route path='/register' element={ <ProtectedRoute element={ <Register /> } isAuthAccess={true} /> } />
@@ -106,10 +107,9 @@ function App() {
           } isAuthAccess={true} /> 
         } />
         <Route path='/profile' element={ <ProtectedRoute element={ <Profile /> } isAuthAccess={false} /> }>
-          <Route path='/profile' element={ <UserProfile /> } />
-          <Route path='/profile/orders' element={ <OrderHistory /> } >
-            <Route path=':id' element={ <OrderInfo /> } />
-          </Route>
+          <Route index element={ <UserProfile /> } />
+          <Route path='orders' element={ <OrderHistory /> } />
+          <Route path='orders/:number' element={ <OrderInfo /> } />
         </Route>
         <Route path='*' element={ <NotFound /> } />
         <Route path='/error' element={ <Error errorStatus={errorStatus} /> } />
@@ -123,13 +123,13 @@ function App() {
             </Modal>
           }>
           </Route>
-          <Route path='/profile/orders/:id' element={
+          <Route path='/profile/orders/:number' element={
             <Modal closeModal={handleCloseModal}> 
                <OrderInfo />
             </Modal>
           }>
           </Route>
-          <Route path='/feed/:id' element={
+          <Route path='/feed/:number' element={
             <Modal closeModal={handleCloseModal}> 
                <OrderInfo />
             </Modal>
